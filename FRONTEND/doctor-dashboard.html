@@ -1,0 +1,2512 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Doctor Dashboard | MediMatrix</title>
+
+    <!-- =====================================================
+         DOCTOR DASHBOARD CSS
+    ====================================================== -->
+
+    <link
+        rel="stylesheet"
+        href="./css/doctor-dashboard.css"
+    >
+
+</head>
+
+
+<body>
+
+<!-- =========================================================
+     APPLICATION
+========================================================= -->
+
+<div class="app-shell">
+
+
+    <!-- =====================================================
+         SIDEBAR
+    ====================================================== -->
+
+    <aside class="sidebar">
+
+
+        <!-- BRAND -->
+
+        <div class="brand">
+
+            <div class="brand-logo">
+                🏥
+            </div>
+
+            <div class="brand-text">
+
+                <h2>
+                    MediMatrix
+                </h2>
+
+                <span>
+                    Healthcare System
+                </span>
+
+            </div>
+
+        </div>
+
+
+        <!-- NAVIGATION -->
+
+        <nav class="sidebar-nav">
+
+
+            <button
+                type="button"
+                class="nav-item active"
+                data-section="dashboardSection"
+                onclick="showSection('dashboardSection', this)"
+            >
+
+                <span class="nav-icon">
+                    📊
+                </span>
+
+                <span>
+                    Dashboard
+                </span>
+
+            </button>
+
+
+            <button
+                type="button"
+                class="nav-item"
+                data-section="queueSection"
+                onclick="showSection('queueSection', this)"
+            >
+
+                <span class="nav-icon">
+                    🩺
+                </span>
+
+                <span>
+                    Patient Queue
+                </span>
+
+            </button>
+
+
+            <button
+                type="button"
+                class="nav-item"
+                data-section="consultationSection"
+                onclick="showSection('consultationSection', this)"
+            >
+
+                <span class="nav-icon">
+                    📋
+                </span>
+
+                <span>
+                    Consultation
+                </span>
+
+            </button>
+
+
+            <button
+                type="button"
+                class="nav-item"
+                data-section="prescriptionSection"
+                onclick="showSection('prescriptionSection', this)"
+            >
+
+                <span class="nav-icon">
+                    💊
+                </span>
+
+                <span>
+                    Prescription
+                </span>
+
+            </button>
+
+
+            <button
+                type="button"
+                class="nav-item"
+                data-section="reportsSection"
+                onclick="showSection('reportsSection', this)"
+            >
+
+                <span class="nav-icon">
+                    📈
+                </span>
+
+                <span>
+                    Reports
+                </span>
+
+            </button>
+
+
+            <button
+                type="button"
+                class="nav-item"
+                data-section="profileSection"
+                onclick="showSection('profileSection', this)"
+            >
+
+                <span class="nav-icon">
+                    👤
+                </span>
+
+                <span>
+                    Profile
+                </span>
+
+            </button>
+
+        </nav>
+
+
+        <!-- SIDEBAR BOTTOM -->
+
+        <div class="sidebar-bottom">
+
+
+            <button
+                type="button"
+                class="nav-item"
+                data-section="settingsSection"
+                onclick="showSection('settingsSection', this)"
+            >
+
+                <span class="nav-icon">
+                    ⚙️
+                </span>
+
+                <span>
+                    Settings
+                </span>
+
+            </button>
+
+
+            <button
+                type="button"
+                class="logout-button"
+                onclick="logoutDoctor()"
+            >
+
+                <span>
+                    🚪
+                </span>
+
+                <span>
+                    Logout
+                </span>
+
+            </button>
+
+        </div>
+
+    </aside>
+
+
+    <!-- =====================================================
+         MAIN AREA
+    ====================================================== -->
+
+    <main class="main-content">
+
+
+        <!-- =================================================
+             TOP HEADER
+        ================================================== -->
+
+        <header class="top-header">
+
+
+            <div class="header-title">
+
+                <h1>
+                    Doctor Dashboard
+                </h1>
+
+                <p>
+                    Clinical Management System
+                </p>
+
+            </div>
+
+
+            <div class="header-actions">
+
+
+                <!-- Notification -->
+
+                <button
+                    type="button"
+                    class="notification-button"
+                    onclick="showNotifications()"
+                >
+
+                    🔔
+
+                    <span
+                        class="notification-count"
+                        id="notificationCount"
+                    >
+                        0
+                    </span>
+
+                </button>
+
+
+                <!-- Doctor Profile -->
+
+                <button
+                    type="button"
+                    class="doctor-profile-button"
+                    onclick="showSection('profileSection')"
+                >
+
+                    <div
+                        class="doctor-avatar-small"
+                        id="headerDoctorAvatar"
+                    >
+                        D
+                    </div>
+
+                    <div class="header-doctor-info">
+
+                        <strong id="headerDoctorName">
+                            Doctor
+                        </strong>
+
+                        <span id="headerDoctorDepartment">
+                            Medical Department
+                        </span>
+
+                    </div>
+
+                    <span class="profile-arrow">
+                        ▼
+                    </span>
+
+                </button>
+
+            </div>
+
+        </header>
+
+
+        <!-- =================================================
+             CONTENT
+        ================================================== -->
+
+        <div class="content-area">
+
+
+            <!-- =================================================
+                 DASHBOARD SECTION
+            ================================================== -->
+
+            <section
+                id="dashboardSection"
+                class="page-section active-section"
+            >
+
+
+                <!-- WELCOME -->
+
+                <div class="dashboard-welcome">
+
+
+                    <div>
+
+                        <span class="dashboard-eyebrow">
+                            CLINICAL OVERVIEW
+                        </span>
+
+                        <h2 id="welcomeDoctorName">
+                            Good Morning, Doctor
+                        </h2>
+
+                        <p>
+                            Here's your clinical overview for today.
+                        </p>
+
+                    </div>
+
+
+                    <div class="doctor-status">
+
+                        <span class="status-dot"></span>
+
+                        Online
+
+                    </div>
+
+                </div>
+
+
+                <!-- =================================================
+                     STAT CARDS
+                ================================================== -->
+
+                <div class="doctor-stat-grid">
+
+
+                    <!-- TOTAL -->
+
+                    <div class="doctor-stat-card">
+
+                        <div class="stat-card-top">
+
+                            <div class="stat-icon total">
+                                👥
+                            </div>
+
+                            <span class="stat-label">
+                                TOTAL
+                            </span>
+
+                        </div>
+
+                        <div
+                            class="stat-number"
+                            id="totalPatients"
+                        >
+                            0
+                        </div>
+
+                        <div class="stat-description">
+                            Patients in queue
+                        </div>
+
+                    </div>
+
+
+                    <!-- EMERGENCY -->
+
+                    <div class="doctor-stat-card emergency-card">
+
+                        <div class="stat-card-top">
+
+                            <div class="stat-icon emergency">
+                                🚨
+                            </div>
+
+                            <span class="stat-label">
+                                EMERGENCY
+                            </span>
+
+                        </div>
+
+                        <div
+                            class="stat-number emergency-number"
+                            id="emergencyPatients"
+                        >
+                            0
+                        </div>
+
+                        <div class="stat-description">
+                            Immediate attention
+                        </div>
+
+                    </div>
+
+
+                    <!-- URGENT -->
+
+                    <div class="doctor-stat-card urgent-card">
+
+                        <div class="stat-card-top">
+
+                            <div class="stat-icon urgent">
+                                ⚠️
+                            </div>
+
+                            <span class="stat-label">
+                                URGENT
+                            </span>
+
+                        </div>
+
+                        <div
+                            class="stat-number urgent-number"
+                            id="urgentPatients"
+                        >
+                            0
+                        </div>
+
+                        <div class="stat-description">
+                            Priority patients
+                        </div>
+
+                    </div>
+
+
+                    <!-- ROUTINE -->
+
+                    <div class="doctor-stat-card routine-card">
+
+                        <div class="stat-card-top">
+
+                            <div class="stat-icon routine">
+                                ✓
+                            </div>
+
+                            <span class="stat-label">
+                                ROUTINE
+                            </span>
+
+                        </div>
+
+                        <div
+                            class="stat-number routine-number"
+                            id="routinePatients"
+                        >
+                            0
+                        </div>
+
+                        <div class="stat-description">
+                            Regular consultation
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <!-- =================================================
+                     EMERGENCY ALERT
+                ================================================== -->
+
+                <div
+                    class="doctor-emergency-alert hidden"
+                    id="emergencyAlert"
+                >
+
+                    <div class="alert-icon">
+                        🚨
+                    </div>
+
+                    <div class="alert-content">
+
+                        <strong>
+                            EMERGENCY ALERT
+                        </strong>
+
+                        <p id="emergencyAlertText">
+                            No emergency patients.
+                        </p>
+
+                    </div>
+
+                    <button
+                        type="button"
+                        class="alert-action"
+                        onclick="showSection('queueSection')"
+                    >
+                        View Queue
+                    </button>
+
+                </div>
+
+
+                <!-- =================================================
+                     PATIENT QUEUE
+                ================================================== -->
+
+                <div class="doctor-queue-card">
+
+
+                    <div class="queue-header">
+
+                        <div>
+
+                            <span class="section-eyebrow">
+                                CLINICAL WORKLIST
+                            </span>
+
+                            <h2>
+                                Patient Queue
+                            </h2>
+
+                            <p>
+                                Patients waiting for consultation
+                            </p>
+
+                        </div>
+
+
+                        <button
+                            type="button"
+                            class="view-all-btn"
+                            onclick="showSection('queueSection')"
+                        >
+                            View All →
+                        </button>
+
+                    </div>
+
+
+                    <div
+                        id="dashboardQueue"
+                        class="queue-list"
+                    >
+
+                        <div class="empty-queue">
+
+                            <div class="empty-icon">
+                                🩺
+                            </div>
+
+                            <h3>
+                                No patients waiting
+                            </h3>
+
+                            <p>
+                                The doctor queue is currently empty.
+                            </p>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <!-- =================================================
+                     QUICK ACTIONS
+                ================================================== -->
+
+                <div class="quick-actions-section">
+
+                    <span class="section-eyebrow">
+                        WORKFLOW
+                    </span>
+
+                    <h2>
+                        Quick Actions
+                    </h2>
+
+
+                    <div class="quick-action-grid">
+
+
+                        <button
+                            type="button"
+                            onclick="showSection('queueSection')"
+                        >
+
+                            <span class="quick-icon">
+                                🩺
+                            </span>
+
+                            <div>
+
+                                <strong>
+                                    Patient Queue
+                                </strong>
+
+                                <small>
+                                    Review waiting patients
+                                </small>
+
+                            </div>
+
+                        </button>
+
+
+                        <button
+                            type="button"
+                            onclick="showSection('consultationSection')"
+                        >
+
+                            <span class="quick-icon">
+                                📋
+                            </span>
+
+                            <div>
+
+                                <strong>
+                                    Consultation
+                                </strong>
+
+                                <small>
+                                    Start patient consultation
+                                </small>
+
+                            </div>
+
+                        </button>
+
+
+                        <button
+                            type="button"
+                            onclick="showSection('prescriptionSection')"
+                        >
+
+                            <span class="quick-icon">
+                                💊
+                            </span>
+
+                            <div>
+
+                                <strong>
+                                    Prescription
+                                </strong>
+
+                                <small>
+                                    Create prescription
+                                </small>
+
+                            </div>
+
+                        </button>
+
+
+                        <button
+                            type="button"
+                            onclick="showSection('profileSection')"
+                        >
+
+                            <span class="quick-icon">
+                                👤
+                            </span>
+
+                            <div>
+
+                                <strong>
+                                    My Profile
+                                </strong>
+
+                                <small>
+                                    Manage your profile
+                                </small>
+
+                            </div>
+
+                        </button>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+
+            <!-- =================================================
+                 PATIENT QUEUE SECTION
+            ================================================== -->
+
+            <section
+                id="queueSection"
+                class="page-section"
+            >
+
+                <div class="page-heading">
+
+                    <div>
+
+                        <span class="section-eyebrow">
+                            CLINICAL WORKLIST
+                        </span>
+
+                        <h2>
+                            Patient Queue
+                        </h2>
+
+                        <p>
+                            Patients waiting for doctor consultation.
+                        </p>
+
+                    </div>
+
+                    <button
+                        type="button"
+                        class="refresh-button"
+                        onclick="loadDoctorQueue()"
+                    >
+                        ↻ Refresh
+                    </button>
+
+                </div>
+
+
+                <div
+                    id="fullDoctorQueue"
+                    class="full-queue-card"
+                >
+
+                    <div class="loading-state">
+                        Loading patient queue...
+                    </div>
+
+                </div>
+
+            </section>
+
+
+            <!-- =================================================
+                 CONSULTATION
+            ================================================== -->
+
+            <!-- =================================================
+     CONSULTATION
+================================================== -->
+
+<section
+    id="consultationSection"
+    class="page-section"
+>
+
+    <div class="page-heading">
+
+        <div>
+
+            <span class="section-eyebrow">
+                CLINICAL CARE
+            </span>
+
+            <h2>
+                Patient Consultation
+            </h2>
+
+            <p>
+                Review patient information and complete
+                clinical consultation.
+            </p>
+
+        </div>
+
+    </div>
+
+
+    <!-- =============================================
+         SELECTED PATIENT
+    ============================================== -->
+
+    <div
+        id="consultationEmptyState"
+        class="coming-card"
+    >
+
+        <div>
+            🩺
+        </div>
+
+        <h3>
+            No Patient Selected
+        </h3>
+
+        <p>
+            Select a patient from the Patient Queue
+            to begin consultation.
+        </p>
+
+    </div>
+
+
+    <!-- =============================================
+         CONSULTATION WORKSPACE
+    ============================================== -->
+
+    <div
+        id="doctorConsultationWorkspace"
+        class="consultation-workspace"
+        style="display:none;"
+    >
+
+        <!-- PATIENT HEADER -->
+
+        <div class="consultation-patient-card">
+
+            <div class="consultation-patient-avatar">
+                👤
+            </div>
+
+            <div class="consultation-patient-info">
+
+                <span class="section-eyebrow">
+                    SELECTED PATIENT
+                </span>
+
+                <h2 id="consultationPatientName">
+                    Patient
+                </h2>
+
+                <div class="consultation-patient-meta">
+
+                    <span>
+                        Patient ID:
+                        <strong id="consultationPatientId">
+                            -
+                        </strong>
+                    </span>
+
+                    <span>
+                        Age:
+                        <strong id="consultationPatientAge">
+                            -
+                        </strong>
+                    </span>
+
+                    <span>
+                        Gender:
+                        <strong id="consultationPatientGender">
+                            -
+                        </strong>
+                    </span>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- =========================================
+             PATIENT INFORMATION
+        ========================================== -->
+
+        <div class="consultation-card">
+
+            <div class="consultation-card-header">
+
+                <div>
+
+                    <span class="section-eyebrow">
+                        PATIENT INFORMATION
+                    </span>
+
+                    <h3>
+                        Clinical Information
+                    </h3>
+
+                </div>
+
+            </div>
+
+
+            <div class="consultation-info-grid">
+
+                <div class="consultation-info-item">
+
+                    <span>
+                        Blood Group
+                    </span>
+
+                    <strong id="patientBlood">
+                        -
+                    </strong>
+
+                </div>
+
+
+                <div class="consultation-info-item">
+
+                    <span>
+                        Phone
+                    </span>
+
+                    <strong id="patientPhone">
+                        -
+                    </strong>
+
+                </div>
+
+
+                <div class="consultation-info-item">
+
+                    <span>
+                        Department
+                    </span>
+
+                    <strong id="patientDepartment">
+                        -
+                    </strong>
+
+                </div>
+
+
+                <div class="consultation-info-item">
+
+                    <span>
+                        Priority
+                    </span>
+
+                    <strong id="patientPriority">
+                        -
+                    </strong>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- =========================================
+             SYMPTOMS
+        ========================================== -->
+
+        <div class="consultation-card">
+
+            <div class="consultation-card-header">
+
+                <div>
+
+                    <span class="section-eyebrow">
+                        NURSE ASSESSMENT
+                    </span>
+
+                    <h3>
+                        Patient Symptoms
+                    </h3>
+
+                </div>
+
+            </div>
+
+
+            <div
+                id="patientSymptoms"
+                class="patient-symptoms-box"
+            >
+                No symptoms recorded.
+            </div>
+
+        </div>
+
+
+        <!-- =========================================
+             VITAL SIGNS
+        ========================================== -->
+
+        <div class="consultation-card">
+
+            <div class="consultation-card-header">
+
+                <div>
+
+                    <span class="section-eyebrow">
+                        VITAL SIGNS
+                    </span>
+
+                    <h3>
+                        Current Vitals
+                    </h3>
+
+                </div>
+
+            </div>
+
+
+            <div class="vitals-grid">
+
+                <div class="vital-box">
+
+                    <span>
+                        Temperature
+                    </span>
+
+                    <strong id="temperature">
+                        -
+                    </strong>
+
+                </div>
+
+
+                <div class="vital-box">
+
+                    <span>
+                        Heart Rate
+                    </span>
+
+                    <strong id="heartRate">
+                        -
+                    </strong>
+
+                </div>
+
+
+                <div class="vital-box">
+
+                    <span>
+                        Blood Pressure
+                    </span>
+
+                    <strong id="bloodPressure">
+                        -
+                    </strong>
+
+                </div>
+
+
+                <div class="vital-box">
+
+                    <span>
+                        SpO₂
+                    </span>
+
+                    <strong id="oxygen">
+                        -
+                    </strong>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- =========================================
+             DOCTOR CONSULTATION
+        ========================================== -->
+
+        <div class="consultation-card">
+
+            <div class="consultation-card-header">
+
+                <div>
+
+                    <span class="section-eyebrow">
+                        DOCTOR ASSESSMENT
+                    </span>
+
+                    <h3>
+                        Doctor Consultation
+                    </h3>
+
+                </div>
+
+            </div>
+
+
+            <div class="doctor-consultation-form">
+
+                <div class="consultation-form-field">
+
+                    <label for="diagnosis">
+                        Diagnosis
+                    </label>
+
+                    <textarea
+                        id="diagnosis"
+                        rows="4"
+                        placeholder="Enter diagnosis..."
+                    ></textarea>
+
+                </div>
+
+
+                <div class="consultation-form-field">
+
+                    <label for="clinicalNotes">
+                        Clinical Notes
+                    </label>
+
+                    <textarea
+                        id="clinicalNotes"
+                        rows="5"
+                        placeholder="Enter clinical observations and clinical notes..."
+                    ></textarea>
+
+                </div>
+
+
+                <div class="consultation-form-field">
+
+                    <label for="treatmentAdvice">
+                        Treatment / Advice
+                    </label>
+
+                    <textarea
+                        id="treatmentAdvice"
+                        rows="5"
+                        placeholder="Enter treatment, advice, precautions or follow-up instructions..."
+                    ></textarea>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- =========================================
+             TREATMENT DECISION
+        ========================================== -->
+
+        <div class="consultation-card">
+
+            <div class="consultation-card-header">
+
+                <div>
+
+                    <span class="section-eyebrow">
+                        TREATMENT DECISION
+                    </span>
+
+                    <h3>
+                        Select Patient Care Path
+                    </h3>
+
+                    <p>
+                        Choose the appropriate treatment
+                        pathway for this patient.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div class="treatment-options">
+
+                <!-- OPD -->
+
+                <button
+                    type="button"
+                    id="opdTreatmentButton"
+                    class="treatment-option opd-option"
+data-treatment-type="OPD"
+onclick="selectTreatmentType('OPD')"
+                    
+                >
+
+                    <span class="treatment-icon">
+                        🏥
+                    </span>
+
+                    <span class="treatment-option-content">
+
+                        <strong>
+                            OPD
+                        </strong>
+
+                        <small>
+                            Outpatient treatment
+                        </small>
+
+                    </span>
+
+                </button>
+
+
+                <!-- IPD -->
+
+                <button
+                    type="button"
+                    id="ipdTreatmentButton"
+                    class="treatment-option ipd-option"
+data-treatment-type="IPD"
+onclick="selectTreatmentType('IPD')"
+                >
+
+                    <span class="treatment-icon">
+                        🛏️
+                    </span>
+
+                    <span class="treatment-option-content">
+
+                        <strong>
+                            IPD
+                        </strong>
+
+                        <small>
+                            Inpatient admission
+                        </small>
+
+                    </span>
+
+                </button>
+
+            </div>
+
+
+            <div
+                id="selectedTreatmentMessage"
+                class="selected-treatment-message"
+            >
+                Please select OPD or IPD.
+            </div>
+
+
+            <button
+                type="button"
+                class="complete-consultation-button"
+                onclick="submitDoctorConsultation()"
+            >
+
+                ✓ Complete Consultation
+
+            </button>
+
+        </div>
+
+    </div>
+
+</section>
+<!-- =========================================================
+     IPD ADMISSION REQUEST
+========================================================= -->
+
+<section
+    id="ipdSection"
+    class="page-section"
+>
+
+    <div class="page-heading">
+
+        <span class="section-eyebrow">
+            IPD • ADMISSION REQUEST
+        </span>
+
+        <h2>
+            🛏️ Inpatient Admission
+        </h2>
+
+        <p>
+            Select the ward type and expected length of stay.
+            Billing will assign the available bed after this request.
+        </p>
+
+    </div>
+
+
+    <!-- =====================================================
+         PATIENT INFORMATION
+    ====================================================== -->
+
+    <div class="consultation-card">
+
+        <div class="consultation-card-header">
+
+            <div>
+
+                <span class="section-eyebrow">
+                    PATIENT
+                </span>
+
+                <h3>
+                    Patient Information
+                </h3>
+
+            </div>
+
+        </div>
+
+
+        <div class="ipd-patient-grid">
+
+            <div class="ipd-info-box">
+
+                <span>
+                    Patient Name
+                </span>
+
+                <strong id="ipdPatientName">
+                    —
+                </strong>
+
+            </div>
+
+
+            <div class="ipd-info-box">
+
+                <span>
+                    Patient ID
+                </span>
+
+                <strong id="ipdPatientId">
+                    —
+                </strong>
+
+            </div>
+
+
+            <div class="ipd-info-box">
+
+                <span>
+                    Age
+                </span>
+
+                <strong id="ipdPatientAge">
+                    —
+                </strong>
+
+            </div>
+
+
+            <div class="ipd-info-box">
+
+                <span>
+                    Department
+                </span>
+
+                <strong id="ipdPatientDepartment">
+                    —
+                </strong>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- =====================================================
+         IPD REQUEST
+    ====================================================== -->
+
+    <div class="consultation-card">
+
+        <div class="consultation-card-header">
+
+            <div>
+
+                <span class="section-eyebrow">
+                    DOCTOR DECISION
+                </span>
+
+                <h3>
+                    IPD Admission Details
+                </h3>
+
+                <p>
+                    The doctor selects the ward and expected
+                    length of stay. The actual bed will be selected
+                    by Billing from available beds.
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <div class="ipd-form-grid">
+
+
+            <!-- WARD -->
+
+            <div class="consultation-form-field">
+
+                <label for="ipdWardType">
+
+                    Ward Type
+
+                </label>
+
+                <select
+                    id="ipdWardType"
+                    onchange="calculateIPDCharge()"
+                >
+
+                    <option value="">
+                        Select Ward
+                    </option>
+
+                    <option value="GENERAL WARD">
+                        General Ward
+                    </option>
+
+                    <option value="ICU">
+                        ICU
+                    </option>
+
+                    <option value="EMERGENCY">
+                        Emergency
+                    </option>
+
+                    <option value="SEMI-PRIVATE WARD">
+                        Semi-Private Ward
+                    </option>
+
+                    <option value="PRIVATE WARD">
+                        Private Ward
+                    </option>
+
+                </select>
+
+            </div>
+
+
+            <!-- EXPECTED DAYS -->
+
+            <div class="consultation-form-field">
+
+                <label for="ipdExpectedDays">
+
+                    Expected Length of Stay
+
+                </label>
+
+                <select
+                    id="ipdExpectedDays"
+                    onchange="calculateIPDCharge()"
+                >
+
+                    <option value="">
+                        Select Days
+                    </option>
+
+                    <option value="1">
+                        1 Day
+                    </option>
+
+                    <option value="2">
+                        2 Days
+                    </option>
+
+                    <option value="3">
+                        3 Days
+                    </option>
+
+                    <option value="4">
+                        4 Days
+                    </option>
+
+                    <option value="5">
+                        5 Days
+                    </option>
+
+                    <option value="6">
+                        6 Days
+                    </option>
+
+                    <option value="7">
+                        7 Days
+                    </option>
+
+                    <option value="10">
+                        10 Days
+                    </option>
+
+                    <option value="15">
+                        15 Days
+                    </option>
+
+                    <option value="30">
+                        30 Days
+                    </option>
+
+                </select>
+
+            </div>
+
+
+            <!-- DAILY RATE -->
+
+            <div class="consultation-form-field">
+
+                <label>
+
+                    Daily Ward Rate
+
+                </label>
+
+                <div
+                    id="ipdDailyRate"
+                    class="ipd-charge-display"
+                >
+                    ₹0.00
+                </div>
+
+            </div>
+
+
+            <!-- ESTIMATED CHARGE -->
+
+            <div class="consultation-form-field">
+
+                <label>
+
+                    Estimated Ward Charge
+
+                </label>
+
+                <div
+                    id="ipdEstimatedCharge"
+                    class="ipd-charge-display ipd-total-charge"
+                >
+                    ₹0.00
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- CALCULATION -->
+
+        <div
+            id="ipdCalculationMessage"
+            class="ipd-calculation-message"
+        >
+
+            Select ward and expected stay to calculate
+            the estimated ward charge.
+
+        </div>
+
+
+        <!-- CLINICAL REASON -->
+
+        <div class="consultation-form-field">
+
+            <label for="ipdAdmissionReason">
+
+                Clinical Reason / Admission Notes
+
+            </label>
+
+            <textarea
+                id="ipdAdmissionReason"
+                rows="5"
+                placeholder="Enter clinical reason for IPD admission, observations, precautions, etc."
+            ></textarea>
+
+        </div>
+
+
+        <!-- DIAGNOSIS -->
+
+        <div class="consultation-form-field">
+
+            <label for="ipdDiagnosis">
+
+                Diagnosis
+
+            </label>
+
+            <textarea
+                id="ipdDiagnosis"
+                rows="4"
+                placeholder="Enter diagnosis..."
+            ></textarea>
+
+        </div>
+
+
+        <!-- WORKFLOW INFORMATION -->
+
+        <div class="ipd-workflow-info">
+
+            <div class="ipd-workflow-step">
+
+                <span>
+                    1
+                </span>
+
+                <div>
+
+                    <strong>
+                        Doctor
+                    </strong>
+
+                    <small>
+                        Selects ward and expected stay
+                    </small>
+
+                </div>
+
+            </div>
+
+
+            <div class="ipd-workflow-arrow">
+                →
+            </div>
+
+
+            <div class="ipd-workflow-step">
+
+                <span>
+                    2
+                </span>
+
+                <div>
+
+                    <strong>
+                        Billing
+                    </strong>
+
+                    <small>
+                        Selects available bed and processes payment
+                    </small>
+
+                </div>
+
+            </div>
+
+
+            <div class="ipd-workflow-arrow">
+                →
+            </div>
+
+
+            <div class="ipd-workflow-step">
+
+                <span>
+                    3
+                </span>
+
+                <div>
+
+                    <strong>
+                        IPD
+                    </strong>
+
+                    <small>
+                        Verifies and confirms admission
+                    </small>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- SUBMIT -->
+
+        <div class="ipd-action-row">
+
+            <button
+                type="button"
+                class="complete-consultation-button"
+                onclick="submitIPDAdmissionRequest()"
+            >
+
+                🛏️ Send IPD Request to Billing
+
+            </button>
+
+        </div>
+
+    </div>
+
+</section>
+<!-- =========================================================
+     OPD PRESCRIPTION
+========================================================= -->
+
+<section
+    id="prescriptionSection"
+    class="page-section"
+>
+
+    <!-- ============================================================
+     PRINT-ONLY HOSPITAL PRESCRIPTION HEADER
+============================================================= -->
+
+<div id="printPrescriptionHeader" class="print-prescription-header">
+
+    <div class="print-hospital-logo">
+        🏥
+    </div>
+
+    <div class="print-hospital-details">
+
+        <h1>MEDIMATRIX HOSPITAL</h1>
+
+        <div class="print-hospital-subtitle">
+            Advanced Healthcare & Clinical Management System
+        </div>
+
+        <div class="print-hospital-contact">
+            Bhubaneswar, Odisha, India
+            &nbsp; | &nbsp;
+            Emergency: +91 XXXXX XXXXX
+        </div>
+
+    </div>
+
+</div>
+
+
+<div class="print-document-title">
+
+    <div>
+        <strong>OPD PRESCRIPTION</strong>
+        <span>OUTPATIENT DEPARTMENT</span>
+    </div>
+
+    <div class="print-document-meta">
+
+        <div>
+            <strong>Prescription No:</strong>
+            <span id="printPrescriptionNo">MED-OPD-000001</span>
+        </div>
+
+        <div>
+            <strong>Date:</strong>
+            <span id="printPrescriptionDate"></span>
+        </div>
+
+    </div>
+
+</div>
+    <div class="page-heading">
+
+        <span class="section-eyebrow">
+            OPD • MEDICATION
+        </span>
+
+        <h2>
+            💊 Prescription
+        </h2>
+
+        <p>
+            Create and issue the patient's OPD prescription.
+        </p>
+
+    </div>
+
+
+    <!-- PATIENT SUMMARY -->
+
+    <div class="prescription-patient-card">
+
+        <div class="prescription-patient-icon">
+            👤
+        </div>
+
+        <div class="prescription-patient-info">
+
+            <span class="prescription-label">
+                PATIENT
+            </span>
+
+            <h3 id="prescriptionPatientName">
+                —
+            </h3>
+
+            <div class="prescription-patient-meta">
+
+                <span>
+                    Patient ID:
+                    <strong id="prescriptionPatientId">
+                        —
+                    </strong>
+                </span>
+
+                <span>
+                    Age:
+                    <strong id="prescriptionPatientAge">
+                        —
+                    </strong>
+                </span>
+
+                <span>
+                    Gender:
+                    <strong id="prescriptionPatientGender">
+                        —
+                    </strong>
+                </span>
+
+                <span>
+                    Department:
+                    <strong id="prescriptionPatientDepartment">
+                        —
+                    </strong>
+                </span>
+
+            </div>
+
+        </div>
+
+        <div class="prescription-status">
+
+            <span>
+                OPD
+            </span>
+
+            <small>
+                Outpatient
+            </small>
+
+        </div>
+
+    </div>
+    <!-- ============================================================
+     PRINT DOCTOR INFORMATION
+============================================================= -->
+
+<div class="print-doctor-box">
+
+    <div>
+        <span class="print-label">
+            CONSULTING DOCTOR
+        </span>
+
+        <strong id="printDoctorName">
+            Dr. —
+        </strong>
+    </div>
+
+    <div>
+        <span class="print-label">
+            DEPARTMENT
+        </span>
+
+        <strong id="printDoctorDepartment">
+            —
+        </strong>
+    </div>
+
+    <div>
+        <span class="print-label">
+            DOCTOR ID
+        </span>
+
+        <strong id="printDoctorId">
+            —
+        </strong>
+    </div>
+
+</div>
+
+    <!-- PRESCRIPTION FORM -->
+
+    <div class="prescription-card">
+
+        <div class="prescription-card-header">
+
+            <div>
+
+                <span class="section-eyebrow">
+                    MEDICATION
+                </span>
+
+                <h3>
+                    Add Medicines
+                </h3>
+
+            </div>
+
+            <button
+                type="button"
+                class="add-medicine-btn"
+                onclick="addPrescriptionMedicine()"
+            >
+                + Add Medicine
+            </button>
+
+        </div>
+
+
+        <!-- MEDICINE TABLE -->
+
+        <div class="prescription-table-wrapper">
+
+            <table class="prescription-table">
+
+                <thead>
+
+                    <tr>
+
+                        <th>
+                            Medicine
+                        </th>
+
+                        <th>
+                            Dosage
+                        </th>
+
+                        <th>
+                            Frequency
+                        </th>
+
+                        <th>
+                            Duration
+                        </th>
+
+                        <th>
+                            Route
+                        </th>
+
+                        <th>
+                            Instructions
+                        </th>
+
+                        <th>
+                            Action
+                        </th>
+
+                    </tr>
+
+                </thead>
+
+                <tbody id="prescriptionMedicineBody">
+
+                    <tr class="medicine-row">
+
+                        <td>
+
+                            <input
+                                type="text"
+                                class="prescription-input medicine-name"
+                                placeholder="Medicine name"
+                            >
+
+                        </td>
+
+                        <td>
+
+                            <input
+                                type="text"
+                                class="prescription-input medicine-dosage"
+                                placeholder="e.g. 500 mg"
+                            >
+
+                        </td>
+
+                        <td>
+
+                            <select
+                                class="prescription-input medicine-frequency"
+                            >
+
+                                <option value="">
+                                    Select
+                                </option>
+
+                                <option value="OD">
+                                    OD
+                                </option>
+
+                                <option value="BD">
+                                    BD
+                                </option>
+
+                                <option value="TDS">
+                                    TDS
+                                </option>
+
+                                <option value="QID">
+                                    QID
+                                </option>
+
+                                <option value="SOS">
+                                    SOS
+                                </option>
+
+                                <option value="HS">
+                                    HS
+                                </option>
+
+                            </select>
+
+                        </td>
+
+                        <td>
+
+                            <input
+                                type="text"
+                                class="prescription-input medicine-duration"
+                                placeholder="e.g. 5 days"
+                            >
+
+                        </td>
+
+                        <td>
+
+                            <select
+                                class="prescription-input medicine-route"
+                            >
+
+                                <option value="">
+                                    Select
+                                </option>
+
+                                <option value="Oral">
+                                    Oral
+                                </option>
+
+                                <option value="Topical">
+                                    Topical
+                                </option>
+
+                                <option value="IV">
+                                    IV
+                                </option>
+
+                                <option value="IM">
+                                    IM
+                                </option>
+
+                                <option value="SC">
+                                    SC
+                                </option>
+
+                            </select>
+
+                        </td>
+
+                        <td>
+
+                            <input
+                                type="text"
+                                class="prescription-input medicine-instructions"
+                                placeholder="After food..."
+                            >
+
+                        </td>
+
+                        <td>
+
+                            <button
+                                type="button"
+                                class="remove-medicine-btn"
+                                onclick="removePrescriptionMedicine(this)"
+                                title="Remove medicine"
+                            >
+                                ×
+                            </button>
+
+                        </td>
+
+                    </tr>
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+    </div>
+
+
+    <!-- GENERAL INSTRUCTIONS -->
+
+    <div class="prescription-card">
+
+        <div class="prescription-card-header">
+
+            <div>
+
+                <span class="section-eyebrow">
+                    CLINICAL INSTRUCTIONS
+                </span>
+
+                <h3>
+                    Advice & Follow-up
+                </h3>
+
+            </div>
+
+        </div>
+
+
+        <div class="prescription-form-grid">
+
+            <div class="prescription-field">
+
+                <label>
+                    General Advice
+                </label>
+
+                <textarea
+                    id="prescriptionAdvice"
+                    rows="4"
+                    placeholder="Enter dietary advice, precautions, rest, etc."
+                ></textarea>
+
+            </div>
+
+
+            <div class="prescription-field">
+
+                <label>
+                    Follow-up
+                </label>
+
+                <input
+                    type="text"
+                    id="prescriptionFollowup"
+                    placeholder="e.g. Follow-up after 7 days"
+                >
+
+            </div>
+
+
+            <div class="prescription-field">
+
+                <label>
+                    Doctor Remarks
+                </label>
+
+                <textarea
+                    id="prescriptionRemarks"
+                    rows="4"
+                    placeholder="Additional clinical remarks..."
+                ></textarea>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- PRESCRIPTION ACTIONS -->
+
+    <div class="prescription-actions">
+
+        <button
+            type="button"
+            class="prescription-secondary-btn"
+            onclick="showSection('consultationSection')"
+        >
+            ← Back to Consultation
+        </button>
+
+        <button
+            type="button"
+            class="prescription-primary-btn"
+            onclick="saveOPDPrescription()"
+        >
+            💾 Save Prescription
+        </button>
+
+        <button
+            type="button"
+            class="prescription-print-btn"
+            onclick="printOPDPrescription()"
+        >
+            🖨️ Print Prescription
+        </button>
+
+    </div>
+
+
+    <div
+        id="prescriptionSaveMessage"
+        class="prescription-save-message"
+    ></div>
+
+</section>
+
+            <!-- =================================================
+                 REPORTS
+            ================================================== -->
+
+            <section
+                id="reportsSection"
+                class="page-section"
+            >
+
+                <div class="page-heading">
+
+                    <span class="section-eyebrow">
+                        ANALYTICS
+                    </span>
+
+                    <h2>
+                        Reports
+                    </h2>
+
+                    <p>
+                        Clinical reports and statistics.
+                    </p>
+
+                </div>
+
+
+                <div class="coming-card">
+
+                    <div>
+                        📈
+                    </div>
+
+                    <h3>
+                        Reports
+                    </h3>
+
+                    <p>
+                        Doctor reports will appear here.
+                    </p>
+
+                </div>
+
+            </section>
+
+
+
+            <!-- =========================================================
+     DOCTOR PROFILE
+========================================================= -->
+
+<section
+    id="profileSection"
+    class="doctor-section profile-section"
+>
+
+    <div class="section-header-card">
+
+        <div>
+            <span class="section-eyebrow">
+                ACCOUNT
+            </span>
+
+            <h1>
+                Doctor Profile
+            </h1>
+
+            <p>
+                Manage your professional information.
+            </p>
+        </div>
+
+    </div>
+
+
+    <div class="doctor-profile-card">
+
+        <!-- =================================================
+             PROFILE PHOTO
+        ================================================== -->
+
+        <div class="profile-photo-column">
+
+            <div class="doctor-profile-photo-wrapper">
+
+                <img
+                    id="profilePhoto"
+                    src=""
+                    alt="Doctor Profile"
+                    class="doctor-profile-photo"
+                >
+
+                <div
+                    id="profileInitial"
+                    class="doctor-profile-initial"
+                >
+                    D
+                </div>
+
+            </div>
+
+
+            <label
+                for="profilePhotoInput"
+                class="change-photo-btn"
+            >
+                📷 Change Photo
+            </label>
+
+            <input
+                type="file"
+                id="profilePhotoInput"
+                accept="image/*"
+                hidden
+            >
+
+            <button
+                type="button"
+                id="removePhotoBtn"
+                class="remove-photo-btn"
+            >
+                Remove Photo
+            </button>
+
+        </div>
+
+
+        <!-- =================================================
+             PROFILE INFORMATION
+        ================================================== -->
+
+        <div class="profile-information">
+
+            <div class="profile-grid">
+
+                <!-- FULL NAME -->
+
+                <div class="profile-field">
+
+                    <label>
+                        FULL NAME
+                    </label>
+
+                    <input
+                        type="text"
+                        id="profileFullName"
+                        readonly
+                    >
+
+                </div>
+
+
+                <!-- DOCTOR ID -->
+
+                <div class="profile-field">
+
+                    <label>
+                        DOCTOR ID
+                    </label>
+
+                    <input
+                        type="text"
+                        id="profileDoctorId"
+                        readonly
+                    >
+
+                </div>
+
+
+                <!-- DEPARTMENT -->
+
+                <div class="profile-field">
+
+                    <label>
+                        DEPARTMENT
+                    </label>
+
+                    <input
+                        type="text"
+                        id="profileDepartment"
+                        readonly
+                    >
+
+                </div>
+
+
+                <!-- EMAIL -->
+
+                <div class="profile-field editable-field">
+
+                    <label>
+                        EMAIL ID
+                    </label>
+
+                    <input
+                        type="email"
+                        id="profileEmail"
+                        placeholder="Enter email address"
+                    >
+
+                </div>
+
+
+                <!-- MOBILE -->
+
+                <div class="profile-field editable-field">
+
+                    <label>
+                        MOBILE NUMBER
+                    </label>
+
+                    <input
+                        type="tel"
+                        id="profilePhone"
+                        placeholder="Enter mobile number"
+                        maxlength="10"
+                    >
+
+                </div>
+
+            </div>
+
+
+            <!-- SAVE -->
+
+            <div class="profile-actions">
+
+                <button
+                    type="button"
+                    id="saveDoctorProfileBtn"
+                    class="save-profile-btn"
+                >
+                    💾 Save Profile
+                </button>
+
+                <span
+                    id="profileSaveMessage"
+                    class="profile-save-message"
+                ></span>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+            <!-- =================================================
+                 SETTINGS
+            ================================================== -->
+
+            <section
+                id="settingsSection"
+                class="page-section"
+            >
+
+                <div class="page-heading">
+
+                    <span class="section-eyebrow">
+                        SYSTEM
+                    </span>
+
+                    <h2>
+                        Settings
+                    </h2>
+
+                    <p>
+                        Manage your dashboard settings.
+                    </p>
+
+                </div>
+
+
+                <div class="coming-card">
+
+                    <div>
+                        ⚙️
+                    </div>
+
+                    <h3>
+                        Settings
+                    </h3>
+
+                    <p>
+                        Dashboard settings will appear here.
+                    </p>
+
+                </div>
+
+            </section>
+
+        </div>
+
+    </main>
+
+</div>
+
+
+<script
+    src="./js/doctor-dashboard.js?v=3"
+    defer
+></script>
+
+
+
+</body>
+
+</html>

@@ -1,0 +1,1041 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>MediMatrix | Login</title>
+
+    <style>
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+
+        body {
+
+            min-height: 100vh;
+
+            font-family:
+                Inter,
+                -apple-system,
+                BlinkMacSystemFont,
+                "Segoe UI",
+                Arial,
+                sans-serif;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #eff6ff,
+                    #f8fafc
+                );
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            padding: 20px;
+
+            color: #172033;
+        }
+
+
+        .login-wrapper {
+
+            width: 100%;
+
+            max-width: 1050px;
+
+            min-height: 620px;
+
+            background: #ffffff;
+
+            border-radius: 24px;
+
+            overflow: hidden;
+
+            display: grid;
+
+            grid-template-columns:
+                1fr 1fr;
+
+            box-shadow:
+                0 25px 70px
+                rgba(15, 23, 42, 0.12);
+        }
+
+
+        /* ====================================================
+           LEFT SIDE
+        ==================================================== */
+
+        .login-left {
+
+            background:
+                linear-gradient(
+                    145deg,
+                    #0f4c81,
+                    #2563eb
+                );
+
+            color: #ffffff;
+
+            padding: 55px;
+
+            display: flex;
+
+            flex-direction: column;
+
+            justify-content: center;
+
+            position: relative;
+
+            overflow: hidden;
+        }
+
+
+        .login-left::before {
+
+            content: "";
+
+            position: absolute;
+
+            width: 300px;
+
+            height: 300px;
+
+            border-radius: 50%;
+
+            background:
+                rgba(255,255,255,0.08);
+
+            top: -100px;
+
+            right: -100px;
+        }
+
+
+        .login-left::after {
+
+            content: "";
+
+            position: absolute;
+
+            width: 220px;
+
+            height: 220px;
+
+            border-radius: 50%;
+
+            background:
+                rgba(255,255,255,0.06);
+
+            bottom: -80px;
+
+            left: -80px;
+        }
+
+
+        .brand {
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 14px;
+
+            margin-bottom: 45px;
+
+            position: relative;
+
+            z-index: 2;
+        }
+
+
+        .brand-icon {
+
+            width: 55px;
+
+            height: 55px;
+
+            border-radius: 16px;
+
+            background:
+                rgba(255,255,255,0.15);
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            font-size: 28px;
+        }
+
+
+        .brand h1 {
+
+            font-size: 28px;
+
+            line-height: 1.1;
+        }
+
+
+        .brand span {
+
+            display: block;
+
+            font-size: 13px;
+
+            opacity: 0.8;
+
+            margin-top: 4px;
+        }
+
+
+        .login-left h2 {
+
+            font-size: 42px;
+
+            line-height: 1.15;
+
+            margin-bottom: 18px;
+
+            position: relative;
+
+            z-index: 2;
+        }
+
+
+        .login-left p {
+
+            max-width: 440px;
+
+            font-size: 16px;
+
+            line-height: 1.7;
+
+            opacity: 0.88;
+
+            position: relative;
+
+            z-index: 2;
+        }
+
+
+        .feature-list {
+
+            list-style: none;
+
+            margin-top: 35px;
+
+            position: relative;
+
+            z-index: 2;
+        }
+
+
+        .feature-list li {
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 12px;
+
+            margin-bottom: 16px;
+
+            font-size: 14px;
+        }
+
+
+        .feature-icon {
+
+            width: 32px;
+
+            height: 32px;
+
+            border-radius: 9px;
+
+            background:
+                rgba(255,255,255,0.14);
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+        }
+
+
+        /* ====================================================
+           RIGHT SIDE
+        ==================================================== */
+
+        .login-right {
+
+            padding: 55px;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+        }
+
+
+        .login-card {
+
+            width: 100%;
+
+            max-width: 400px;
+        }
+
+
+        .login-heading {
+
+            margin-bottom: 30px;
+        }
+
+
+        .login-heading h2 {
+
+            font-size: 30px;
+
+            margin-bottom: 8px;
+
+            color: #111827;
+        }
+
+
+        .login-heading p {
+
+            color: #6b7280;
+
+            font-size: 14px;
+        }
+
+
+        /* ====================================================
+           FORM
+        ==================================================== */
+
+        .form-group {
+
+            margin-bottom: 20px;
+        }
+
+
+        .form-group label {
+
+            display: block;
+
+            margin-bottom: 8px;
+
+            font-size: 14px;
+
+            font-weight: 600;
+
+            color: #374151;
+        }
+
+
+        .input-wrapper {
+
+            position: relative;
+        }
+
+
+        .input-icon {
+
+            position: absolute;
+
+            left: 15px;
+
+            top: 50%;
+
+            transform:
+                translateY(-50%);
+
+            font-size: 18px;
+
+            pointer-events: none;
+        }
+
+
+        .form-control {
+
+            width: 100%;
+
+            height: 52px;
+
+            border: 1px solid #dbe2ea;
+
+            border-radius: 12px;
+
+            padding:
+                0 16px 0 46px;
+
+            font-size: 14px;
+
+            outline: none;
+
+            background: #ffffff;
+
+            transition:
+                border-color .2s,
+                box-shadow .2s;
+        }
+
+
+        .form-control:focus {
+
+            border-color: #2563eb;
+
+            box-shadow:
+                0 0 0 4px
+                rgba(37,99,235,0.10);
+        }
+
+
+        select.form-control {
+
+            padding-left: 16px;
+
+            cursor: pointer;
+        }
+
+
+        .password-toggle {
+
+            position: absolute;
+
+            right: 14px;
+
+            top: 50%;
+
+            transform:
+                translateY(-50%);
+
+            border: none;
+
+            background: transparent;
+
+            cursor: pointer;
+
+            font-size: 18px;
+        }
+
+
+        /* ====================================================
+           OPTIONS
+        ==================================================== */
+
+        .form-options {
+
+            display: flex;
+
+            justify-content:
+                space-between;
+
+            align-items: center;
+
+            margin-bottom: 24px;
+
+            font-size: 13px;
+        }
+
+
+        .remember {
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 8px;
+
+            color: #6b7280;
+
+            cursor: pointer;
+        }
+
+
+        .remember input {
+
+            width: 15px;
+
+            height: 15px;
+
+            accent-color: #2563eb;
+        }
+
+
+        .forgot-password {
+
+            border: none;
+
+            background: transparent;
+
+            color: #2563eb;
+
+            cursor: pointer;
+
+            font-size: 13px;
+
+            font-weight: 600;
+        }
+
+
+        /* ====================================================
+           LOGIN BUTTON
+        ==================================================== */
+
+        .login-button {
+
+            width: 100%;
+
+            height: 52px;
+
+            border: none;
+
+            border-radius: 12px;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #2563eb,
+                    #1d4ed8
+                );
+
+            color: #ffffff;
+
+            font-size: 15px;
+
+            font-weight: 700;
+
+            cursor: pointer;
+
+            transition:
+                transform .2s,
+                box-shadow .2s,
+                opacity .2s;
+        }
+
+
+        .login-button:hover {
+
+            transform:
+                translateY(-1px);
+
+            box-shadow:
+                0 10px 25px
+                rgba(37,99,235,0.25);
+        }
+
+
+        .login-button:disabled {
+
+            opacity: 0.65;
+
+            cursor: not-allowed;
+
+            transform: none;
+
+            box-shadow: none;
+        }
+
+
+        /* ====================================================
+           MESSAGE
+        ==================================================== */
+
+        .login-message {
+
+            min-height: 22px;
+
+            margin-top: 16px;
+
+            padding: 0;
+
+            border-radius: 9px;
+
+            font-size: 13px;
+
+            line-height: 1.5;
+
+            text-align: center;
+        }
+
+
+        .login-message.error {
+
+            color: #dc2626;
+        }
+
+
+        .login-message.success {
+
+            color: #16a34a;
+        }
+
+
+        .login-message.info {
+
+            color: #2563eb;
+        }
+
+
+        /* ====================================================
+           FOOTER
+        ==================================================== */
+
+        .login-footer {
+
+            margin-top: 30px;
+
+            text-align: center;
+
+            color: #9ca3af;
+
+            font-size: 12px;
+        }
+
+
+        /* ====================================================
+           MOBILE
+        ==================================================== */
+
+        @media (max-width: 800px) {
+
+            .login-wrapper {
+
+                grid-template-columns: 1fr;
+
+                max-width: 500px;
+            }
+
+
+            .login-left {
+
+                padding: 35px;
+
+                min-height: 300px;
+            }
+
+
+            .login-left h2 {
+
+                font-size: 30px;
+            }
+
+
+            .feature-list {
+
+                display: none;
+            }
+
+
+            .brand {
+
+                margin-bottom: 25px;
+            }
+
+
+            .login-right {
+
+                padding: 35px 25px;
+            }
+
+        }
+
+
+        @media (max-width: 480px) {
+
+            body {
+
+                padding: 10px;
+            }
+
+
+            .login-wrapper {
+
+                border-radius: 18px;
+            }
+
+
+            .login-left {
+
+                padding: 28px 22px;
+            }
+
+
+            .login-right {
+
+                padding: 30px 20px;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<div class="login-wrapper">
+
+
+    <!-- =====================================================
+         LEFT
+    ====================================================== -->
+
+    <section class="login-left">
+
+        <div class="brand">
+
+            <div class="brand-icon">
+                🏥
+            </div>
+
+            <div>
+
+                <h1>
+                    MediMatrix
+                </h1>
+
+                <span>
+                    Healthcare Management System
+                </span>
+
+            </div>
+
+        </div>
+
+
+        <h2>
+            Smart Healthcare.
+            Better Care.
+        </h2>
+
+
+        <p>
+            Securely access the MediMatrix hospital
+            management platform and continue your
+            healthcare workflow.
+        </p>
+
+
+        <ul class="feature-list">
+
+            <li>
+
+                <span class="feature-icon">
+                    🧑‍⚕️
+                </span>
+
+                <span>
+                    Department-based patient workflow
+                </span>
+
+            </li>
+
+
+            <li>
+
+                <span class="feature-icon">
+                    🧠
+                </span>
+
+                <span>
+                    AI-assisted clinical triage
+                </span>
+
+            </li>
+
+
+            <li>
+
+                <span class="feature-icon">
+                    🔔
+                </span>
+
+                <span>
+                    Real-time staff notifications
+                </span>
+
+            </li>
+
+
+            <li>
+
+                <span class="feature-icon">
+                    🔐
+                </span>
+
+                <span>
+                    Secure role-based access
+                </span>
+
+            </li>
+
+        </ul>
+
+    </section>
+
+
+    <!-- =====================================================
+         RIGHT
+    ====================================================== -->
+
+    <section class="login-right">
+
+        <div class="login-card">
+
+
+            <div class="login-heading">
+
+                <h2>
+                    Welcome Back
+                </h2>
+
+                <p>
+                    Sign in to access your MediMatrix account.
+                </p>
+
+            </div>
+
+
+            <!-- =================================================
+                 LOGIN FORM
+            ================================================== -->
+
+            <form
+                id="loginForm"
+                autocomplete="on"
+            >
+
+
+                <!-- USERNAME -->
+
+                <div class="form-group">
+
+                    <label for="username">
+                        Username
+                    </label>
+
+                    <div class="input-wrapper">
+
+                        <span class="input-icon">
+                            👤
+                        </span>
+
+                        <input
+                            type="text"
+                            id="username"
+                            name="username"
+                            class="form-control"
+                            placeholder="Enter your username"
+                            autocomplete="username"
+                            required
+                        >
+
+                    </div>
+
+                </div>
+
+
+                <!-- PASSWORD -->
+
+                <div class="form-group">
+
+                    <label for="password">
+                        Password
+                    </label>
+
+                    <div class="input-wrapper">
+
+                        <span class="input-icon">
+                            🔒
+                        </span>
+
+                        <input
+                            type="password"
+                            id="password"
+                            name="password"
+                            class="form-control"
+                            placeholder="Enter your password"
+                            autocomplete="current-password"
+                            required
+                        >
+
+                        <button
+                            type="button"
+                            id="togglePassword"
+                            class="password-toggle"
+                            aria-label="Show password"
+                        >
+                            👁
+                        </button>
+
+                    </div>
+
+                </div>
+
+
+                <!-- ROLE -->
+
+                <div class="form-group">
+
+                    <label for="role">
+                        Login As
+                    </label>
+
+                    <select
+                        id="role"
+                        name="role"
+                        class="form-control"
+                        required
+                    >
+
+                        <option value="">
+                            Select your role
+                        </option>
+
+                        <option value="ADMIN">
+                            Administrator
+                        </option>
+
+                        <option value="HOSPITAL_EMPLOYEE">
+                            Hospital Employee
+                        </option>
+
+                        <option value="HOSPITAL_EMPLOYEE_HOD">
+                            Hospital Employee HOD
+                        </option>
+
+                        <option value="NURSE">
+                            Nurse
+                        </option>
+
+                        <option value="NURSE_HOD">
+                            Nurse HOD
+                        </option>
+
+                        <option value="DOCTOR">
+                            Doctor
+                        </option>
+
+                        <option value="DOCTOR_HOD">
+                            Doctor HOD
+                        </option>
+
+                        <option value="OPD_STAFF">
+                            OPD Staff   
+                        </option>
+
+
+                        <option value="IPD_STAFF">
+                            IPD Staff
+                        </option>
+
+                        <!-- BILLING STAFF -->
+<option value="BILLING">
+    Billing Staff
+</option>
+                        <option value="PHARMACY">Pharmacy / Medicine Store</option>
+
+                    </select>
+
+                </div>
+
+
+                <!-- OPTIONS -->
+
+                <div class="form-options">
+
+                    <label class="remember">
+
+                        <input
+                            type="checkbox"
+                            id="rememberMe"
+                        >
+
+                        <span>
+                            Remember me
+                        </span>
+
+                    </label>
+
+
+                    <button
+                        type="button"
+                        id="forgotPassword"
+                        class="forgot-password"
+                    >
+                        Forgot password?
+                    </button>
+
+                </div>
+
+
+                <!-- LOGIN -->
+
+                <button
+                    type="submit"
+                    class="login-button"
+                >
+                    Login
+                </button>
+
+
+                <!-- MESSAGE -->
+
+                <div
+                    id="loginMessage"
+                    class="login-message"
+                    aria-live="polite"
+                ></div>
+
+
+            </form>
+
+
+            <div class="login-footer">
+
+                MediMatrix Healthcare Management System
+
+            </div>
+
+
+        </div>
+
+    </section>
+
+
+</div>
+
+
+<!-- =========================================================
+     LOGIN JAVASCRIPT
+========================================================== -->
+
+<script src="login.js"></script>
+
+
+</body>
+
+</html>

@@ -1,0 +1,624 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Login | HealthTriage AI</title>
+
+
+    <!-- =====================================================
+         GOOGLE FONT
+         ===================================================== -->
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+
+    <link
+        rel="preconnect"
+        href="https://fonts.gstatic.com"
+        crossorigin
+    >
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+        rel="stylesheet"
+    >
+
+
+    <!-- =====================================================
+         LOGIN CSS
+         ===================================================== -->
+
+    <link
+        rel="stylesheet"
+        href="login.css"
+    >
+
+</head>
+
+
+<body>
+
+
+    <!-- =====================================================
+         LOGIN PAGE
+         ===================================================== -->
+
+    <div class="login-page">
+
+
+        <!-- =================================================
+             LEFT INFORMATION PANEL
+             ================================================= -->
+
+        <section class="login-left">
+
+            <div class="left-overlay"></div>
+
+
+            <div class="brand-area">
+
+
+                <!-- BRAND -->
+
+                <div class="brand-icon">
+                    🏥
+                </div>
+
+
+                <h1>
+                    HealthTriage <span>AI</span>
+                </h1>
+
+
+                <h2>
+                    Intelligent Healthcare<br>
+                    Triage Management System
+                </h2>
+
+
+                <p class="brand-description">
+
+                    Connecting patients, nurses, doctors and
+                    hospital departments through a smarter
+                    digital healthcare workflow.
+
+                </p>
+
+
+                <!-- =================================================
+                     FEATURES
+                     ================================================= -->
+
+                <div class="feature-list">
+
+
+                    <!-- FEATURE 1 -->
+
+                    <div class="feature-item">
+
+                        <span class="check-icon">
+                            ✓
+                        </span>
+
+                        <div>
+
+                            <strong>
+                                Smart Patient Management
+                            </strong>
+
+                            <p>
+                                Organized digital patient workflows
+                            </p>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- FEATURE 2 -->
+
+                    <div class="feature-item">
+
+                        <span class="check-icon">
+                            ✓
+                        </span>
+
+                        <div>
+
+                            <strong>
+                                Clinical Workflow Support
+                            </strong>
+
+                            <p>
+                                Connected nursing and doctor workflows
+                            </p>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- FEATURE 3 -->
+
+                    <div class="feature-item">
+
+                        <span class="check-icon">
+                            ✓
+                        </span>
+
+                        <div>
+
+                            <strong>
+                                Secure Hospital Operations
+                            </strong>
+
+                            <p>
+                                Role-based access and protected data
+                            </p>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <!-- COPYRIGHT -->
+
+                <div class="copyright">
+
+                    © 2026 HealthTriage AI
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- =================================================
+             RIGHT LOGIN PANEL
+             ================================================= -->
+
+        <section class="login-right">
+
+
+            <div class="login-card">
+
+
+                <!-- =================================================
+                     LOGIN HEADER
+                     ================================================= -->
+
+                <div class="login-header">
+
+
+                    <!-- MINI BRAND -->
+
+                    <div class="mini-brand">
+
+                        <div class="mini-brand-icon">
+                            🏥
+                        </div>
+
+                        <div>
+
+                            <h3>
+                                HealthTriage AI
+                            </h3>
+
+                            <p>
+                                Healthcare Management System
+                            </p>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- SECURITY LABEL -->
+
+                    <div class="secure-label">
+
+                        SECURE ACCESS
+
+                    </div>
+
+
+                    <!-- TITLE -->
+
+                    <h1>
+                        Welcome Back
+                    </h1>
+
+
+                    <p>
+                        Sign in to continue to your
+                        healthcare dashboard.
+                    </p>
+
+                </div>
+
+
+
+                <!-- =================================================
+                     LOGIN FORM
+                     ================================================= -->
+
+                <form
+                    id="loginForm"
+                    autocomplete="on"
+                >
+
+
+                    <!-- =================================================
+                         USERNAME
+                         ================================================= -->
+
+                    <div class="input-group">
+
+
+                        <label for="username">
+                            Username
+                        </label>
+
+
+                        <div class="input-wrapper">
+
+
+                            <span class="input-icon">
+                                👤
+                            </span>
+
+
+                            <input
+                                type="text"
+                                id="username"
+                                name="username"
+                                placeholder="Enter your username"
+                                autocomplete="username"
+                                required
+                            >
+
+
+                        </div>
+
+                    </div>
+
+
+
+                    <!-- =================================================
+                         PASSWORD
+                         ================================================= -->
+
+                    <div class="input-group">
+
+
+                        <div class="password-label-row">
+
+
+                            <label for="password">
+                                Password
+                            </label>
+
+
+                            <a
+                                href="#"
+                                id="forgotPassword"
+                            >
+                                Forgot Password?
+                            </a>
+
+
+                        </div>
+
+
+                        <div class="input-wrapper">
+
+
+                            <span class="input-icon">
+                                🔒
+                            </span>
+
+
+                            <input
+                                type="password"
+                                id="password"
+                                name="password"
+                                placeholder="Enter your password"
+                                autocomplete="current-password"
+                                required
+                            >
+
+
+                            <button
+                                type="button"
+                                class="password-toggle"
+                                id="togglePassword"
+                                aria-label="Show password"
+                            >
+                                👁
+                            </button>
+
+
+                        </div>
+
+                    </div>
+
+
+
+                    <!-- =================================================
+                         LOGIN ROLE
+                         ================================================= -->
+
+                    <div class="input-group">
+
+
+                        <label for="role">
+                            Login Role
+                        </label>
+
+
+                        <div class="input-wrapper">
+
+
+                            <span class="input-icon">
+                                🛡️
+                            </span>
+
+
+                            <select
+                                id="role"
+                                name="role"
+                                required
+                            >
+
+
+                                <option value="">
+                                    Select your role
+                                </option>
+
+
+                                <!-- ADMIN -->
+
+                                <option value="ADMIN">
+                                    Administrator
+                                </option>
+
+
+                                <!-- HOSPITAL EMPLOYEE -->
+
+                                <option value="HOSPITAL_EMPLOYEE">
+                                    Hospital Employee
+                                </option>
+
+
+                                <!-- HOSPITAL EMPLOYEE HOD -->
+
+                                <option value="HOSPITAL_EMPLOYEE_HOD">
+                                    Hospital Employee HOD
+                                </option>
+
+
+                                <!-- NURSE -->
+
+                                <option value="NURSE">
+                                    Nurse
+                                </option>
+
+
+                                <!-- NURSE HOD -->
+
+                                <option value="NURSE_HOD">
+                                    Nurse HOD
+                                </option>
+
+
+                                <!-- DOCTOR -->
+
+                                <option value="DOCTOR">
+                                    Doctor
+                                </option>
+
+
+                                <!-- DOCTOR HOD -->
+
+                                <option value="DOCTOR_HOD">
+                                    Doctor HOD
+                                </option>
+
+
+                                <!-- OPD STAFF -->
+
+                                <option value="OPD_STAFF">
+                                    OPD Staff
+                                </option>
+
+
+                                <!-- OPD HOD -->
+
+                                <option value="OPD_HOD">
+                                    OPD HOD
+                                </option>
+
+
+                                <!-- IPD STAFF -->
+
+                                <option value="IPD_STAFF">
+                                    IPD Staff
+                                </option>
+
+
+                                <!-- IPD HOD -->
+
+                                <option value="IPD_HOD">
+                                    IPD HOD
+                                </option>
+
+
+                            </select>
+
+
+                        </div>
+
+                    </div>
+
+
+
+                    <!-- =================================================
+                         REMEMBER ME
+                         ================================================= -->
+
+                    <div class="remember-row">
+
+
+                        <label class="remember-label">
+
+
+                            <input
+                                type="checkbox"
+                                id="rememberMe"
+                                name="rememberMe"
+                            >
+
+
+                            <span>
+                                Remember me
+                            </span>
+
+
+                        </label>
+
+
+                    </div>
+
+
+
+                    <!-- =================================================
+                         LOGIN BUTTON
+                         ================================================= -->
+
+                    <button
+                        type="submit"
+                        class="login-button"
+                        id="loginButton"
+                    >
+
+
+                        <span>
+                            Sign In
+                        </span>
+
+
+                        <span class="button-arrow">
+                            →
+                        </span>
+
+
+                    </button>
+
+
+
+                    <!-- =================================================
+                         LOGIN MESSAGE
+                         ================================================= -->
+
+                    <div
+                        id="loginMessage"
+                        class="login-message"
+                        role="alert"
+                    ></div>
+
+
+                </form>
+
+
+
+                <!-- =================================================
+                     SECURITY INFORMATION
+                     ================================================= -->
+
+                <div class="security-box">
+
+
+                    <div class="security-icon">
+                        🔐
+                    </div>
+
+
+                    <div>
+
+
+                        <strong>
+                            Secure Healthcare Access
+                        </strong>
+
+
+                        <p>
+                            Your account is protected with
+                            role-based authentication.
+                        </p>
+
+
+                    </div>
+
+
+                </div>
+
+
+
+                <!-- =================================================
+                     FOOTER
+                     ================================================= -->
+
+                <div class="login-footer">
+
+
+                    <p>
+
+                        Don't have an account?
+
+                        <a href="register.html">
+                            Create Account
+                        </a>
+
+                    </p>
+
+
+                    <span>
+
+                        HealthTriage AI •
+                        Intelligent Healthcare Management
+
+                    </span>
+
+
+                </div>
+
+
+            </div>
+
+        </section>
+
+    </div>
+
+
+
+    <!-- =====================================================
+         LOGIN JAVASCRIPT
+         ===================================================== -->
+
+    <script src="loginn.js"></script>
+
+
+</body>
+
+</html>

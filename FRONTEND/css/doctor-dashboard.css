@@ -1,0 +1,3176 @@
+/* ============================================================
+   MEDIMATRIX DOCTOR DASHBOARD
+   PROFESSIONAL UI
+============================================================ */
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+
+:root {
+
+    --primary: #2563eb;
+    --primary-dark: #1d4ed8;
+
+    --background: #f4f7fb;
+    --surface: #ffffff;
+
+    --text: #172033;
+    --muted: #718096;
+
+    --border: #e3e9f2;
+
+    --danger: #dc2626;
+    --danger-bg: #fff5f5;
+
+    --warning: #d97706;
+    --warning-bg: #fffaf0;
+
+    --success: #16a34a;
+    --success-bg: #effcf4;
+
+    --sidebar-width: 280px;
+
+    --shadow:
+        0 8px 30px rgba(30, 64, 175, 0.06);
+}
+
+
+html,
+body {
+    width: 100%;
+    min-height: 100%;
+}
+
+
+body {
+
+    font-family:
+        Inter,
+        "Segoe UI",
+        Roboto,
+        Arial,
+        sans-serif;
+
+    background: var(--background);
+
+    color: var(--text);
+
+    line-height: 1.5;
+}
+
+
+/* ============================================================
+   APP
+============================================================ */
+
+.app-shell {
+
+    display: flex;
+
+    min-height: 100vh;
+
+    width: 100%;
+}
+
+
+/* ============================================================
+   SIDEBAR
+============================================================ */
+
+.sidebar {
+
+    position: fixed;
+
+    left: 0;
+    top: 0;
+    bottom: 0;
+
+    width: var(--sidebar-width);
+
+    background: #ffffff;
+
+    border-right: 1px solid var(--border);
+
+    display: flex;
+
+    flex-direction: column;
+
+    z-index: 100;
+}
+
+
+/* BRAND */
+
+.brand {
+
+    height: 118px;
+
+    padding: 28px;
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 14px;
+
+    border-bottom: 1px solid var(--border);
+}
+
+
+.brand-logo {
+
+    width: 52px;
+    height: 52px;
+
+    border-radius: 15px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #2563eb,
+            #4f8df7
+        );
+
+    color: #ffffff;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    font-size: 28px;
+
+    font-weight: 800;
+
+    box-shadow:
+        0 8px 18px rgba(37, 99, 235, 0.22);
+}
+
+
+.brand-text h2 {
+
+    font-size: 21px;
+
+    font-weight: 800;
+
+    letter-spacing: -0.5px;
+}
+
+
+.brand-text span {
+
+    display: block;
+
+    color: var(--muted);
+
+    font-size: 13px;
+
+    margin-top: 2px;
+}
+
+
+/* NAV */
+
+.sidebar-nav {
+
+    padding: 25px 18px;
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 7px;
+}
+
+
+.nav-item {
+
+    width: 100%;
+
+    min-height: 54px;
+
+    border: none;
+
+    background: transparent;
+
+    border-radius: 13px;
+
+    padding: 0 18px;
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 15px;
+
+    text-align: left;
+
+    color: #53627d;
+
+    font-size: 15px;
+
+    font-weight: 650;
+
+    cursor: pointer;
+
+    transition:
+        background 0.2s ease,
+        color 0.2s ease,
+        transform 0.2s ease;
+}
+
+
+.nav-item:hover {
+
+    background: #f2f6ff;
+
+    color: var(--primary);
+
+    transform: translateX(2px);
+}
+
+
+.nav-item.active {
+
+    background: #eaf2ff;
+
+    color: var(--primary);
+
+    font-weight: 750;
+}
+
+
+.nav-icon {
+
+    width: 24px;
+
+    text-align: center;
+
+    font-size: 19px;
+}
+
+
+/* SIDEBAR BOTTOM */
+
+.sidebar-bottom {
+
+    margin-top: auto;
+
+    padding: 18px;
+
+    border-top: 1px solid var(--border);
+}
+
+
+.logout-button {
+
+    width: 100%;
+
+    min-height: 52px;
+
+    border-radius: 12px;
+
+    border: 1px solid #fecaca;
+
+    background: #fff5f5;
+
+    color: #dc2626;
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 14px;
+
+    padding: 0 18px;
+
+    font-size: 15px;
+
+    font-weight: 700;
+
+    cursor: pointer;
+
+    margin-top: 10px;
+
+    transition: 0.2s ease;
+}
+
+
+.logout-button:hover {
+
+    background: #fee2e2;
+}
+
+
+/* ============================================================
+   MAIN
+============================================================ */
+
+.main-content {
+
+    margin-left: var(--sidebar-width);
+
+    min-height: 100vh;
+
+    width: calc(100% - var(--sidebar-width));
+}
+
+
+/* ============================================================
+   HEADER
+============================================================ */
+
+.top-header {
+
+    height: 88px;
+
+    padding: 0 42px;
+
+    background: rgba(255,255,255,0.94);
+
+    border-bottom: 1px solid var(--border);
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    position: sticky;
+
+    top: 0;
+
+    z-index: 50;
+
+    backdrop-filter: blur(10px);
+}
+
+
+.header-title h1 {
+
+    font-size: 21px;
+
+    font-weight: 800;
+
+    letter-spacing: -0.4px;
+}
+
+
+.header-title p {
+
+    color: var(--muted);
+
+    font-size: 13px;
+
+    margin-top: 2px;
+}
+
+
+.header-actions {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 16px;
+}
+
+
+/* NOTIFICATION */
+
+.notification-button {
+
+    position: relative;
+
+    width: 45px;
+    height: 45px;
+
+    border-radius: 12px;
+
+    background: #ffffff;
+
+    border: 1px solid var(--border);
+
+    cursor: pointer;
+
+    font-size: 20px;
+}
+
+
+.notification-count {
+
+    position: absolute;
+
+    top: -5px;
+    right: -5px;
+
+    min-width: 20px;
+    height: 20px;
+
+    padding: 0 5px;
+
+    background: #dc2626;
+
+    color: white;
+
+    border-radius: 20px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    font-size: 11px;
+
+    font-weight: 800;
+}
+
+
+/* DOCTOR PROFILE */
+
+.doctor-profile-button {
+
+    border: none;
+
+    background: transparent;
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 11px;
+
+    cursor: pointer;
+
+    text-align: left;
+}
+
+
+.doctor-avatar-small {
+
+    width: 45px;
+    height: 45px;
+
+    border-radius: 50%;
+
+    background:
+        linear-gradient(
+            135deg,
+            #2563eb,
+            #60a5fa
+        );
+
+    color: white;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    font-size: 18px;
+
+    font-weight: 800;
+}
+
+
+.header-doctor-info strong {
+
+    display: block;
+
+    font-size: 14px;
+
+    font-weight: 750;
+}
+
+
+.header-doctor-info span {
+
+    display: block;
+
+    font-size: 12px;
+
+    color: var(--muted);
+
+    margin-top: 1px;
+}
+
+
+.profile-arrow {
+
+    color: #718096;
+
+    font-size: 10px;
+
+    margin-left: 4px;
+}
+
+
+/* ============================================================
+   CONTENT
+============================================================ */
+
+.content-area {
+
+    padding: 36px 34px 50px;
+}
+
+
+/* ============================================================
+   PAGE SECTIONS
+============================================================ */
+
+.page-section {
+
+    display: none;
+
+    animation: fadeIn 0.2s ease;
+}
+
+
+.page-section.active-section {
+
+    display: block;
+}
+
+
+@keyframes fadeIn {
+
+    from {
+        opacity: 0;
+        transform: translateY(4px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+
+/* ============================================================
+   WELCOME
+============================================================ */
+
+.dashboard-welcome {
+
+    background: #ffffff;
+
+    border: 1px solid var(--border);
+
+    border-radius: 18px;
+
+    padding: 32px;
+
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: center;
+
+    box-shadow: var(--shadow);
+
+    margin-bottom: 24px;
+}
+
+
+.dashboard-eyebrow,
+.section-eyebrow {
+
+    display: block;
+
+    color: var(--primary);
+
+    font-size: 12px;
+
+    font-weight: 800;
+
+    letter-spacing: 1.2px;
+
+    margin-bottom: 7px;
+}
+
+
+.dashboard-welcome h2 {
+
+    font-size: 29px;
+
+    line-height: 1.2;
+
+    letter-spacing: -0.8px;
+
+    margin-bottom: 7px;
+}
+
+
+.dashboard-welcome p {
+
+    color: var(--muted);
+
+    font-size: 14px;
+}
+
+
+/* ONLINE */
+
+.doctor-status {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 8px;
+
+    padding: 10px 15px;
+
+    border: 1px solid #bbf7d0;
+
+    background: #f0fdf4;
+
+    color: #15803d;
+
+    border-radius: 30px;
+
+    font-size: 13px;
+
+    font-weight: 700;
+}
+
+
+.status-dot {
+
+    width: 9px;
+    height: 9px;
+
+    background: #22c55e;
+
+    border-radius: 50%;
+
+    box-shadow:
+        0 0 0 4px rgba(34,197,94,0.12);
+}
+
+
+/* ============================================================
+   STAT GRID
+============================================================ */
+
+.doctor-stat-grid {
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(4, minmax(0, 1fr));
+
+    gap: 18px;
+
+    margin-bottom: 24px;
+}
+
+
+.doctor-stat-card {
+
+    background: #ffffff;
+
+    border: 1px solid var(--border);
+
+    border-radius: 17px;
+
+    padding: 25px;
+
+    min-height: 170px;
+
+    box-shadow: var(--shadow);
+
+    transition:
+        transform 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+
+.doctor-stat-card:hover {
+
+    transform: translateY(-2px);
+
+    box-shadow:
+        0 12px 32px rgba(30,64,175,0.10);
+}
+
+
+.stat-card-top {
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+}
+
+
+.stat-icon {
+
+    width: 45px;
+    height: 45px;
+
+    border-radius: 13px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    font-size: 21px;
+}
+
+
+.stat-icon.total {
+
+    background: #edf3ff;
+}
+
+
+.stat-icon.emergency {
+
+    background: #fff0f0;
+}
+
+
+.stat-icon.urgent {
+
+    background: #fff7df;
+}
+
+
+.stat-icon.routine {
+
+    background: #eafaf1;
+}
+
+
+.stat-label {
+
+    font-size: 11px;
+
+    color: #68758e;
+
+    font-weight: 800;
+
+    letter-spacing: 1px;
+}
+
+
+.stat-number {
+
+    margin-top: 19px;
+
+    font-size: 34px;
+
+    font-weight: 800;
+
+    line-height: 1;
+}
+
+
+.stat-description {
+
+    margin-top: 9px;
+
+    color: var(--muted);
+
+    font-size: 12px;
+}
+
+
+.emergency-number {
+    color: var(--danger);
+}
+
+
+.urgent-number {
+    color: var(--warning);
+}
+
+
+.routine-number {
+    color: var(--success);
+}
+
+
+/* ============================================================
+   EMERGENCY
+============================================================ */
+
+.doctor-emergency-alert {
+
+    border: 1px solid #fecaca;
+
+    border-left: 5px solid #dc2626;
+
+    background: #fff7f7;
+
+    border-radius: 15px;
+
+    padding: 18px 20px;
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 15px;
+
+    margin-bottom: 24px;
+}
+
+
+.doctor-emergency-alert.hidden {
+
+    display: none;
+}
+
+
+.alert-icon {
+
+    width: 48px;
+    height: 48px;
+
+    border-radius: 13px;
+
+    background: #fee2e2;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    font-size: 22px;
+}
+
+
+.alert-content {
+
+    flex: 1;
+}
+
+
+.alert-content strong {
+
+    display: block;
+
+    color: #dc2626;
+
+    font-size: 13px;
+
+    letter-spacing: 0.5px;
+}
+
+
+.alert-content p {
+
+    color: #6b7280;
+
+    font-size: 13px;
+
+    margin-top: 3px;
+}
+
+
+.alert-action {
+
+    border: none;
+
+    background: #dc2626;
+
+    color: white;
+
+    border-radius: 10px;
+
+    padding: 11px 18px;
+
+    font-weight: 700;
+
+    cursor: pointer;
+}
+
+
+.alert-action:hover {
+
+    background: #b91c1c;
+}
+
+
+/* ============================================================
+   QUEUE
+============================================================ */
+
+.doctor-queue-card,
+.full-queue-card {
+
+    background: #ffffff;
+
+    border: 1px solid var(--border);
+
+    border-radius: 18px;
+
+    box-shadow: var(--shadow);
+
+    overflow: hidden;
+}
+
+
+.queue-header {
+
+    padding: 25px 27px 20px;
+
+    border-bottom: 1px solid var(--border);
+
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: center;
+}
+
+
+.queue-header h2 {
+
+    font-size: 21px;
+
+    margin-bottom: 3px;
+}
+
+
+.queue-header p {
+
+    color: var(--muted);
+
+    font-size: 13px;
+}
+
+
+.view-all-btn,
+.refresh-button {
+
+    border: 1px solid #bfdbfe;
+
+    background: #ffffff;
+
+    color: var(--primary);
+
+    border-radius: 10px;
+
+    padding: 10px 16px;
+
+    font-weight: 700;
+
+    cursor: pointer;
+}
+
+
+.view-all-btn:hover,
+.refresh-button:hover {
+
+    background: #eff6ff;
+}
+
+
+/* QUEUE ROW */
+
+.patient-row {
+
+    min-height: 92px;
+
+    padding: 18px 27px;
+
+    display: grid;
+
+    grid-template-columns:
+        48px
+        minmax(180px, 1fr)
+        180px
+        auto;
+
+    align-items: center;
+
+    gap: 18px;
+
+    border-bottom: 1px solid #edf0f5;
+}
+
+
+.patient-row:last-child {
+
+    border-bottom: none;
+}
+
+
+.patient-avatar {
+
+    width: 46px;
+    height: 46px;
+
+    border-radius: 50%;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    font-weight: 800;
+
+    font-size: 16px;
+}
+
+
+.patient-avatar.emergency {
+
+    color: #dc2626;
+
+    background: #fee2e2;
+}
+
+
+.patient-avatar.urgent {
+
+    color: #d97706;
+
+    background: #fef3c7;
+}
+
+
+.patient-avatar.routine {
+
+    color: #16a34a;
+
+    background: #dcfce7;
+}
+
+
+.patient-main strong {
+
+    display: block;
+
+    font-size: 15px;
+}
+
+
+.patient-main span {
+
+    display: block;
+
+    color: #8290a8;
+
+    font-size: 12px;
+
+    margin-top: 3px;
+}
+
+
+.patient-vital strong {
+
+    display: block;
+
+    font-size: 12px;
+}
+
+
+.patient-vital span {
+
+    display: block;
+
+    color: #718096;
+
+    font-size: 12px;
+
+    margin-top: 3px;
+}
+
+
+.patient-vital.emergency strong {
+    color: #dc2626;
+}
+
+
+.patient-vital.urgent strong {
+    color: #d97706;
+}
+
+
+.patient-vital.routine strong {
+    color: #16a34a;
+}
+
+
+.patient-view-btn {
+
+    border: 1px solid #dbe4f0;
+
+    background: #ffffff;
+
+    color: var(--primary);
+
+    border-radius: 10px;
+
+    padding: 9px 14px;
+
+    font-size: 12px;
+
+    font-weight: 700;
+
+    cursor: pointer;
+}
+
+
+.patient-view-btn:hover {
+
+    background: #eff6ff;
+
+    border-color: #bfdbfe;
+}
+
+
+/* EMPTY */
+
+.empty-queue {
+
+    padding: 48px 20px;
+
+    text-align: center;
+
+    color: var(--muted);
+}
+
+
+.empty-icon {
+
+    font-size: 34px;
+
+    margin-bottom: 10px;
+}
+
+
+.empty-queue h3 {
+
+    color: var(--text);
+
+    font-size: 16px;
+
+    margin-bottom: 4px;
+}
+
+
+.empty-queue p {
+
+    font-size: 13px;
+}
+
+
+/* ============================================================
+   QUICK ACTIONS
+============================================================ */
+
+.quick-actions-section {
+
+    margin-top: 32px;
+}
+
+
+.quick-actions-section h2 {
+
+    font-size: 27px;
+
+    margin-bottom: 18px;
+
+    letter-spacing: -0.5px;
+}
+
+
+.quick-action-grid {
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(4, minmax(0, 1fr));
+
+    gap: 16px;
+}
+
+
+.quick-action-grid button {
+
+    background: #ffffff;
+
+    border: 1px solid var(--border);
+
+    border-radius: 15px;
+
+    min-height: 88px;
+
+    padding: 18px;
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 14px;
+
+    text-align: left;
+
+    cursor: pointer;
+
+    box-shadow: var(--shadow);
+
+    transition: 0.2s ease;
+}
+
+
+.quick-action-grid button:hover {
+
+    border-color: #bfdbfe;
+
+    transform: translateY(-2px);
+
+    box-shadow:
+        0 12px 30px rgba(30,64,175,0.08);
+}
+
+
+.quick-icon {
+
+    width: 43px;
+    height: 43px;
+
+    border-radius: 12px;
+
+    background: #edf4ff;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    font-size: 20px;
+
+    flex-shrink: 0;
+}
+
+
+.quick-action-grid strong {
+
+    display: block;
+
+    color: var(--text);
+
+    font-size: 14px;
+}
+
+
+.quick-action-grid small {
+
+    display: block;
+
+    color: var(--muted);
+
+    font-size: 11px;
+
+    margin-top: 3px;
+}
+
+
+/* ============================================================
+   PAGE HEADING
+============================================================ */
+
+.page-heading {
+
+    background: #ffffff;
+
+    border: 1px solid var(--border);
+
+    border-radius: 18px;
+
+    padding: 28px;
+
+    margin-bottom: 22px;
+
+    box-shadow: var(--shadow);
+}
+
+
+.page-heading h2 {
+
+    font-size: 27px;
+
+    margin-bottom: 5px;
+}
+
+
+.page-heading p {
+
+    color: var(--muted);
+
+    font-size: 13px;
+}
+
+
+/* ============================================================
+   FULL QUEUE
+============================================================ */
+
+.full-queue-card {
+
+    min-height: 250px;
+}
+
+
+.loading-state {
+
+    padding: 55px;
+
+    text-align: center;
+
+    color: var(--muted);
+}
+
+
+/* ============================================================
+   COMING / WORKSPACE
+============================================================ */
+
+.coming-card {
+
+    background: #ffffff;
+
+    border: 1px solid var(--border);
+
+    border-radius: 18px;
+
+    min-height: 280px;
+
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
+
+    justify-content: center;
+
+    text-align: center;
+
+    box-shadow: var(--shadow);
+}
+
+
+.coming-card > div {
+
+    font-size: 42px;
+
+    margin-bottom: 12px;
+}
+
+
+.coming-card h3 {
+
+    font-size: 19px;
+
+    margin-bottom: 5px;
+}
+
+
+.coming-card p {
+
+    color: var(--muted);
+
+    font-size: 13px;
+}
+
+
+/* ============================================================
+   PROFILE
+============================================================ */
+
+.profile-card {
+
+    background: #ffffff;
+
+    border: 1px solid var(--border);
+
+    border-radius: 18px;
+
+    padding: 35px;
+
+    box-shadow: var(--shadow);
+
+    display: flex;
+
+    gap: 45px;
+
+    align-items: flex-start;
+}
+
+
+.profile-avatar-large {
+
+    width: 125px;
+    height: 125px;
+
+    border-radius: 50%;
+
+    background:
+        linear-gradient(
+            135deg,
+            #2563eb,
+            #60a5fa
+        );
+
+    color: white;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    font-size: 42px;
+
+    font-weight: 800;
+
+    flex-shrink: 0;
+}
+
+
+.profile-information {
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(2, minmax(230px, 1fr));
+
+    gap: 20px;
+
+    width: 100%;
+}
+
+
+.profile-field {
+
+    border: 1px solid var(--border);
+
+    background: #fafcff;
+
+    border-radius: 12px;
+
+    padding: 15px 17px;
+}
+
+
+.profile-field span {
+
+    display: block;
+
+    color: var(--muted);
+
+    font-size: 11px;
+
+    font-weight: 700;
+
+    margin-bottom: 5px;
+
+    text-transform: uppercase;
+
+    letter-spacing: 0.5px;
+}
+
+
+.profile-field strong {
+
+    font-size: 14px;
+
+    color: var(--text);
+}
+
+
+/* ============================================================
+   RESPONSIVE
+============================================================ */
+
+@media (max-width: 1200px) {
+
+    .doctor-stat-grid,
+    .quick-action-grid {
+
+        grid-template-columns:
+            repeat(2, minmax(0, 1fr));
+    }
+
+}
+
+
+@media (max-width: 900px) {
+
+    :root {
+        --sidebar-width: 80px;
+    }
+
+
+    .brand {
+
+        justify-content: center;
+
+        padding: 18px;
+    }
+
+
+    .brand-text,
+    .nav-item span:not(.nav-icon),
+    .logout-button span:last-child {
+
+        display: none;
+    }
+
+
+    .sidebar-nav {
+
+        padding: 20px 12px;
+    }
+
+
+    .nav-item {
+
+        justify-content: center;
+
+        padding: 0;
+    }
+
+
+    .sidebar-bottom {
+
+        padding: 12px;
+    }
+
+
+    .logout-button {
+
+        justify-content: center;
+
+        padding: 0;
+    }
+
+
+    .main-content {
+
+        width: calc(100% - 80px);
+    }
+
+
+    .header-doctor-info,
+    .profile-arrow {
+
+        display: none;
+    }
+
+
+    .doctor-profile-button {
+
+        gap: 0;
+    }
+
+}
+
+
+@media (max-width: 700px) {
+
+    .content-area {
+
+        padding: 20px 15px 40px;
+    }
+
+
+    .top-header {
+
+        padding: 0 18px;
+    }
+
+
+    .dashboard-welcome {
+
+        padding: 23px;
+
+        align-items: flex-start;
+
+        flex-direction: column;
+
+        gap: 20px;
+    }
+
+
+    .dashboard-welcome h2 {
+
+        font-size: 24px;
+    }
+
+
+    .doctor-stat-grid,
+    .quick-action-grid {
+
+        grid-template-columns: 1fr;
+    }
+
+
+    .patient-row {
+
+        grid-template-columns:
+            45px
+            1fr;
+
+        gap: 12px;
+    }
+
+
+    .patient-vital {
+
+        grid-column: 2;
+    }
+
+
+    .patient-view-btn {
+
+        grid-column: 2;
+
+        width: fit-content;
+    }
+
+
+    .queue-header {
+
+        align-items: flex-start;
+
+        gap: 15px;
+
+        flex-direction: column;
+    }
+
+
+    .doctor-emergency-alert {
+
+        align-items: flex-start;
+
+        flex-wrap: wrap;
+    }
+
+
+    .alert-action {
+
+        width: 100%;
+    }
+
+
+    .profile-card {
+
+        flex-direction: column;
+    }
+
+
+    .profile-information {
+
+        grid-template-columns: 1fr;
+    }
+
+}
+
+/* =========================================================
+   DOCTOR PROFILE
+========================================================= */
+
+.profile-section {
+    width: 100%;
+}
+
+.section-header-card {
+    background: #ffffff;
+    border: 1px solid #e4eaf3;
+    border-radius: 20px;
+    padding: 34px 32px;
+    margin-bottom: 24px;
+    box-shadow: 0 8px 30px rgba(25, 55, 95, 0.04);
+}
+
+.section-eyebrow {
+    display: block;
+    color: #1769ff;
+    font-size: 12px;
+    font-weight: 800;
+    letter-spacing: 1.5px;
+    margin-bottom: 8px;
+}
+
+.section-header-card h1 {
+    margin: 0;
+    color: #14213d;
+    font-size: 30px;
+    font-weight: 800;
+}
+
+.section-header-card p {
+    margin: 8px 0 0;
+    color: #7b879c;
+    font-size: 14px;
+}
+
+
+/* =========================================================
+   PROFILE CARD
+========================================================= */
+
+.doctor-profile-card {
+    display: grid;
+    grid-template-columns: 190px 1fr;
+    gap: 42px;
+
+    background: #ffffff;
+    border: 1px solid #e4eaf3;
+    border-radius: 20px;
+
+    padding: 38px;
+
+    box-shadow: 0 8px 30px rgba(25, 55, 95, 0.05);
+}
+
+
+/* =========================================================
+   PHOTO
+========================================================= */
+
+.profile-photo-column {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+}
+
+.doctor-profile-photo-wrapper {
+    width: 145px;
+    height: 145px;
+    position: relative;
+    margin-bottom: 18px;
+}
+
+.doctor-profile-photo {
+    width: 145px;
+    height: 145px;
+
+    object-fit: cover;
+
+    border-radius: 50%;
+
+    border: 5px solid #ffffff;
+
+    box-shadow:
+        0 8px 25px rgba(24, 105, 255, 0.20);
+
+    display: none;
+}
+
+.doctor-profile-initial {
+    width: 145px;
+    height: 145px;
+
+    border-radius: 50%;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background: linear-gradient(
+        135deg,
+        #1769ff,
+        #4f8cff
+    );
+
+    color: #ffffff;
+
+    font-size: 48px;
+    font-weight: 800;
+
+    box-shadow:
+        0 8px 25px rgba(24, 105, 255, 0.20);
+}
+
+
+.change-photo-btn {
+    width: 150px;
+
+    padding: 11px 15px;
+
+    border-radius: 10px;
+
+    background: #eef4ff;
+
+    color: #1769ff;
+
+    font-size: 13px;
+    font-weight: 700;
+
+    text-align: center;
+
+    cursor: pointer;
+
+    transition: 0.2s ease;
+}
+
+.change-photo-btn:hover {
+    background: #1769ff;
+    color: #ffffff;
+}
+
+.remove-photo-btn {
+    margin-top: 9px;
+
+    border: none;
+    background: transparent;
+
+    color: #e53935;
+
+    font-size: 12px;
+    font-weight: 600;
+
+    cursor: pointer;
+}
+
+.remove-photo-btn:hover {
+    text-decoration: underline;
+}
+
+
+/* =========================================================
+   PROFILE INFORMATION
+========================================================= */
+
+.profile-information {
+    width: 100%;
+}
+
+.profile-grid {
+    display: grid;
+
+    grid-template-columns:
+        repeat(2, minmax(0, 1fr));
+
+    gap: 20px;
+}
+
+.profile-field {
+    display: flex;
+    flex-direction: column;
+}
+
+.profile-field label {
+    margin-bottom: 8px;
+
+    color: #718096;
+
+    font-size: 11px;
+    font-weight: 800;
+
+    letter-spacing: 1px;
+}
+
+.profile-field input {
+    width: 100%;
+    box-sizing: border-box;
+
+    min-height: 48px;
+
+    padding: 12px 14px;
+
+    border: 1px solid #dce4ef;
+
+    border-radius: 10px;
+
+    background: #f8fafd;
+
+    color: #17233d;
+
+    font-size: 14px;
+    font-weight: 600;
+
+    outline: none;
+
+    transition: 0.2s ease;
+}
+
+.profile-field input:focus {
+    border-color: #1769ff;
+
+    background: #ffffff;
+
+    box-shadow:
+        0 0 0 3px rgba(23, 105, 255, 0.08);
+}
+
+
+/* READ ONLY */
+
+.profile-field input[readonly] {
+    background: #f4f6fa;
+    color: #64748b;
+    cursor: not-allowed;
+}
+
+
+/* EDITABLE */
+
+.editable-field input {
+    background: #ffffff;
+}
+
+.editable-field::after {
+    content: "Editable";
+
+    margin-top: 5px;
+
+    color: #1769ff;
+
+    font-size: 10px;
+    font-weight: 600;
+}
+
+
+/* =========================================================
+   SAVE
+========================================================= */
+
+.profile-actions {
+    display: flex;
+    align-items: center;
+
+    gap: 15px;
+
+    margin-top: 28px;
+}
+
+.save-profile-btn {
+    border: none;
+
+    background: #1769ff;
+
+    color: #ffffff;
+
+    padding: 13px 22px;
+
+    border-radius: 10px;
+
+    font-size: 14px;
+    font-weight: 700;
+
+    cursor: pointer;
+
+    box-shadow:
+        0 5px 15px rgba(23, 105, 255, 0.20);
+
+    transition: 0.2s ease;
+}
+
+.save-profile-btn:hover {
+    background: #0d5ce5;
+
+    transform: translateY(-1px);
+}
+
+.profile-save-message {
+    font-size: 13px;
+    font-weight: 600;
+}
+
+.profile-save-message.success {
+    color: #16a34a;
+}
+
+.profile-save-message.error {
+    color: #dc2626;
+}
+
+
+/* =========================================================
+   RESPONSIVE
+========================================================= */
+
+@media (max-width: 900px) {
+
+    .doctor-profile-card {
+        grid-template-columns: 1fr;
+    }
+
+    .profile-photo-column {
+        align-items: center;
+    }
+
+}
+
+
+@media (max-width: 650px) {
+
+    .profile-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .doctor-profile-card {
+        padding: 22px;
+    }
+
+    .section-header-card {
+        padding: 25px 22px;
+    }
+
+    .section-header-card h1 {
+        font-size: 25px;
+    }
+
+}
+
+/* ============================================================
+   MEDIMATRIX - DOCTOR CONSULTATION WORKSPACE
+============================================================ */
+
+.consultation-workspace {
+    width: 100%;
+    box-sizing: border-box;
+    margin-top: 20px;
+}
+
+.consultation-patient-card {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    background: #ffffff;
+    border: 1px solid #e5eaf2;
+    border-radius: 18px;
+    padding: 24px;
+    margin-bottom: 20px;
+    box-shadow: 0 4px 15px rgba(30, 50, 90, 0.05);
+}
+
+.consultation-patient-avatar {
+    width: 64px;
+    height: 64px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #eaf2ff;
+    font-size: 30px;
+    flex-shrink: 0;
+}
+
+.consultation-patient-info h2 {
+    margin: 5px 0 10px;
+    font-size: 24px;
+    color: #17213b;
+}
+
+.consultation-patient-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    color: #718096;
+    font-size: 14px;
+}
+
+.consultation-patient-meta strong {
+    color: #17213b;
+}
+
+/* Cards */
+
+.consultation-card {
+    background: #ffffff;
+    border: 1px solid #e5eaf2;
+    border-radius: 18px;
+    padding: 25px;
+    margin-bottom: 20px;
+    box-shadow: 0 4px 15px rgba(30, 50, 90, 0.05);
+}
+
+.consultation-card-header {
+    margin-bottom: 22px;
+}
+
+.consultation-card-header h3 {
+    margin: 5px 0 6px;
+    font-size: 20px;
+    color: #17213b;
+}
+
+.consultation-card-header p {
+    margin: 0;
+    color: #718096;
+}
+
+/* Patient information */
+
+.consultation-info-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 15px;
+}
+
+.consultation-info-item {
+    background: #f8fafc;
+    border-radius: 12px;
+    padding: 16px;
+}
+
+.consultation-info-item small {
+    display: block;
+    color: #718096;
+    margin-bottom: 6px;
+}
+
+.consultation-info-item strong {
+    color: #17213b;
+}
+
+/* Symptoms */
+
+.consultation-symptoms {
+    background: #f8fafc;
+    border-radius: 12px;
+    padding: 18px;
+    margin-top: 18px;
+}
+
+.consultation-symptoms h4 {
+    margin: 0 0 8px;
+    color: #17213b;
+}
+
+.consultation-symptoms p {
+    margin: 0;
+    color: #4a5568;
+    line-height: 1.6;
+}
+
+/* Doctor form */
+
+.consultation-form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.consultation-form-field {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.consultation-form-field label {
+    font-size: 14px;
+    font-weight: 700;
+    color: #17213b;
+}
+
+.consultation-form-field textarea,
+.consultation-form-field input {
+    width: 100%;
+    box-sizing: border-box;
+    border: 1px solid #d9e1ec;
+    border-radius: 10px;
+    padding: 13px 14px;
+    font-family: inherit;
+    font-size: 14px;
+    color: #17213b;
+    background: #ffffff;
+    resize: vertical;
+    outline: none;
+}
+
+.consultation-form-field textarea:focus,
+.consultation-form-field input:focus {
+    border-color: #2563eb;
+    box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.10);
+}
+
+/* Treatment buttons */
+
+.treatment-options {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 18px;
+    margin-top: 20px;
+}
+
+.treatment-option {
+    width: 100%;
+    min-height: 90px;
+    border: 2px solid #dbe3ef;
+    border-radius: 14px;
+    background: #ffffff;
+    padding: 18px;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    text-align: left;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.treatment-option:hover {
+    border-color: #2563eb;
+    transform: translateY(-1px);
+}
+
+.treatment-option.selected {
+    border-color: #2563eb;
+    background: #eef5ff;
+    box-shadow: 0 5px 18px rgba(37, 99, 235, 0.12);
+}
+
+.treatment-icon {
+    width: 48px;
+    height: 48px;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #eef5ff;
+    font-size: 24px;
+    flex-shrink: 0;
+}
+
+.treatment-option-content {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.treatment-option-content strong {
+    font-size: 17px;
+    color: #17213b;
+}
+
+.treatment-option-content small {
+    color: #718096;
+}
+
+/* Selected treatment message */
+
+.selected-treatment-message {
+    margin-top: 15px;
+    padding: 13px 16px;
+    border-radius: 10px;
+    background: #f8fafc;
+    color: #4a5568;
+    font-size: 14px;
+}
+
+/* Complete button */
+
+.complete-consultation-button {
+    width: 100%;
+    margin-top: 18px;
+    padding: 15px 20px;
+    border: none;
+    border-radius: 12px;
+    background: #2563eb;
+    color: #ffffff;
+    font-size: 15px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.complete-consultation-button:hover {
+    background: #1d4ed8;
+    transform: translateY(-1px);
+}
+
+.complete-consultation-button:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+/* Mobile */
+
+@media (max-width: 900px) {
+
+    .consultation-info-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .treatment-options {
+        grid-template-columns: 1fr;
+    }
+
+}
+
+@media (max-width: 600px) {
+
+    .consultation-info-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .consultation-patient-card {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .consultation-patient-meta {
+        flex-direction: column;
+        gap: 8px;
+    }
+
+}
+
+/* =========================================================
+   OPD PRESCRIPTION
+========================================================= */
+
+.prescription-patient-card {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    background: #ffffff;
+    border: 1px solid #e6ebf3;
+    border-radius: 18px;
+    padding: 22px;
+    margin-bottom: 22px;
+    box-shadow: 0 8px 24px rgba(31, 41, 55, 0.05);
+}
+
+.prescription-patient-icon {
+    width: 58px;
+    height: 58px;
+    border-radius: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #eef4ff;
+    font-size: 27px;
+    flex-shrink: 0;
+}
+
+.prescription-patient-info {
+    flex: 1;
+}
+
+.prescription-label {
+    display: block;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    margin-bottom: 4px;
+    color: #718096;
+}
+
+.prescription-patient-info h3 {
+    margin: 0 0 10px;
+    font-size: 21px;
+    color: #172033;
+}
+
+.prescription-patient-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px 24px;
+    color: #667085;
+    font-size: 13px;
+}
+
+.prescription-patient-meta strong {
+    color: #172033;
+}
+
+.prescription-status {
+    min-width: 85px;
+    padding: 12px 16px;
+    border-radius: 12px;
+    text-align: center;
+    background: #ecfdf3;
+}
+
+.prescription-status span {
+    display: block;
+    font-size: 14px;
+    font-weight: 800;
+    color: #087443;
+}
+
+.prescription-status small {
+    color: #667085;
+}
+
+
+/* =========================================================
+   PRESCRIPTION CARD
+========================================================= */
+
+.prescription-card {
+    background: #ffffff;
+    border: 1px solid #e6ebf3;
+    border-radius: 18px;
+    padding: 24px;
+    margin-bottom: 22px;
+    box-shadow: 0 8px 24px rgba(31, 41, 55, 0.05);
+}
+
+.prescription-card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 20px;
+}
+
+.prescription-card-header h3 {
+    margin: 4px 0 0;
+    color: #172033;
+    font-size: 19px;
+}
+
+.add-medicine-btn {
+    border: 0;
+    border-radius: 10px;
+    padding: 11px 16px;
+    background: #2563eb;
+    color: #ffffff;
+    font-weight: 700;
+    cursor: pointer;
+}
+
+.add-medicine-btn:hover {
+    opacity: 0.9;
+}
+
+
+/* =========================================================
+   MEDICINE TABLE
+========================================================= */
+
+.prescription-table-wrapper {
+    width: 100%;
+    overflow-x: auto;
+}
+
+.prescription-table {
+    width: 100%;
+    min-width: 1050px;
+    border-collapse: collapse;
+}
+
+.prescription-table th {
+    text-align: left;
+    padding: 12px;
+    background: #f7f9fc;
+    color: #667085;
+    font-size: 12px;
+    font-weight: 700;
+    white-space: nowrap;
+}
+
+.prescription-table td {
+    padding: 10px;
+    border-bottom: 1px solid #edf0f5;
+    vertical-align: middle;
+}
+
+.prescription-input,
+.prescription-field input,
+.prescription-field textarea {
+    width: 100%;
+    box-sizing: border-box;
+    border: 1px solid #d9e0ea;
+    border-radius: 9px;
+    padding: 10px 11px;
+    background: #ffffff;
+    color: #172033;
+    font-size: 13px;
+    outline: none;
+}
+
+.prescription-input:focus,
+.prescription-field input:focus,
+.prescription-field textarea:focus {
+    border-color: #2563eb;
+}
+
+.remove-medicine-btn {
+    width: 34px;
+    height: 34px;
+    border: 0;
+    border-radius: 9px;
+    background: #fff1f2;
+    color: #dc2626;
+    font-size: 20px;
+    cursor: pointer;
+}
+
+.remove-medicine-btn:hover {
+    background: #fee2e2;
+}
+
+
+/* =========================================================
+   FORM
+========================================================= */
+
+.prescription-form-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+}
+
+.prescription-field {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.prescription-field:first-child,
+.prescription-field:nth-child(3) {
+    grid-column: span 2;
+}
+
+.prescription-field label {
+    font-size: 13px;
+    font-weight: 700;
+    color: #344054;
+}
+
+.prescription-field textarea {
+    resize: vertical;
+    min-height: 100px;
+}
+
+
+/* =========================================================
+   ACTIONS
+========================================================= */
+
+.prescription-actions {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 12px;
+    flex-wrap: wrap;
+    margin-top: 10px;
+}
+
+.prescription-actions button {
+    border: 0;
+    border-radius: 10px;
+    padding: 12px 18px;
+    font-weight: 700;
+    cursor: pointer;
+}
+
+.prescription-secondary-btn {
+    background: #eef2f7;
+    color: #344054;
+}
+
+.prescription-primary-btn {
+    background: #2563eb;
+    color: #ffffff;
+}
+
+.prescription-print-btn {
+    background: #172033;
+    color: #ffffff;
+}
+
+.prescription-actions button:hover {
+    opacity: 0.9;
+}
+
+.prescription-save-message {
+    margin-top: 14px;
+    font-size: 14px;
+    font-weight: 600;
+}
+
+
+/* =========================================================
+   RESPONSIVE
+========================================================= */
+
+@media (max-width: 900px) {
+
+    .prescription-patient-card {
+        align-items: flex-start;
+        flex-wrap: wrap;
+    }
+
+    .prescription-status {
+        margin-left: 78px;
+    }
+
+    .prescription-form-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .prescription-field:first-child,
+    .prescription-field:nth-child(3) {
+        grid-column: span 1;
+    }
+
+}
+
+@media (max-width: 600px) {
+
+    .prescription-card {
+        padding: 16px;
+    }
+
+    .prescription-patient-card {
+        padding: 16px;
+    }
+
+    .prescription-patient-meta {
+        flex-direction: column;
+        gap: 6px;
+    }
+
+    .prescription-actions {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+}
+
+/* ============================================================
+   MEDIMATRIX PROFESSIONAL OPD PRESCRIPTION PRINT
+============================================================ */
+
+@media print {
+
+    @page {
+        size: A4 portrait;
+        margin: 8mm;
+    }
+
+
+    /* ========================================================
+       BASIC PAGE
+    ======================================================== */
+
+    html,
+    body {
+
+        width: 210mm !important;
+
+        min-height: 297mm !important;
+
+        margin: 0 !important;
+
+        padding: 0 !important;
+
+        background: #ffffff !important;
+
+        overflow: visible !important;
+    }
+
+
+    /* ========================================================
+       HIDE DASHBOARD
+    ======================================================== */
+
+    body * {
+
+        visibility: hidden !important;
+    }
+
+
+    #prescriptionSection,
+    #prescriptionSection * {
+
+        visibility: visible !important;
+    }
+
+
+    /* ========================================================
+       HIDE SCREEN ELEMENTS
+    ======================================================== */
+
+    .sidebar,
+    .topbar,
+    .sidebar-nav,
+    .sidebar-bottom,
+    .page-heading,
+    .notification-panel,
+    .prescription-actions,
+    .action-buttons,
+    .form-actions,
+    button {
+
+        display: none !important;
+    }
+
+
+    /* ========================================================
+       PRESCRIPTION PAGE
+    ======================================================== */
+
+    #prescriptionSection {
+
+        display: block !important;
+
+        position: relative !important;
+
+        width: 100% !important;
+
+        max-width: none !important;
+
+        min-height: 0 !important;
+
+        margin: 0 !important;
+
+        padding: 0 !important;
+
+        background: white !important;
+
+        color: #111111 !important;
+
+        overflow: visible !important;
+
+        zoom: 0.90 !important;
+    }
+
+
+    /* ========================================================
+       PRINT HEADER
+    ======================================================== */
+
+    #printPrescriptionHeader {
+
+        display: flex !important;
+
+        align-items: center !important;
+
+        justify-content: center !important;
+
+        gap: 12px !important;
+
+        width: 100% !important;
+
+        padding: 4px 0 6px 0 !important;
+
+        margin: 0 !important;
+
+        border-bottom: 2px solid #111111 !important;
+    }
+
+
+    .print-hospital-logo {
+
+        display: flex !important;
+
+        align-items: center !important;
+
+        justify-content: center !important;
+
+        width: 42px !important;
+
+        height: 42px !important;
+
+        font-size: 26px !important;
+
+        border: 1px solid #222 !important;
+
+        border-radius: 50% !important;
+    }
+
+
+    .print-hospital-details {
+
+        text-align: center !important;
+
+        flex: 1 !important;
+    }
+
+
+    .print-hospital-details h1 {
+
+        margin: 0 !important;
+
+        padding: 0 !important;
+
+        font-size: 19px !important;
+
+        font-weight: 800 !important;
+
+        letter-spacing: 1px !important;
+
+        color: #000000 !important;
+    }
+
+
+    .print-hospital-subtitle {
+
+        margin-top: 1px !important;
+
+        font-size: 9px !important;
+
+        font-weight: 600 !important;
+    }
+
+
+    .print-hospital-contact {
+
+        margin-top: 2px !important;
+
+        font-size: 8px !important;
+    }
+
+
+    /* ========================================================
+       DOCUMENT TITLE
+    ======================================================== */
+
+    .print-document-title {
+
+        display: flex !important;
+
+        justify-content: space-between !important;
+
+        align-items: center !important;
+
+        width: 100% !important;
+
+        padding: 5px 0 !important;
+
+        margin: 0 !important;
+
+        border-bottom: 1px solid #777 !important;
+    }
+
+
+    .print-document-title strong {
+
+        display: block !important;
+
+        font-size: 13px !important;
+
+        font-weight: 800 !important;
+
+        color: #000 !important;
+    }
+
+
+    .print-document-title span {
+
+        font-size: 8px !important;
+
+        color: #333 !important;
+    }
+
+
+    .print-document-meta {
+
+        text-align: right !important;
+
+        font-size: 8px !important;
+
+        line-height: 1.5 !important;
+    }
+
+
+    /* ========================================================
+       DOCTOR BOX
+    ======================================================== */
+
+    .print-doctor-box {
+
+        display: grid !important;
+
+        grid-template-columns:
+            2fr
+            1.5fr
+            1fr !important;
+
+        gap: 8px !important;
+
+        width: 100% !important;
+
+        margin: 5px 0 !important;
+
+        padding: 5px 7px !important;
+
+        border: 1px solid #999 !important;
+
+        background: #fafafa !important;
+
+        break-inside: avoid !important;
+
+        page-break-inside: avoid !important;
+    }
+
+
+    .print-doctor-box > div {
+
+        display: flex !important;
+
+        flex-direction: column !important;
+
+        gap: 1px !important;
+    }
+
+
+    .print-label {
+
+        font-size: 7px !important;
+
+        font-weight: 700 !important;
+
+        text-transform: uppercase !important;
+
+        color: #555 !important;
+    }
+
+
+    .print-doctor-box strong {
+
+        font-size: 9px !important;
+
+        color: #000 !important;
+    }
+
+
+    /* ========================================================
+       PATIENT CARD
+    ======================================================== */
+
+    #prescriptionSection .patient-card,
+    #prescriptionSection .patient-info,
+    #prescriptionSection .patient-details {
+
+        width: 100% !important;
+
+        margin: 4px 0 !important;
+
+        padding: 5px 7px !important;
+
+        border: 1px solid #999 !important;
+
+        border-radius: 0 !important;
+
+        box-shadow: none !important;
+
+        break-inside: avoid !important;
+
+        page-break-inside: avoid !important;
+    }
+
+
+    /* ========================================================
+       MEDICATION SECTION
+    ======================================================== */
+
+    #prescriptionSection table {
+
+        width: 100% !important;
+
+        border-collapse: collapse !important;
+
+        table-layout: fixed !important;
+
+        margin: 3px 0 !important;
+
+        font-size: 8px !important;
+
+        break-inside: avoid !important;
+
+        page-break-inside: avoid !important;
+    }
+
+
+    #prescriptionSection th {
+
+        background: #eeeeee !important;
+
+        color: #000000 !important;
+
+        font-size: 7.5px !important;
+
+        font-weight: 800 !important;
+
+        text-transform: uppercase !important;
+
+        border: 1px solid #555 !important;
+
+        padding: 4px !important;
+    }
+
+
+    #prescriptionSection td {
+
+        border: 1px solid #777 !important;
+
+        padding: 4px !important;
+
+        font-size: 8px !important;
+
+        color: #000 !important;
+
+        vertical-align: middle !important;
+    }
+
+
+    /* ========================================================
+       FORM INPUTS
+    ======================================================== */
+
+    #prescriptionSection input,
+    #prescriptionSection select,
+    #prescriptionSection textarea {
+
+        font-size: 8px !important;
+
+        padding: 3px !important;
+
+        min-height: 18px !important;
+
+        border: none !important;
+
+        background: transparent !important;
+
+        color: #000 !important;
+
+        box-shadow: none !important;
+    }
+
+
+    #prescriptionSection textarea {
+
+        min-height: 30px !important;
+
+        height: 30px !important;
+
+        resize: none !important;
+    }
+
+
+    /* ========================================================
+       CLINICAL INSTRUCTIONS
+    ======================================================== */
+
+    #prescriptionSection .advice-section,
+    #prescriptionSection .followup-section,
+    #prescriptionSection .remarks-section {
+
+        margin: 4px 0 !important;
+
+        padding: 5px 7px !important;
+
+        border: 1px solid #999 !important;
+
+        break-inside: avoid !important;
+
+        page-break-inside: avoid !important;
+    }
+
+
+    /* ========================================================
+       REMOVE HUGE SPACING
+    ======================================================== */
+
+    #prescriptionSection h1,
+    #prescriptionSection h2,
+    #prescriptionSection h3,
+    #prescriptionSection h4,
+    #prescriptionSection p {
+
+        margin-top: 2px !important;
+
+        margin-bottom: 2px !important;
+    }
+
+
+    #prescriptionSection .card,
+    #prescriptionSection .prescription-card,
+    #prescriptionSection .prescription-container {
+
+        margin: 3px 0 !important;
+
+        padding: 5px !important;
+
+        border-radius: 0 !important;
+
+        box-shadow: none !important;
+
+        break-inside: avoid !important;
+
+        page-break-inside: avoid !important;
+    }
+
+
+    /* ========================================================
+       SIGNATURE
+    ======================================================== */
+
+    .print-signature-area {
+
+        display: flex !important;
+
+        justify-content: flex-end !important;
+
+        margin-top: 8px !important;
+
+        padding-top: 8px !important;
+    }
+
+
+    .print-signature {
+
+        width: 150px !important;
+
+        text-align: center !important;
+
+        border-top: 1px solid #222 !important;
+
+        padding-top: 3px !important;
+
+        font-size: 8px !important;
+    }
+
+
+    /* ========================================================
+       FOOTER
+    ======================================================== */
+
+    .print-prescription-footer {
+
+        display: block !important;
+
+        width: 100% !important;
+
+        margin-top: 5px !important;
+
+        padding-top: 4px !important;
+
+        border-top: 1px solid #777 !important;
+
+        text-align: center !important;
+
+        font-size: 7px !important;
+
+        color: #555 !important;
+    }
+
+
+    /* ========================================================
+       NO PAGE BREAKS
+    ======================================================== */
+
+    #prescriptionSection,
+    #prescriptionSection > *,
+    #prescriptionSection .card,
+    #prescriptionSection table {
+
+        page-break-inside: avoid !important;
+
+        break-inside: avoid !important;
+    }
+
+}

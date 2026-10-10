@@ -1,0 +1,1075 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Hospital Employee Dashboard | MediMatrix</title>
+
+    <link
+        rel="stylesheet"
+        href="css/hospital-employee-dashboard.css"
+    >
+
+    <script
+        src="js/hospital-employee-dashboard.js"
+        defer
+    ></script>
+</head>
+
+<body>
+
+<div class="app-container">
+
+    <!-- =====================================================
+         SIDEBAR
+    ====================================================== -->
+    <aside class="sidebar">
+
+        <div class="sidebar-brand">
+            <div class="brand-icon">🏥</div>
+
+            <div>
+                <h2>MediMatrix</h2>
+                <span>HealthTriage AI</span>
+            </div>
+        </div>
+
+
+        <div class="employee-mini-profile">
+
+            <div
+                class="mini-avatar"
+                id="sidebarProfileImage"
+            >
+                👤
+            </div>
+
+            <div class="mini-profile-info">
+                <strong id="sidebarEmployeeName">
+                    Hospital Employee
+                </strong>
+
+                <span>
+                    Hospital Employee
+                </span>
+            </div>
+
+        </div>
+
+
+        <nav class="sidebar-navigation">
+
+            <button
+                type="button"
+                class="nav-item active"
+                data-section="dashboardSection"
+            >
+                <span class="nav-icon">▦</span>
+                <span>Dashboard</span>
+            </button>
+
+
+            <button
+                type="button"
+                class="nav-item"
+                data-section="registrationSection"
+            >
+                <span class="nav-icon">+</span>
+                <span>Register Patient</span>
+            </button>
+
+
+            <button
+                type="button"
+                class="nav-item"
+                data-section="profileSection"
+            >
+                <span class="nav-icon">◯</span>
+                <span>My Profile</span>
+            </button>
+
+        </nav>
+
+
+        
+        
+<div class="sidebar-bottom">
+
+    <button type="button" class="logout-button" id="logoutButton">
+        <span class="nav-icon">↪</span>
+        <span>Logout</span>
+    </button>
+
+    <div class="system-status">
+        <span class="status-dot"></span>
+        <div>
+            <strong>System Online</strong>
+            <small>MediMatrix AI</small>
+        </div>
+    </div>
+
+</div>
+
+
+    </aside>
+
+
+    <!-- =====================================================
+         MAIN CONTENT
+    ====================================================== -->
+    <main class="main-content">
+
+
+        <!-- =================================================
+             TOP BAR
+        ================================================== -->
+        <header class="topbar">
+
+            <div class="topbar-left">
+
+                <button
+                    type="button"
+                    class="mobile-menu-button"
+                    id="mobileMenuButton"
+                >
+                    ☰
+                </button>
+
+                <div>
+                    <h1 id="pageTitle">
+                        Hospital Employee Dashboard
+                    </h1>
+
+                    <p id="pageSubtitle">
+                        Manage patient registration and daily work.
+                    </p>
+                </div>
+
+            </div>
+
+
+            <div class="topbar-right">
+
+                <div class="current-date">
+                    <span>Today</span>
+                    <strong id="currentDate">
+                        --
+                    </strong>
+                </div>
+
+
+                <button
+                    type="button"
+                    class="profile-button"
+                    id="profileTopButton"
+                    title="My Profile"
+                >
+
+                    <div
+                        class="top-avatar"
+                        id="topProfileImage"
+                    >
+                        👤
+                    </div>
+
+                    <div class="top-profile-text">
+
+                        <strong id="topEmployeeName">
+                            Hospital Employee
+                        </strong>
+
+                        <span>
+                            Employee
+                        </span>
+
+                    </div>
+
+                    <span class="profile-arrow">
+                        ▾
+                    </span>
+
+                </button>
+
+            </div>
+
+        </header>
+
+
+        <!-- =================================================
+             CONTENT AREA
+        ================================================== -->
+        <div class="content-area">
+
+
+            <!-- =================================================
+                 DASHBOARD SECTION
+            ================================================== -->
+            <section
+                id="dashboardSection"
+                class="page-section active-section"
+            >
+
+                <div class="welcome-card">
+
+                    <div>
+
+                        <span class="welcome-label">
+                            Welcome back
+                        </span>
+
+                        <h2>
+                            <span id="welcomeEmployeeName">
+                                Hospital Employee
+                            </span>
+                        </h2>
+
+                        <p>
+                            Register patients and manage today's
+                            hospital intake from one place.
+                        </p>
+
+                    </div>
+
+                    <div class="welcome-icon">
+                        🏥
+                    </div>
+
+                </div>
+
+
+                <!-- =================================================
+                     STATISTICS
+                ================================================== -->
+                <div class="stats-grid">
+
+                    <div class="stat-card">
+
+                        <div class="stat-icon blue">
+                            👥
+                        </div>
+
+                        <div class="stat-content">
+
+                            <span class="stat-label">
+                                Total Patients
+                            </span>
+
+                            <strong
+                                id="totalPatientsMonth"
+                                class="stat-number"
+                            >
+                                0
+                            </strong>
+
+                            <small>
+                                Registered this month
+                            </small>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="stat-card">
+
+                        <div class="stat-icon green">
+                            📅
+                        </div>
+
+                        <div class="stat-content">
+
+                            <span class="stat-label">
+                                Today's Patients
+                            </span>
+
+                            <strong
+                                id="totalPatientsToday"
+                                class="stat-number"
+                            >
+                                0
+                            </strong>
+
+                            <small>
+                                Registered today
+                            </small>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="stat-card">
+
+                        <div class="stat-icon orange">
+                            ⏳
+                        </div>
+
+                        <div class="stat-content">
+
+                            <span class="stat-label">
+                                Waiting Patients
+                            </span>
+
+                            <strong
+                                id="waitingPatients"
+                                class="stat-number"
+                            >
+                                0
+                            </strong>
+
+                            <small>
+                                Waiting for assessment
+                            </small>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <!-- =================================================
+                     QUICK ACTION
+                ================================================== -->
+                <div class="section-heading">
+
+                    <div>
+                        <h3>Quick Action</h3>
+
+                        <p>
+                            Register a new patient.
+                        </p>
+                    </div>
+
+                    <button
+                        type="button"
+                        class="primary-button"
+                        id="quickRegisterButton"
+                    >
+                        <span>＋</span>
+                        Register Patient
+                    </button>
+
+                </div>
+
+
+                <!-- =================================================
+                     RECENT REGISTRATIONS
+                ================================================== -->
+                <div class="panel">
+
+                    <div class="panel-header">
+
+                        <div>
+                            <h3>
+                                Recent Registrations
+                            </h3>
+
+                            <p>
+                                Recently registered patients.
+                            </p>
+                        </div>
+
+                        <span class="panel-badge">
+                            Latest
+                        </span>
+
+                    </div>
+
+
+                    <div class="table-wrapper">
+
+                        <table class="patient-table">
+
+                            <thead>
+
+                                <tr>
+                                    <th>Patient ID</th>
+                                    <th>Patient Name</th>
+                                    <th>Age</th>
+                                    <th>Gender</th>
+                                    <th>Department</th>
+                                    <th>Status</th>
+                                </tr>
+
+                            </thead>
+
+                            <tbody id="recentPatientsTable">
+
+                                <tr class="empty-row">
+
+                                    <td
+                                        colspan="6"
+                                    >
+                                        <div class="empty-state">
+
+                                            <div class="empty-icon">
+                                                👥
+                                            </div>
+
+                                            <strong>
+                                                No recent registrations
+                                            </strong>
+
+                                            <span>
+                                                Registered patients
+                                                will appear here.
+                                            </span>
+
+                                        </div>
+                                    </td>
+
+                                </tr>
+
+                            </tbody>
+
+                        </table>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+
+            <!-- =================================================
+                 PATIENT REGISTRATION SECTION
+            ================================================== -->
+            <section
+                id="registrationSection"
+                class="page-section"
+            >
+
+                <div class="page-heading">
+
+                    <div>
+
+                        <span class="page-heading-label">
+                            Patient Management
+                        </span>
+
+                        <h2>
+                            Register New Patient
+                        </h2>
+
+                        <p>
+                            Enter the patient's basic information
+                            and symptoms. Patient ID and department
+                            routing are handled automatically.
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <!-- =================================================
+                     REGISTRATION FORM
+                ================================================== -->
+                <div class="form-panel">
+
+                    <div class="form-panel-header">
+
+                        <div class="form-header-icon">
+                            👤
+                        </div>
+
+                        <div>
+
+                            <h3>
+                                Patient Information
+                            </h3>
+
+                            <p>
+                                Fields marked with
+                                <span>*</span>
+                                are required.
+                            </p>
+
+                        </div>
+
+                    </div>
+
+
+                    <form
+                        id="patientRegistrationForm"
+                        autocomplete="off"
+                    >
+
+                        <div class="form-grid">
+
+
+                            <!-- FULL NAME -->
+                            <div class="form-group full-width">
+
+                                <label for="fullName">
+                                    Full Name
+                                    <span>*</span>
+                                </label>
+
+                                <input
+                                    type="text"
+                                    id="fullName"
+                                    name="full_name"
+                                    placeholder="Enter patient's full name"
+                                    maxlength="150"
+                                    required
+                                >
+
+                            </div>
+
+
+                            <!-- AGE -->
+                            <div class="form-group">
+
+                                <label for="age">
+                                    Age
+                                    <span>*</span>
+                                </label>
+
+                                <input
+                                    type="number"
+                                    id="age"
+                                    name="age"
+                                    placeholder="Enter age"
+                                    min="0"
+                                    max="120"
+                                    required
+                                >
+
+                            </div>
+
+
+                            <!-- GENDER -->
+                            <div class="form-group">
+
+                                <label for="gender">
+                                    Gender
+                                    <span>*</span>
+                                </label>
+
+                                <select
+                                    id="gender"
+                                    name="gender"
+                                    required
+                                >
+
+                                    <option value="">
+                                        Select gender
+                                    </option>
+
+                                    <option value="Male">
+                                        Male
+                                    </option>
+
+                                    <option value="Female">
+                                        Female
+                                    </option>
+
+                                    <option value="Other">
+                                        Other
+                                    </option>
+
+                                </select>
+
+                            </div>
+
+
+                            <!-- PHONE -->
+                            <div class="form-group">
+
+                                <label for="phone">
+                                    Phone Number
+                                    <span>*</span>
+                                </label>
+
+                                <input
+                                    type="tel"
+                                    id="phone"
+                                    name="phone"
+                                    placeholder="Enter phone number"
+                                    maxlength="20"
+                                    required
+                                >
+
+                            </div>
+
+
+                            <!-- EMERGENCY CONTACT -->
+                            <div class="form-group">
+
+                                <label for="emergencyContact">
+                                    Emergency Contact
+                                    <span>*</span>
+                                </label>
+
+                                <input
+                                    type="tel"
+                                    id="emergencyContact"
+                                    name="emergency_contact"
+                                    placeholder="Emergency contact number"
+                                    maxlength="20"
+                                    required
+                                >
+
+                            </div>
+
+
+                            <!-- ADDRESS -->
+                            <div class="form-group full-width">
+
+                                <label for="address">
+                                    Address
+                                    <span>*</span>
+                                </label>
+
+                                <textarea
+                                    id="address"
+                                    name="address"
+                                    rows="3"
+                                    maxlength="500"
+                                    placeholder="Enter patient's address"
+                                    required
+                                ></textarea>
+
+                            </div>
+
+
+                            <!-- =====================================================
+     MULTILINGUAL SYMPTOMS + VOICE INPUT
+====================================================== -->
+
+<div class="form-group full-width">
+
+    <div class="symptoms-header-row">
+
+        <label for="symptoms">
+            Patient Symptoms
+            <span>*</span>
+        </label>
+
+        <div class="voice-language-control">
+
+            <label for="voiceLanguage">
+                Voice Language
+            </label>
+
+            <select id="voiceLanguage">
+                <option value="en-IN">English (India)</option>
+                <option value="hi-IN">Hindi</option>
+                <option value="or-IN">Odia</option>
+                <option value="bn-IN">Bengali</option>
+                <option value="te-IN">Telugu</option>
+                <option value="ta-IN">Tamil</option>
+                <option value="mr-IN">Marathi</option>
+                <option value="gu-IN">Gujarati</option>
+                <option value="kn-IN">Kannada</option>
+                <option value="ml-IN">Malayalam</option>
+                <option value="pa-IN">Punjabi</option>
+                <option value="ur-IN">Urdu</option>
+            </select>
+
+        </div>
+
+    </div>
+
+
+    <div class="symptoms-voice-wrapper">
+
+        <textarea
+            id="symptoms"
+            name="symptoms"
+            rows="5"
+            maxlength="1000"
+            placeholder="Type symptoms or use voice input..."
+            required
+        ></textarea>
+
+
+        <div class="voice-controls">
+
+            <button
+                type="button"
+                id="voiceInputButton"
+                class="voice-input-button"
+                title="Speak patient symptoms"
+            >
+                🎙️
+                <span id="voiceInputText">
+                    Speak Symptoms
+                </span>
+            </button>
+
+            <span
+                id="voiceStatus"
+                class="voice-status"
+            >
+                Ready
+            </span>
+
+        </div>
+
+    </div>
+
+
+    <div class="field-help">
+
+        Describe the patient's current symptoms.
+        You can type them manually or speak them in
+        the selected language. The system will use the
+        symptoms for department routing.
+
+    </div>
+
+</div>
+                        </div>
+
+
+                        <!-- =================================================
+                             SUBMIT AREA
+                        ================================================== -->
+                        <div class="form-actions">
+
+                            <button
+                                type="button"
+                                class="secondary-button"
+                                id="clearFormButton"
+                            >
+                                Clear
+                            </button>
+
+                            <button
+                                type="submit"
+                                class="primary-button submit-button"
+                                id="registerPatientButton"
+                            >
+
+                                <span class="button-icon">
+                                    ✓
+                                </span>
+
+                                <span id="registerButtonText">
+                                    Register Patient
+                                </span>
+
+                            </button>
+
+                        </div>
+
+                    </form>
+
+                </div>
+
+
+                <!-- =================================================
+                     REGISTRATION RESULT
+                ================================================== -->
+                <div
+                    id="registrationResult"
+                    class="registration-result hidden"
+                >
+
+                    <div class="success-icon">
+                        ✓
+                    </div>
+
+                    <div class="result-content">
+
+                        <span class="result-label">
+                            Patient Registered Successfully
+                        </span>
+
+                        <h3 id="resultPatientName">
+                            Patient Name
+                        </h3>
+
+                        <div class="result-details">
+
+                            <div>
+                                <span>
+                                    Patient ID
+                                </span>
+
+                                <strong id="resultPatientId">
+                                    PAT-0000
+                                </strong>
+                            </div>
+
+                            <div>
+                                <span>
+                                    Department
+                                </span>
+
+                                <strong id="resultDepartment">
+                                    General Medicine
+                                </strong>
+                            </div>
+
+                            <div>
+                                <span>
+                                    Status
+                                </span>
+
+                                <strong id="resultStatus">
+                                    WAITING
+                                </strong>
+                            </div>
+                            <!-- PRINT REGISTRATION -->
+<div class="registration-print-action">
+    <button
+        type="button"
+        class="btn-print-registration"
+        onclick="printPatientRegistration()"
+    >
+        🖨️ Print Registration
+    </button>
+</div>
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+
+            <!-- =================================================
+                 PROFILE SECTION
+            ================================================== -->
+            <section
+                id="profileSection"
+                class="page-section"
+            >
+
+                <div class="page-heading">
+
+                    <div>
+
+                        <span class="page-heading-label">
+                            Account
+                        </span>
+
+                        <h2>
+                            My Profile
+                        </h2>
+
+                        <p>
+                            Manage your hospital employee profile.
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <div class="profile-layout">
+
+
+                    <!-- PROFILE PHOTO -->
+                    <div class="profile-card photo-card">
+
+                        <div
+                            class="large-profile-avatar"
+                            id="profileImagePreview"
+                        >
+                            👤
+                        </div>
+
+                        <h3 id="profileCardName">
+                            Hospital Employee
+                        </h3>
+
+                        <p>
+                            Hospital Employee
+                        </p>
+
+                        <label
+                            for="profilePhotoInput"
+                            class="photo-upload-button"
+                        >
+                            📷 Change Profile Photo
+                        </label>
+
+                        <input
+                            type="file"
+                            id="profilePhotoInput"
+                            accept="image/*"
+                            hidden
+                        >
+
+                    </div>
+
+
+                    <!-- PROFILE INFORMATION -->
+                    <div class="profile-card">
+
+                        <div class="profile-card-header">
+
+                            <div>
+
+                                <h3>
+                                    Employee Information
+                                </h3>
+
+                                <p>
+                                    Your hospital employee details.
+                                </p>
+
+                            </div>
+
+                        </div>
+
+
+                        <form
+                            id="profileForm"
+                            class="profile-form"
+                        >
+
+                            <div class="form-group">
+
+                                <label>
+                                    Employee Name
+                                </label>
+
+                                <input
+                                    type="text"
+                                    id="profileName"
+                                    readonly
+                                >
+
+                            </div>
+
+
+                            <div class="form-group">
+
+                                <label>
+                                    Employee ID
+                                </label>
+
+                                <input
+                                    type="text"
+                                    id="profileEmployeeId"
+                                    readonly
+                                >
+
+                            </div>
+
+
+                            <div class="form-group">
+
+                                <label>
+                                    Role
+                                </label>
+
+                                <input
+                                    type="text"
+                                    id="profileRole"
+                                    value="Hospital Employee"
+                                    readonly
+                                >
+
+                            </div>
+
+
+                            <div class="form-group">
+
+                                <label for="profilePhone">
+                                    Mobile Number
+                                </label>
+
+                                <input
+                                    type="tel"
+                                    id="profilePhone"
+                                    placeholder="Enter mobile number"
+                                    maxlength="20"
+                                >
+
+                            </div>
+
+
+                            <div class="form-group">
+
+                                <label for="profileEmail">
+                                    Email ID
+                                </label>
+
+                                <input
+                                    type="email"
+                                    id="profileEmail"
+                                    placeholder="Enter email address"
+                                    maxlength="150"
+                                >
+
+                            </div>
+
+
+                            <div class="profile-actions">
+
+                                <button
+                                    type="submit"
+                                    class="primary-button"
+                                >
+                                    Save Profile
+                                </button>
+
+                            </div>
+
+                        </form>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+
+        </div>
+
+    </main>
+
+</div>
+
+
+<!-- =========================================================
+     MOBILE OVERLAY
+========================================================== -->
+<div
+    class="sidebar-overlay"
+    id="sidebarOverlay"
+></div>
+
+
+<!-- =========================================================
+     TOAST
+========================================================== -->
+<div
+    id="toast"
+    class="toast"
+>
+
+    <div
+        class="toast-icon"
+        id="toastIcon"
+    >
+        ✓
+    </div>
+
+    <div>
+        <strong id="toastTitle">
+            Success
+        </strong>
+
+        <span id="toastMessage">
+            Operation completed.
+        </span>
+    </div>
+
+</div>
+
+</body>
+</html>

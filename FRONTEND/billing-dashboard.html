@@ -1,0 +1,922 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Billing Dashboard | MediMatrix</title>
+
+    <link rel="stylesheet" href="./css/billing-dashboard.css">
+
+    <script src="/js/billing-dashboard.js?v=2" defer></script>
+</head>
+
+<body>
+
+<div class="app-shell">
+
+    <!-- ======================================================
+         SIDEBAR
+    ======================================================= -->
+
+    <aside class="sidebar">
+
+        <div class="brand">
+
+            <div class="brand-logo">
+                🏥
+            </div>
+
+            <div>
+                <h1>MediMatrix</h1>
+                <span>Healthcare System</span>
+            </div>
+
+        </div>
+
+
+        <nav class="sidebar-nav">
+
+            <button
+                type="button"
+                class="nav-item active"
+                onclick="showBillingSection('dashboardSection', this)"
+            >
+                <span>📊</span>
+                <strong>Dashboard</strong>
+            </button>
+
+
+            <button
+                type="button"
+                class="nav-item"
+                onclick="showBillingSection('ipdBillingSection', this)"
+            >
+                <span>💳</span>
+                <strong>IPD Billing</strong>
+            </button>
+
+
+            <button
+                type="button"
+                class="nav-item"
+                onclick="showBillingSection('bedsSection', this)"
+            >
+                <span>🛏️</span>
+                <strong>Bed Availability</strong>
+            </button>
+
+
+            <button
+                type="button"
+                class="nav-item"
+                onclick="showBillingSection('paymentsSection', this)"
+            >
+                <span>💰</span>
+                <strong>Payment History</strong>
+            </button>
+
+
+            <button
+                type="button"
+                class="nav-item"
+                onclick="showBillingSection('receiptsSection', this)"
+            >
+                <span>🧾</span>
+                <strong>Receipts</strong>
+            </button>
+
+
+            <button
+                type="button"
+                class="nav-item"
+                onclick="showBillingSection('notificationsSection', this)"
+            >
+                <span>🔔</span>
+                <strong>Notifications</strong>
+
+                <span
+                    id="notificationBadge"
+                    class="notification-badge"
+                    hidden
+                >
+                    0
+                </span>
+            </button>
+
+        </nav>
+
+
+        <div class="sidebar-bottom">
+
+            <button
+                type="button"
+                class="nav-item"
+                onclick="openProfile()"
+            >
+                <span>👤</span>
+                <strong>My Profile</strong>
+            </button>
+
+
+            <button
+                type="button"
+                class="nav-item logout-item"
+                onclick="logoutBilling()"
+            >
+                <span>🚪</span>
+                <strong>Logout</strong>
+            </button>
+
+        </div>
+
+    </aside>
+
+
+    <!-- ======================================================
+         MAIN
+    ======================================================= -->
+
+    <main class="main-content">
+
+        <!-- HEADER -->
+
+        <header class="topbar">
+
+            <div>
+
+                <div class="page-title">
+                    Billing Dashboard
+                </div>
+
+                <div class="page-subtitle">
+                    Hospital Billing & Payment Management
+                </div>
+
+            </div>
+
+
+            <div class="topbar-right">
+
+                <button
+                    type="button"
+                    class="notification-button"
+                    onclick="showBillingSection('notificationsSection')"
+                >
+                    🔔
+
+                    <span
+                        id="headerNotificationBadge"
+                        class="header-badge"
+                        hidden
+                    >
+                        0
+                    </span>
+
+                </button>
+
+
+                <button
+                    type="button"
+                    class="profile-mini"
+                    onclick="openProfile()"
+                >
+
+                    <div
+                        id="profileInitial"
+                        class="profile-avatar"
+                    >
+                        B
+                    </div>
+
+                    <div class="profile-mini-info">
+
+                        <strong id="headerStaffName">
+                            Billing Staff
+                        </strong>
+
+                        <span>
+                            Billing Department
+                        </span>
+
+                    </div>
+
+                    <span class="profile-arrow">
+                        ▾
+                    </span>
+
+                </button>
+
+            </div>
+
+        </header>
+
+
+        <!-- ==================================================
+             DASHBOARD
+        =================================================== -->
+
+        <section
+            id="dashboardSection"
+            class="content-section active-section"
+        >
+
+            <div class="section-heading">
+
+                <div>
+
+                    <span class="eyebrow">
+                        OVERVIEW
+                    </span>
+
+                    <h2>
+                        Billing Overview
+                    </h2>
+
+                    <p>
+                        Monitor IPD requests, beds, payments and receipts.
+                    </p>
+
+                </div>
+
+
+                <button
+                    type="button"
+                    class="primary-button"
+                    onclick="loadAllBillingData()"
+                >
+                    ↻ Refresh
+                </button>
+
+            </div>
+
+
+            <div class="stats-grid">
+
+                <div class="stat-card">
+
+                    <div class="stat-icon blue">
+                        📋
+                    </div>
+
+                    <div>
+                        <span>Pending IPD Requests</span>
+                        <strong id="pendingRequestsCount">0</strong>
+                    </div>
+
+                </div>
+
+
+                <div class="stat-card">
+
+                    <div class="stat-icon green">
+                        🛏️
+                    </div>
+
+                    <div>
+                        <span>Available Beds</span>
+                        <strong id="availableBedsCount">0</strong>
+                    </div>
+
+                </div>
+
+
+                <div class="stat-card">
+
+                    <div class="stat-icon orange">
+                        💳
+                    </div>
+
+                    <div>
+                        <span>Payment Pending</span>
+                        <strong id="paymentPendingCount">0</strong>
+                    </div>
+
+                </div>
+
+
+                <div class="stat-card">
+
+                    <div class="stat-icon purple">
+                        💰
+                    </div>
+
+                    <div>
+                        <span>Estimated Charges</span>
+                        <strong id="estimatedCharges">₹0.00</strong>
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <div class="dashboard-grid">
+
+                <div class="panel">
+
+                    <div class="panel-header">
+
+                        <div>
+
+                            <span class="eyebrow">
+                                IPD WORKFLOW
+                            </span>
+
+                            <h3>
+                                Recent IPD Requests
+                            </h3>
+
+                        </div>
+
+                        <button
+                            type="button"
+                            class="secondary-button"
+                            onclick="showBillingSection('ipdBillingSection')"
+                        >
+                            View All
+                        </button>
+
+                    </div>
+
+
+                    <div
+                        id="recentRequests"
+                        class="request-list"
+                    >
+                        <div class="empty-state">
+                            Loading requests...
+                        </div>
+                    </div>
+
+                </div>
+
+
+                <div class="panel">
+
+                    <div class="panel-header">
+
+                        <div>
+
+                            <span class="eyebrow">
+                                SYSTEM STATUS
+                            </span>
+
+                            <h3>
+                                Billing Workflow
+                            </h3>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="workflow-list">
+
+                        <div class="workflow-step complete">
+                            <span>✓</span>
+                            <div>
+                                <strong>Doctor IPD Request</strong>
+                                <small>Request received by Billing</small>
+                            </div>
+                        </div>
+
+
+                        <div class="workflow-step">
+                            <span>2</span>
+                            <div>
+                                <strong>Bed Assignment</strong>
+                                <small>Select available bed</small>
+                            </div>
+                        </div>
+
+
+                        <div class="workflow-step">
+                            <span>3</span>
+                            <div>
+                                <strong>Bill & Payment</strong>
+                                <small>Generate bill and process payment</small>
+                            </div>
+                        </div>
+
+
+                        <div class="workflow-step">
+                            <span>4</span>
+                            <div>
+                                <strong>IPD Verification</strong>
+                                <small>Automatic notification to IPD</small>
+                            </div>
+                        </div>
+
+
+                        <div class="workflow-step">
+                            <span>5</span>
+                            <div>
+                                <strong>Admission Confirmation</strong>
+                                <small>IPD confirms patient admission</small>
+                            </div>
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- ==================================================
+             IPD BILLING
+        =================================================== -->
+
+        <section
+            id="ipdBillingSection"
+            class="content-section"
+        >
+
+            <div class="section-heading">
+
+                <div>
+
+                    <span class="eyebrow">
+                        IPD BILLING
+                    </span>
+
+                    <h2>
+                        Admission Billing Requests
+                    </h2>
+
+                    <p>
+                        Assign an available bed, generate the bill and process payment.
+                    </p>
+
+                </div>
+
+                <button
+                    type="button"
+                    class="primary-button"
+                    onclick="loadIPDRequests()"
+                >
+                    ↻ Refresh
+                </button>
+
+            </div>
+
+
+            <div
+                id="ipdRequestsContainer"
+                class="billing-request-grid"
+            >
+
+                <div class="empty-state">
+                    Loading IPD requests...
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- ==================================================
+             BED AVAILABILITY
+        =================================================== -->
+
+        <section
+            id="bedsSection"
+            class="content-section"
+        >
+
+            <div class="section-heading">
+
+                <div>
+
+                    <span class="eyebrow">
+                        BED MANAGEMENT
+                    </span>
+
+                    <h2>
+                        Bed Availability
+                    </h2>
+
+                    <p>
+                        View current ward and bed availability.
+                    </p>
+
+                </div>
+
+                <button
+                    type="button"
+                    class="primary-button"
+                    onclick="loadBeds()"
+                >
+                    ↻ Refresh
+                </button>
+
+            </div>
+
+
+            <div
+                id="bedsContainer"
+                class="beds-grid"
+            >
+                Loading beds...
+            </div>
+
+        </section>
+
+
+        <!-- ==================================================
+             PAYMENTS
+        =================================================== -->
+
+        <section
+            id="paymentsSection"
+            class="content-section"
+        >
+
+            <div class="section-heading">
+
+                <div>
+
+                    <span class="eyebrow">
+                        FINANCIAL RECORDS
+                    </span>
+
+                    <h2>
+                        Payment History
+                    </h2>
+
+                    <p>
+                        Completed and pending hospital billing transactions.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div class="panel">
+
+                <div
+                    id="paymentHistory"
+                    class="table-wrapper"
+                >
+
+                    <div class="empty-state">
+                        Payment history will appear here after successful billing.
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- ==================================================
+             RECEIPTS
+        =================================================== -->
+
+        <section
+            id="receiptsSection"
+            class="content-section"
+        >
+
+            <div class="section-heading">
+
+                <div>
+
+                    <span class="eyebrow">
+                        RECEIPTS
+                    </span>
+
+                    <h2>
+                        Payment Receipts
+                    </h2>
+
+                    <p>
+                        View and print completed payment receipts.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div
+                id="receiptsContainer"
+                class="receipt-list"
+            >
+
+                <div class="empty-state">
+                    Complete a payment to generate a receipt.
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- ==================================================
+             NOTIFICATIONS
+        =================================================== -->
+
+        <section
+            id="notificationsSection"
+            class="content-section"
+        >
+
+            <div class="section-heading">
+
+                <div>
+
+                    <span class="eyebrow">
+                        NOTIFICATIONS
+                    </span>
+
+                    <h2>
+                        Billing Notifications
+                    </h2>
+
+                    <p>
+                        IPD requests and hospital workflow notifications.
+                    </p>
+
+                </div>
+
+                <button
+                    type="button"
+                    class="primary-button"
+                    onclick="loadNotifications()"
+                >
+                    ↻ Refresh
+                </button>
+
+            </div>
+
+
+            <div
+                id="notificationsContainer"
+                class="notification-list"
+            >
+
+                <div class="empty-state">
+                    Loading notifications...
+                </div>
+
+            </div>
+
+        </section>
+
+    </main>
+
+</div>
+
+
+<!-- =========================================================
+     BILLING MODAL
+========================================================== -->
+
+<div
+    id="billingModal"
+    class="modal-overlay"
+    hidden
+>
+
+    <div class="modal-card large-modal">
+
+        <div class="modal-header">
+
+            <div>
+
+                <span class="eyebrow">
+                    IPD BILLING
+                </span>
+
+                <h2>
+                    Process Admission Bill
+                </h2>
+
+            </div>
+
+            <button
+                type="button"
+                class="modal-close"
+                onclick="closeBillingModal()"
+            >
+                ×
+            </button>
+
+        </div>
+
+
+        <div
+            id="billingModalContent"
+            class="modal-body"
+        >
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- =========================================================
+     PROFILE MODAL
+========================================================== -->
+
+<div
+    id="profileModal"
+    class="modal-overlay"
+    hidden
+>
+
+    <div class="modal-card">
+
+        <div class="modal-header">
+
+            <div>
+
+                <span class="eyebrow">
+                    ACCOUNT
+                </span>
+
+                <h2>
+                    Billing Profile
+                </h2>
+
+            </div>
+
+            <button
+                type="button"
+                class="modal-close"
+                onclick="closeProfile()"
+            >
+                ×
+            </button>
+
+        </div>
+
+
+        <div class="profile-large">
+
+            <div
+                id="largeProfileInitial"
+                class="profile-large-avatar"
+            >
+                B
+            </div>
+
+            <div>
+
+                <h3 id="profileName">
+                    Billing Staff
+                </h3>
+
+                <p>
+                    Billing Department
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <div class="profile-fields">
+
+            <div>
+                <label>Employee ID</label>
+                <input id="profileEmployeeId" value="BIL001">
+            </div>
+
+            <div>
+                <label>Full Name</label>
+                <input id="profileFullName" value="Billing Staff">
+            </div>
+
+            <div>
+                <label>Email</label>
+                <input id="profileEmail" type="email">
+            </div>
+
+            <div>
+                <label>Mobile</label>
+                <input id="profilePhone" type="tel">
+            </div>
+
+            <div class="full-width">
+                <label>Address</label>
+                <textarea id="profileAddress"></textarea>
+            </div>
+
+        </div>
+
+
+        <div class="modal-actions">
+
+            <button
+                type="button"
+                class="secondary-button"
+                onclick="closeProfile()"
+            >
+                Cancel
+            </button>
+
+            <button
+                type="button"
+                class="primary-button"
+                onclick="saveBillingProfile()"
+            >
+                Save Profile
+            </button>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- =========================================================
+     RECEIPT MODAL
+========================================================== -->
+
+<div
+    id="receiptModal"
+    class="modal-overlay"
+    hidden
+>
+
+    <div class="modal-card receipt-modal">
+
+        <div class="modal-header no-print">
+
+            <div>
+
+                <span class="eyebrow">
+                    PAYMENT RECEIPT
+                </span>
+
+                <h2>
+                    Receipt
+                </h2>
+
+            </div>
+
+            <button
+                type="button"
+                class="modal-close"
+                onclick="closeReceipt()"
+            >
+                ×
+            </button>
+
+        </div>
+
+
+        <div
+            id="receiptContent"
+            class="receipt-paper"
+        >
+        </div>
+
+
+        <div class="modal-actions no-print">
+
+            <button
+                type="button"
+                class="secondary-button"
+                onclick="closeReceipt()"
+            >
+                Close
+            </button>
+
+            <button
+                type="button"
+                class="primary-button"
+                onclick="printReceipt()"
+            >
+                🖨️ Print Receipt
+            </button>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- =========================================================
+     TOAST
+========================================================== -->
+
+<div
+    id="toast"
+    class="toast"
+    hidden
+>
+</div>
+
+</body>
+</html>

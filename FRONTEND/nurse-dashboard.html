@@ -1,0 +1,1403 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Nurse Dashboard | MediMatrix</title>
+
+    <link
+        rel="stylesheet"
+        href="css/nurse-dashboard.css"
+    >
+</head>
+
+
+<body>
+
+<div class="app">
+
+    <!-- =====================================================
+         SIDEBAR
+    ====================================================== -->
+
+    <aside class="sidebar">
+
+        <div class="brand">
+
+            <div class="brand-icon">
+                🏥
+            </div>
+
+            <div>
+                <h1>MediMatrix</h1>
+                <span>Nurse Portal</span>
+            </div>
+
+        </div>
+
+
+        <nav class="sidebar-nav">
+
+            <button
+                type="button"
+                class="nav-item active"
+                onclick="showSection('dashboardSection', this)"
+            >
+                <span>📊</span>
+                <span>Dashboard</span>
+            </button>
+
+
+            <button
+                type="button"
+                class="nav-item"
+                onclick="showSection('notificationsSection', this)"
+            >
+                <span>🔔</span>
+                <span>Notifications</span>
+
+                <span
+                    id="notificationBadge"
+                    class="notification-badge"
+                >
+                    0
+                </span>
+            </button>
+
+
+            <button
+                type="button"
+                class="nav-item"
+                onclick="showSection('patientSection', this)"
+            >
+                <span>🩺</span>
+                <span>Patient Assessment</span>
+            </button>
+
+
+            <button
+                type="button"
+                class="nav-item"
+                onclick="showSection('profileSection', this)"
+            >
+                <span>👤</span>
+                <span>My Profile</span>
+            </button>
+
+        </nav>
+
+
+        <div class="sidebar-bottom">
+
+            <div class="nurse-profile-mini">
+
+                <div
+                    id="sidebarAvatar"
+                    class="avatar"
+                >
+                    N
+                </div>
+
+                <div class="profile-mini-text">
+
+                    <strong id="sidebarNurseName">
+                        Nurse
+                    </strong>
+
+                    <span>
+                        Nursing Department
+                    </span>
+
+                </div>
+
+            </div>
+
+
+            <button
+                type="button"
+                class="logout-button"
+                onclick="logout()"
+            >
+                🚪 Logout
+            </button>
+
+        </div>
+
+    </aside>
+
+
+
+    <!-- =====================================================
+         MAIN CONTENT
+    ====================================================== -->
+
+    <main class="main-content">
+
+
+        <!-- =================================================
+             TOP HEADER
+        ================================================== -->
+
+        <header class="topbar">
+
+            <div>
+
+                <span class="topbar-label">
+                    CLINICAL CARE
+                </span>
+
+                <h2 id="pageTitle">
+                    Nurse Dashboard
+                </h2>
+
+            </div>
+
+
+            <div class="topbar-right">
+
+                <div
+                    id="connectionStatus"
+                    class="connection-status"
+                >
+                    <span class="status-dot"></span>
+                    Backend Connected
+                </div>
+
+
+                <button
+                    type="button"
+                    class="refresh-button"
+                    onclick="refreshDashboard()"
+                >
+                    ↻ Refresh
+                </button>
+
+            </div>
+
+        </header>
+
+
+
+        <!-- =================================================
+             DASHBOARD
+        ================================================== -->
+
+        <section
+            id="dashboardSection"
+            class="content-section active-section"
+        >
+
+            <div class="welcome-section">
+
+                <div>
+
+                    <span class="section-label">
+                        NURSE WORKSPACE
+                    </span>
+
+                    <h2>
+                        Welcome,
+                        <span id="welcomeNurseName">
+                            Nurse
+                        </span>
+                    </h2>
+
+                    <p>
+                        Review newly registered patients,
+                        verify their information and complete
+                        the initial nursing assessment.
+                    </p>
+
+                </div>
+
+
+                <div class="welcome-icon">
+                    🩺
+                </div>
+
+            </div>
+
+
+            <!-- STATISTICS -->
+
+            <div class="stats-grid">
+
+                <div class="stat-card">
+
+                    <div class="stat-icon blue">
+                        👥
+                    </div>
+
+                    <div>
+
+                        <span class="stat-label">
+                            New Patients
+                        </span>
+
+                        <strong
+                            id="newPatientsCount"
+                            class="stat-value"
+                        >
+                            0
+                        </strong>
+
+                    </div>
+
+                </div>
+
+
+                <div class="stat-card">
+
+                    <div class="stat-icon orange">
+                        🔔
+                    </div>
+
+                    <div>
+
+                        <span class="stat-label">
+                            Unread Notifications
+                        </span>
+
+                        <strong
+                            id="unreadCount"
+                            class="stat-value"
+                        >
+                            0
+                        </strong>
+
+                    </div>
+
+                </div>
+
+
+                <div class="stat-card">
+
+                    <div class="stat-icon green">
+                        🩺
+                    </div>
+
+                    <div>
+
+                        <span class="stat-label">
+                            Assessed Today
+                        </span>
+
+                        <strong
+                            id="assessedTodayCount"
+                            class="stat-value"
+                        >
+                            0
+                        </strong>
+
+                    </div>
+
+                </div>
+
+
+                <div class="stat-card">
+
+                    <div class="stat-icon purple">
+                        ⏳
+                    </div>
+
+                    <div>
+
+                        <span class="stat-label">
+                            Awaiting Assessment
+                        </span>
+
+                        <strong
+                            id="awaitingCount"
+                            class="stat-value"
+                        >
+                            0
+                        </strong>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- RECENT NOTIFICATIONS -->
+
+            <div class="panel">
+
+                <div class="panel-header">
+
+                    <div>
+
+                        <span class="panel-label">
+                            PATIENT INTAKE
+                        </span>
+
+                        <h3>
+                            New Patient Notifications
+                        </h3>
+
+                        <p>
+                            Patients registered by the
+                            hospital employee.
+                        </p>
+
+                    </div>
+
+
+                    <button
+                        type="button"
+                        class="primary-button"
+                        onclick="showSection('notificationsSection')"
+                    >
+                        View All
+                    </button>
+
+                </div>
+
+
+                <div
+                    id="dashboardNotifications"
+                    class="notification-list"
+                >
+
+                    <div class="loading-state">
+                        Loading notifications...
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- =================================================
+             NOTIFICATIONS
+        ================================================== -->
+
+        <section
+            id="notificationsSection"
+            class="content-section"
+        >
+
+            <div class="section-heading">
+
+                <div>
+
+                    <span class="section-label">
+                        PATIENT INTAKE
+                    </span>
+
+                    <h2>
+                        Nurse Notifications
+                    </h2>
+
+                    <p>
+                        Newly registered patients assigned
+                        through symptom-based department routing.
+                    </p>
+
+                </div>
+
+
+                <button
+                    type="button"
+                    class="primary-button"
+                    onclick="loadNotifications()"
+                >
+                    ↻ Refresh
+                </button>
+
+            </div>
+
+
+            <div class="notification-info">
+
+                <div class="info-icon">
+                    ℹ️
+                </div>
+
+                <div>
+
+                    <strong>
+                        Patient matching
+                    </strong>
+
+                    <p>
+                        When the patient physically arrives,
+                        verify the Patient ID, name and registered
+                        symptoms before opening the assessment.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div
+                id="fullNotifications"
+                class="notification-list large-list"
+            >
+
+                <div class="loading-state">
+                    Loading notifications...
+                </div>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- =================================================
+             PATIENT ASSESSMENT
+        ================================================== -->
+
+        <section
+            id="patientSection"
+            class="content-section"
+        >
+
+            <div class="section-heading">
+
+                <div>
+
+                    <span class="section-label">
+                        CLINICAL ASSESSMENT
+                    </span>
+
+                    <h2>
+                        Patient Assessment
+                    </h2>
+
+                    <p>
+                        Verify the registered patient and
+                        record current nursing assessment data.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <!-- NO PATIENT -->
+
+            <div
+                id="noPatientState"
+                class="empty-state"
+            >
+
+                <div class="empty-icon">
+                    🩺
+                </div>
+
+                <h3>
+                    No Patient Selected
+                </h3>
+
+                <p>
+                    Open a patient from the notification
+                    list to begin the nursing assessment.
+                </p>
+
+                <button
+                    type="button"
+                    class="primary-button"
+                    onclick="showSection('notificationsSection')"
+                >
+                    🔔 View Notifications
+                </button>
+
+            </div>
+
+
+
+            <!-- ASSESSMENT WORKSPACE -->
+
+            <div
+                id="assessmentWorkspace"
+                class="assessment-workspace hidden"
+            >
+
+
+                <!-- PATIENT IDENTITY -->
+
+                <div class="patient-banner">
+
+                    <div class="patient-banner-avatar">
+
+                        <span id="patientInitial">
+                            P
+                        </span>
+
+                    </div>
+
+
+                    <div class="patient-banner-main">
+
+                        <span class="patient-banner-label">
+                            PATIENT ARRIVAL VERIFICATION
+                        </span>
+
+                        <h3 id="patientName">
+                            Patient
+                        </h3>
+
+                        <div class="patient-meta">
+
+                            <span>
+                                🆔
+                                <strong id="patientId">
+                                    —
+                                </strong>
+                            </span>
+
+                            <span>
+                                🏥
+                                <strong id="patientDepartment">
+                                    —
+                                </strong>
+                            </span>
+
+                        </div>
+
+                    </div>
+
+
+                    <div
+                        id="patientStatus"
+                        class="patient-status"
+                    >
+                        Registered
+                    </div>
+
+                </div>
+
+
+
+                <div class="assessment-grid">
+
+
+                    <!-- PATIENT INFORMATION -->
+
+                    <div class="panel">
+
+                        <div class="panel-header">
+
+                            <div>
+
+                                <span class="panel-label">
+                                    REGISTRATION DATA
+                                </span>
+
+                                <h3>
+                                    Patient Information
+                                </h3>
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="patient-details">
+
+                            <div class="detail-item">
+
+                                <span>
+                                    Full Name
+                                </span>
+
+                                <strong id="detailName">
+                                    —
+                                </strong>
+
+                            </div>
+
+
+                            <div class="detail-item">
+
+                                <span>
+                                    Age
+                                </span>
+
+                                <strong id="detailAge">
+                                    —
+                                </strong>
+
+                            </div>
+
+
+                            <div class="detail-item">
+
+                                <span>
+                                    Gender
+                                </span>
+
+                                <strong id="detailGender">
+                                    —
+                                </strong>
+
+                            </div>
+
+
+                            <div class="detail-item">
+
+                                <span>
+                                    Phone
+                                </span>
+
+                                <strong id="detailPhone">
+                                    —
+                                </strong>
+
+                            </div>
+
+
+                            <div class="detail-item full">
+
+                                <span>
+                                    Address
+                                </span>
+
+                                <strong id="detailAddress">
+                                    —
+                                </strong>
+
+                            </div>
+
+
+                            <div class="detail-item full">
+
+                                <span>
+                                    Emergency Contact
+                                </span>
+
+                                <strong id="detailEmergency">
+                                    —
+                                </strong>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+
+                    <!-- REGISTERED SYMPTOMS -->
+
+                    <div class="panel symptom-panel">
+
+                        <div class="panel-header">
+
+                            <div>
+
+                                <span class="panel-label">
+                                    SYMPTOM ANALYSIS
+                                </span>
+
+                                <h3>
+                                    Registered Symptoms
+                                </h3>
+
+                            </div>
+
+                            <span class="analysis-badge">
+                                AI ROUTED
+                            </span>
+
+                        </div>
+
+
+                        <div class="symptom-box">
+
+                            <div class="symptom-icon">
+                                🔍
+                            </div>
+
+                            <p id="registeredSymptoms">
+                                —
+                            </p>
+
+                        </div>
+
+
+                        <div class="department-box">
+
+                            <span>
+                                Assigned Department
+                            </span>
+
+                            <strong id="symptomDepartment">
+                                —
+                            </strong>
+
+                        </div>
+
+                    </div>
+
+
+
+                    <!-- VITALS -->
+
+                    <div class="panel">
+
+                        <div class="panel-header">
+
+                            <div>
+
+                                <span class="panel-label">
+                                    NURSING ASSESSMENT
+                                </span>
+
+                                <h3>
+                                    Record Vital Signs
+                                </h3>
+
+                                <p>
+                                    Enter the patient's current
+                                    measured vital signs.
+                                </p>
+
+                            </div>
+
+                        </div>
+
+
+                        <form
+                            id="assessmentForm"
+                            class="vitals-form"
+                        >
+
+                            <div class="form-group">
+
+                                <label for="temperature">
+                                    🌡️ Temperature
+                                    <small>°C</small>
+                                </label>
+
+                                <input
+                                    type="number"
+                                    id="temperature"
+                                    name="temperature"
+                                    step="0.1"
+                                    min="25"
+                                    max="45"
+                                    placeholder="e.g. 37.2"
+                                >
+
+                            </div>
+
+
+                            <div class="form-group">
+
+                                <label for="heartRate">
+                                    ❤️ Heart Rate
+                                    <small>BPM</small>
+                                </label>
+
+                                <input
+                                    type="number"
+                                    id="heartRate"
+                                    name="heartRate"
+                                    min="20"
+                                    max="250"
+                                    placeholder="e.g. 78"
+                                >
+
+                            </div>
+
+
+                            <div class="form-group">
+
+                                <label for="systolicBP">
+                                    🩸 Systolic BP
+                                    <small>mmHg</small>
+                                </label>
+
+                                <input
+                                    type="number"
+                                    id="systolicBP"
+                                    name="systolicBP"
+                                    min="50"
+                                    max="250"
+                                    placeholder="e.g. 120"
+                                >
+
+                            </div>
+
+
+                            <div class="form-group">
+
+                                <label for="diastolicBP">
+                                    🩸 Diastolic BP
+                                    <small>mmHg</small>
+                                </label>
+
+                                <input
+                                    type="number"
+                                    id="diastolicBP"
+                                    name="diastolicBP"
+                                    min="30"
+                                    max="180"
+                                    placeholder="e.g. 80"
+                                >
+
+                            </div>
+
+
+                            <div class="form-group">
+
+                                <label for="oxygenSaturation">
+                                    🫁 SpO₂
+                                    <small>%</small>
+                                </label>
+
+                                <input
+                                    type="number"
+                                    id="oxygenSaturation"
+                                    name="oxygenSaturation"
+                                    step="0.1"
+                                    min="50"
+                                    max="100"
+                                    placeholder="e.g. 98"
+                                >
+
+                            </div>
+
+
+                            <!-- NURSE OBSERVATION -->
+
+                            <div class="form-group full-width">
+
+                                <label for="nurseObservation">
+                                    📝 Nurse Observation
+                                </label>
+
+                                <textarea
+                                    id="nurseObservation"
+                                    name="nurseObservation"
+                                    rows="4"
+                                    placeholder="Enter relevant clinical observations, patient condition, visible symptoms or other nursing notes..."
+                                ></textarea>
+
+                            </div>
+
+
+                            <!-- PREVIOUS REPORT -->
+
+                            <div class="medical-report-section">
+
+                                <div class="report-header">
+
+                                    <div>
+
+                                        <span class="panel-label">
+                                            MEDICAL HISTORY
+                                        </span>
+
+                                        <h3>
+                                            Previous Medical Report
+                                        </h3>
+
+                                        <p>
+                                            Upload the patient's previous
+                                            medical report if available.
+                                            This is optional.
+                                        </p>
+
+                                    </div>
+
+                                    <div class="report-icon">
+                                        📄
+                                    </div>
+
+                                </div>
+
+
+                                <div class="report-choice">
+
+                                    <label class="report-option">
+
+                                        <input
+                                            type="radio"
+                                            name="previousReport"
+                                            value="no"
+                                            checked
+                                            onchange="toggleReportUpload()"
+                                        >
+
+                                        <span>
+                                            No previous report
+                                        </span>
+
+                                    </label>
+
+
+                                    <label class="report-option">
+
+                                        <input
+                                            type="radio"
+                                            name="previousReport"
+                                            value="yes"
+                                            onchange="toggleReportUpload()"
+                                        >
+
+                                        <span>
+                                            Yes, patient has a report
+                                        </span>
+
+                                    </label>
+
+                                </div>
+
+
+                                <div
+                                    id="reportUploadArea"
+                                    class="report-upload-area hidden"
+                                >
+
+                                    <label
+                                        for="medicalReportFile"
+                                        class="file-upload-box"
+                                    >
+
+                                        <div class="upload-icon">
+                                            📤
+                                        </div>
+
+                                        <strong>
+                                            Choose Medical Report
+                                        </strong>
+
+                                        <span>
+                                            PDF, JPG, JPEG or PNG
+                                        </span>
+
+                                        <input
+                                            type="file"
+                                            id="medicalReportFile"
+                                            accept=".pdf,.jpg,.jpeg,.png,application/pdf,image/jpeg,image/png"
+                                            onchange="handleReportSelection(event)"
+                                            hidden
+                                        >
+
+                                    </label>
+
+
+                                    <div
+                                        id="selectedReportInfo"
+                                        class="selected-report-info hidden"
+                                    >
+
+                                        <span id="selectedReportName">
+                                            No file selected
+                                        </span>
+
+                                        <button
+                                            type="button"
+                                            class="secondary-button"
+                                            onclick="removeSelectedReport()"
+                                        >
+                                            Remove
+                                        </button>
+
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+
+                            <div class="vitals-note">
+
+                                <span>💡</span>
+
+                                <p>
+                                    Enter only values actually
+                                    measured by the nurse. Empty
+                                    fields will be sent as
+                                    <strong>null</strong>.
+                                </p>
+
+                            </div>
+
+
+                            <div class="assessment-actions">
+
+                                <button
+                                    type="button"
+                                    class="secondary-button"
+                                    onclick="clearVitals()"
+                                >
+                                    Clear
+                                </button>
+
+
+                                <button
+                                    type="submit"
+                                    id="submitAssessmentButton"
+                                    class="primary-button large-button"
+                                >
+                                    🩺 Complete Assessment
+                                </button>
+
+                            </div>
+
+                        </form>
+
+                    </div>
+
+
+
+                    <!-- RESULT -->
+
+                    <div
+                        id="assessmentResult"
+                        class="assessment-result hidden"
+                    >
+                    </div>
+
+
+
+                    <!-- PREVIOUS ASSESSMENTS -->
+
+                    <div class="panel">
+
+                        <div class="panel-header">
+
+                            <div>
+
+                                <span class="panel-label">
+                                    HISTORY
+                                </span>
+
+                                <h3>
+                                    Previous Assessments
+                                </h3>
+
+                            </div>
+
+                        </div>
+
+
+                        <div
+                            id="assessmentHistory"
+                            class="history-list"
+                        >
+
+                            <div class="empty-small">
+                                No previous assessments loaded.
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- =================================================
+             NURSE PROFILE
+        ================================================== -->
+
+        <section
+            id="profileSection"
+            class="content-section"
+        >
+
+            <div class="section-heading">
+
+                <div>
+
+                    <span class="section-label">
+                        ACCOUNT
+                    </span>
+
+                    <h2>
+                        Nurse Profile
+                    </h2>
+
+                    <p>
+                        Manage your professional profile information.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div class="profile-page-grid">
+
+
+                <!-- PROFILE PHOTO -->
+
+                <div class="panel profile-photo-panel">
+
+                    <div class="profile-photo-wrapper">
+
+                        <div
+                            id="nurseProfileAvatar"
+                            class="profile-avatar-large"
+                        >
+                            N
+                        </div>
+
+                        <img
+                            id="nurseProfileImage"
+                            class="profile-avatar-image hidden"
+                            alt="Nurse profile photo"
+                        >
+
+                    </div>
+
+
+                    <input
+                        type="file"
+                        id="nurseProfilePhotoInput"
+                        accept=".jpg,.jpeg,.png,.webp,image/jpeg,image/png,image/webp"
+                        hidden
+                        onchange="uploadNurseProfilePhoto(event)"
+                    >
+
+
+                    <button
+                        type="button"
+                        class="secondary-button"
+                        onclick="document.getElementById('nurseProfilePhotoInput').click()"
+                    >
+                        📷 Change Profile Photo
+                    </button>
+
+
+                    <p class="profile-photo-note">
+                        JPG, PNG or WEBP. Professional profile photo.
+                    </p>
+
+                </div>
+
+
+
+                <!-- PROFILE INFORMATION -->
+
+                <div class="panel">
+
+                    <div class="panel-header">
+
+                        <div>
+
+                            <span class="panel-label">
+                                PROFESSIONAL PROFILE
+                            </span>
+
+                            <h3>
+                                Nurse Information
+                            </h3>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="profile-form-grid">
+
+
+                        <div class="form-group">
+
+                            <label for="profileNurseId">
+                                Nurse ID
+                            </label>
+
+                            <input
+                                type="text"
+                                id="profileNurseId"
+                                readonly
+                            >
+
+                        </div>
+
+
+                        <div class="form-group">
+
+                            <label for="profileRole">
+                                Role
+                            </label>
+
+                            <input
+                                type="text"
+                                id="profileRole"
+                                readonly
+                            >
+
+                        </div>
+
+
+                        <div class="form-group">
+
+                            <label for="profileDepartment">
+                                Department
+                            </label>
+
+                            <input
+                                type="text"
+                                id="profileDepartment"
+                                readonly
+                            >
+
+                        </div>
+
+
+                        <div class="form-group">
+
+                            <label for="profileUsername">
+                                Username
+                            </label>
+
+                            <input
+                                type="text"
+                                id="profileUsername"
+                                readonly
+                            >
+
+                        </div>
+
+
+                        <!-- EDITABLE NAME -->
+
+                        <div class="form-group">
+
+                            <label for="profileFullName">
+                                Full Name
+                            </label>
+
+                            <input
+                                type="text"
+                                id="profileFullName"
+                                placeholder="Nurse full name"
+                            >
+
+                        </div>
+
+
+                        <!-- MOBILE READ ONLY -->
+
+                        <div class="form-group">
+
+                            <label for="profilePhone">
+                                Mobile Number
+                            </label>
+
+                            <input
+                                type="tel"
+                                id="profilePhone"
+                                readonly
+                            >
+
+                        </div>
+
+
+                        <!-- EMAIL READ ONLY -->
+
+                        <div class="form-group">
+
+                            <label for="profileEmail">
+                                Email ID
+                            </label>
+
+                            <input
+                                type="email"
+                                id="profileEmail"
+                                readonly
+                            >
+
+                        </div>
+
+
+                        <!-- EDITABLE ADDRESS -->
+
+                        <div class="form-group full-width">
+
+                            <label for="profileAddress">
+                                Address
+                            </label>
+
+                            <textarea
+                                id="profileAddress"
+                                rows="4"
+                                placeholder="Enter your address"
+                            ></textarea>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="profile-readonly-note">
+                        🔒 Nurse ID, Role, Department, Mobile Number
+                        and Email ID are managed by the hospital
+                        administration.
+                    </div>
+
+
+                    <div class="profile-actions">
+
+                        <button
+                            type="button"
+                            class="primary-button"
+                            onclick="saveNurseProfile()"
+                        >
+                            💾 Save Profile
+                        </button>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+    </main>
+
+</div>
+
+
+
+<!-- =========================================================
+     TOAST
+========================================================== -->
+
+<div
+    id="toast"
+    class="toast"
+>
+
+    <span id="toastIcon">
+        ✓
+    </span>
+
+    <span id="toastMessage">
+        Done
+    </span>
+
+</div>
+
+
+
+<script src="js/nurse-dashboard.js"></script>
+
+</body>
+
+</html>

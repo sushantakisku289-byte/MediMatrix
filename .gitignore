@@ -1,0 +1,28 @@
+
+# Secrets
+.env
+.env.*
+!.env.example
+**/.env
+**/.env.*
+!**/.env.example
+
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+
+# Private files and logs
+BACKEND/uploads/
+uploads/
+*.log
+*.sqlite
+*.sqlite3
+*.db
+*.bak
+
+# Editor files
+.vscode/
+.DS_Store
+Thumbs.db

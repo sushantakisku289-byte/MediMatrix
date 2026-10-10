@@ -1,0 +1,1080 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>MediMatrix | Admin Dashboard</title>
+
+    <link rel="stylesheet" href="css/admin-dashboard.css">
+</head>
+
+<body>
+
+<div class="admin-layout">
+
+    <!-- ================= SIDEBAR ================= -->
+    <aside class="sidebar">
+
+        <div class="brand">
+            <div class="brand-icon">🏥</div>
+            <div>
+                <h2>MediMatrix</h2>
+                <span>Healthcare System</span>
+            </div>
+        </div>
+
+        <div class="admin-profile">
+
+    <div
+        class="profile-avatar"
+        id="sidebarAdminAvatar"
+    >
+        M
+    </div>
+
+    <div>
+        <strong id="sidebarAdminName">
+            MediMatrix Admin
+        </strong>
+
+        <small>
+            Administrator
+        </small>
+    </div>
+
+    <span class="online-dot"></span>
+
+</div>
+
+        <nav class="sidebar-nav">
+
+            <button class="nav-item active" onclick="showSection('dashboardSection', this)">
+                <span>📊</span>
+                Dashboard
+            </button>
+
+            <button class="nav-item" onclick="showSection('createUserSection', this)">
+                <span>🆔</span>
+                Create User ID
+            </button>
+
+            <button class="nav-item" onclick="showSection('usersSection', this)">
+                <span>👥</span>
+                Manage Users
+            </button>
+
+            <button class="nav-item" onclick="showSection('patientsSection', this)">
+                <span>🧑‍⚕️</span>
+                Patient Records
+            </button>
+
+            <button class="nav-item" onclick="showSection('departmentsSection', this)">
+                <span>🏥</span>
+                Departments
+            </button>
+
+            <button class="nav-item" onclick="showSection('notificationsSection', this)">
+                <span>🔔</span>
+                Notifications
+                <span class="notification-count">3</span>
+            </button>
+
+            <button class="nav-item" onclick="showSection('reportsSection', this)">
+                <span>📋</span>
+                Reports
+            </button>
+            <button
+    type="button"
+    class="nav-item"
+    onclick="showSection('profileSection', this)"
+>
+    <span>👤</span>
+    <span>My Profile</span>
+</button>
+        </nav>
+
+        <div class="sidebar-bottom">
+
+            <button class="nav-item" onclick="showSection('settingsSection', this)">
+                <span>⚙️</span>
+                Settings
+            </button>
+
+            <button class="logout-btn" onclick="logout()">
+                <span>🚪</span>
+                Logout
+            </button>
+
+        </div>
+
+    </aside>
+
+
+    <!-- ================= MAIN ================= -->
+    <main class="main-content">
+    <section
+    id="profileSection"
+    class="page-section"
+>
+
+    <div class="section-heading">
+
+        <div>
+            <span class="section-label">
+                ACCOUNT SETTINGS
+            </span>
+
+            <h2>My Profile</h2>
+
+            <p>
+                Manage your MediMatrix administrator account.
+            </p>
+        </div>
+
+    </div>
+
+
+    <div class="profile-page-card">
+
+        <!-- PROFILE PHOTO -->
+
+        <div class="profile-photo-area">
+
+            <div class="profile-photo-wrapper">
+
+                <img
+                    id="profileImage"
+                    src="images/default-profile.png"
+                    alt="Admin Profile"
+                >
+
+                <label
+                    for="profilePhotoInput"
+                    class="profile-camera-btn"
+                    title="Change profile photo"
+                >
+                    📷
+                </label>
+
+                <input
+                    type="file"
+                    id="profilePhotoInput"
+                    accept="image/*"
+                    hidden
+                >
+
+            </div>
+
+
+            <div class="profile-photo-info">
+
+                <h3 id="profileDisplayName">
+                    MediMatrix Admin
+                </h3>
+
+                <p>
+                    System Administrator
+                </p>
+
+                <small>
+                    JPG, PNG or WEBP • Maximum 2 MB
+                </small>
+
+            </div>
+
+        </div>
+
+
+        <!-- PROFILE FORM -->
+
+        <form id="adminProfileForm">
+
+            <div class="profile-form-grid">
+
+                <!-- NAME -->
+
+                <div class="form-group">
+
+                    <label for="profileName">
+                        Full Name
+                    </label>
+
+                    <input
+                        type="text"
+                        id="profileName"
+                        placeholder="Enter your full name"
+                        required
+                    >
+
+                </div>
+
+
+                <!-- MOBILE -->
+
+                <div class="form-group">
+
+                    <label for="profileMobile">
+                        Mobile Number
+                    </label>
+
+                    <input
+                        type="tel"
+                        id="profileMobile"
+                        placeholder="Enter mobile number"
+                        maxlength="10"
+                    >
+
+                </div>
+
+
+                <!-- EMAIL -->
+
+                <div class="form-group">
+
+                    <label for="profileEmail">
+                        Email Address
+                    </label>
+
+                    <input
+                        type="email"
+                        id="profileEmail"
+                        placeholder="Enter email address"
+                        required
+                    >
+
+                </div>
+
+
+                <!-- USERNAME -->
+
+                <div class="form-group">
+
+                    <label for="profileUsername">
+                        Username
+                    </label>
+
+                    <input
+                        type="text"
+                        id="profileUsername"
+                        value="admin"
+                        readonly
+                    >
+
+                </div>
+
+            </div>
+
+
+            <div class="profile-divider"></div>
+
+
+            <h3 class="profile-subtitle">
+                🔐 Change Password
+            </h3>
+
+
+            <div class="profile-form-grid">
+
+                <div class="form-group">
+
+                    <label for="currentPassword">
+                        Current Password
+                    </label>
+
+                    <input
+                        type="password"
+                        id="currentPassword"
+                        placeholder="Current password"
+                    >
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label for="newPassword">
+                        New Password
+                    </label>
+
+                    <input
+                        type="password"
+                        id="newPassword"
+                        placeholder="New password"
+                    >
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label for="confirmPassword">
+                        Confirm New Password
+                    </label>
+
+                    <input
+                        type="password"
+                        id="confirmPassword"
+                        placeholder="Confirm new password"
+                    >
+
+                </div>
+
+            </div>
+
+
+            <div
+                id="profileMessage"
+                class="form-message"
+            ></div>
+
+
+            <div class="form-actions">
+
+                <button
+                    type="button"
+                    class="secondary-btn"
+                    onclick="resetAdminProfile()"
+                >
+                    Reset
+                </button>
+
+                <button
+                    type="submit"
+                    class="primary-btn"
+                >
+                    💾 Save Profile
+                </button>
+
+            </div>
+
+        </form>
+
+    </div>
+
+</section>
+        <!-- HEADER -->
+        <header class="topbar">
+
+            <div>
+                <span class="page-label">ADMINISTRATION</span>
+                <h1 id="pageTitle">Dashboard</h1>
+            </div>
+
+            <div class="topbar-right">
+
+                <button class="notification-btn"
+                        onclick="showSectionById('notificationsSection')">
+                    🔔
+                    <span>3</span>
+                </button>
+
+                <div class="top-profile">
+                    <div class="top-avatar">A</div>
+                    <div>
+                        <strong>Administrator</strong>
+                        <small>Admin ID: ADM001</small>
+                    </div>
+                </div>
+
+            </div>
+
+        </header>
+
+
+        <!-- ================= DASHBOARD ================= -->
+        <section id="dashboardSection" class="page-section active-section">
+
+            <div class="welcome-card">
+
+                <div>
+                    <span class="section-label">MEDIMATRIX CONTROL CENTER</span>
+
+                    <h2>Welcome, Administrator 👋</h2>
+
+                    <p>
+                        Manage hospital users, departments, patient workflows,
+                        notifications and healthcare operations from one place.
+                    </p>
+                </div>
+
+                <div class="welcome-icon">
+                    🏥
+                </div>
+
+            </div>
+
+
+            <!-- STATISTICS -->
+
+            <div class="stats-grid">
+
+                <div class="stat-card">
+                    <div class="stat-icon blue">👥</div>
+                    <div>
+                        <span>Total Users</span>
+                        <strong id="totalUsers">0</strong>
+                    </div>
+                </div>
+
+                <div class="stat-card">
+                    <div class="stat-icon green">🧑‍⚕️</div>
+                    <div>
+                        <span>Patients</span>
+                        <strong id="totalPatients">0</strong>
+                    </div>
+                </div>
+
+                <div class="stat-card">
+                    <div class="stat-icon orange">🔔</div>
+                    <div>
+                        <span>Notifications</span>
+                        <strong id="totalNotifications">3</strong>
+                    </div>
+                </div>
+
+                <div class="stat-card">
+                    <div class="stat-icon red">🚨</div>
+                    <div>
+                        <span>Emergency Cases</span>
+                        <strong id="emergencyCases">0</strong>
+                    </div>
+                </div>
+
+            </div>
+
+
+            <!-- WORKFLOW -->
+
+            <div class="content-card">
+
+                <div class="card-header">
+                    <div>
+                        <span class="section-label">PATIENT WORKFLOW</span>
+                        <h3>MediMatrix Care Flow</h3>
+                    </div>
+                </div>
+
+                <div class="workflow">
+
+                    <div class="workflow-step">
+                        <span>1</span>
+                        <strong>Registration</strong>
+                        <small>Patient ID</small>
+                    </div>
+
+                    <div class="workflow-line"></div>
+
+                    <div class="workflow-step">
+                        <span>2</span>
+                        <strong>Nurse</strong>
+                        <small>Assessment</small>
+                    </div>
+
+                    <div class="workflow-line"></div>
+
+                    <div class="workflow-step">
+                        <span>3</span>
+                        <strong>Department</strong>
+                        <small>Routing</small>
+                    </div>
+
+                    <div class="workflow-line"></div>
+
+                    <div class="workflow-step">
+                        <span>4</span>
+                        <strong>Doctor</strong>
+                        <small>Consultation</small>
+                    </div>
+
+                    <div class="workflow-line"></div>
+
+                    <div class="workflow-step">
+                        <span>5</span>
+                        <strong>OPD/IPD</strong>
+                        <small>Admission</small>
+                    </div>
+
+                    <div class="workflow-line"></div>
+
+                    <div class="workflow-step">
+                        <span>6</span>
+                        <strong>Pharmacy</strong>
+                        <small>Medicine</small>
+                    </div>
+
+                    <div class="workflow-line"></div>
+
+                    <div class="workflow-step">
+                        <span>7</span>
+                        <strong>Billing</strong>
+                        <small>Payment</small>
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- QUICK ACTIONS -->
+
+            <div class="content-card">
+
+                <div class="card-header">
+                    <div>
+                        <span class="section-label">QUICK ACTIONS</span>
+                        <h3>Administration</h3>
+                    </div>
+                </div>
+
+                <div class="quick-actions">
+
+                    <button onclick="showSectionById('createUserSection')">
+                        <span>➕</span>
+                        <strong>Create User</strong>
+                        <small>Create hospital account</small>
+                    </button>
+
+                    <button onclick="showSectionById('usersSection')">
+                        <span>👥</span>
+                        <strong>Manage Users</strong>
+                        <small>View staff accounts</small>
+                    </button>
+
+                    <button onclick="showSectionById('patientsSection')">
+                        <span>🧑‍⚕️</span>
+                        <strong>Patients</strong>
+                        <small>View patient records</small>
+                    </button>
+
+                    <button onclick="showSectionById('notificationsSection')">
+                        <span>🔔</span>
+                        <strong>Notifications</strong>
+                        <small>System notifications</small>
+                    </button>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- ================= CREATE USER ================= -->
+        <section id="createUserSection" class="page-section">
+
+            <div class="section-heading">
+                <div>
+                    <span class="section-label">USER MANAGEMENT</span>
+                    <h2>Create Hospital Account</h2>
+                    <p>Create login IDs for hospital employees and departments.</p>
+                </div>
+            </div>
+
+            <div class="form-card">
+
+                <form id="createUserForm">
+
+                    <div class="form-grid">
+
+                        <div class="form-group">
+                            <label>Full Name *</label>
+                            <input
+                                type="text"
+                                id="userName"
+                                placeholder="Enter full name"
+                                required
+                            >
+                        </div>
+
+                        <div class="form-group">
+                            <label>Role *</label>
+
+                            <select id="userRole" required onchange="updateDepartmentField()">
+
+                                <option value="">Select Role</option>
+                                <option value="employee">Hospital Employee</option>
+                                <option value="nurse">Nurse</option>
+                                <option value="doctor">Doctor</option>
+                                <option value="opd">OPD Staff</option>
+                                <option value="ipd">IPD Staff</option>
+                                <option value="pharmacy">Medicine Store</option>
+                                <option value="billing">Billing Staff</option>
+
+                            </select>
+
+                        </div>
+
+                        <div class="form-group">
+                            <label>Employee ID *</label>
+                            <input
+                                type="text"
+                                id="employeeId"
+                                placeholder="Example: NUR001"
+                                required
+                            >
+                        </div>
+
+                        <div class="form-group">
+                            <label>Department</label>
+
+                            <select id="userDepartment">
+
+                                <option value="">Select Department</option>
+                                <option value="General Medicine">General Medicine</option>
+                                <option value="Cardiology">Cardiology</option>
+                                <option value="Neurology">Neurology</option>
+                                <option value="Orthopedics">Orthopedics</option>
+                                <option value="Ophthalmology">Eye / Ophthalmology</option>
+                                <option value="ENT">ENT</option>
+                                <option value="Dermatology">Dermatology</option>
+                                <option value="Pediatrics">Pediatrics</option>
+                                <option value="Gynecology">Gynecology</option>
+                                <option value="Emergency">Emergency</option>
+
+                            </select>
+
+                        </div>
+
+                        <div class="form-group">
+                            <label>Phone Number *</label>
+                            <input
+                                type="tel"
+                                id="userPhone"
+                                placeholder="Enter phone number"
+                                required
+                            >
+                        </div>
+
+                        <div class="form-group">
+                            <label>Email</label>
+                            <input
+                                type="email"
+                                id="userEmail"
+                                placeholder="Enter email"
+                            >
+                        </div>
+
+                        <div class="form-group">
+                            <label>Username *</label>
+                            <input
+                                type="text"
+                                id="username"
+                                placeholder="Create username"
+                                required
+                            >
+                        </div>
+
+                        <div class="form-group">
+                            <label>Password *</label>
+                            <input
+                                type="password"
+                                id="password"
+                                placeholder="Create password"
+                                required
+                            >
+                        </div>
+
+                        <div class="form-group">
+                            <label>Room Number</label>
+                            <input
+                                type="text"
+                                id="roomNumber"
+                                placeholder="If applicable"
+                            >
+                        </div>
+
+                        <div class="form-group">
+                            <label>Account Status</label>
+
+                            <select id="accountStatus">
+                                <option value="active">Active</option>
+                                <option value="inactive">Inactive</option>
+                            </select>
+
+                        </div>
+
+                    </div>
+
+                    <div class="form-actions">
+
+                        <button
+                            type="reset"
+                            class="secondary-btn">
+                            Clear
+                        </button>
+
+                        <button
+                            type="submit"
+                            class="primary-btn">
+                            🆔 Create Account
+                        </button>
+
+                    </div>
+
+                </form>
+
+                <div id="createUserMessage" class="form-message"></div>
+
+            </div>
+
+        </section>
+
+
+        <!-- ================= USERS ================= -->
+        <section id="usersSection" class="page-section">
+
+            <div class="section-heading">
+
+                <div>
+                    <span class="section-label">USER MANAGEMENT</span>
+                    <h2>Hospital Users</h2>
+                    <p>Manage accounts created by the administrator.</p>
+                </div>
+
+                <button
+                    class="primary-btn"
+                    onclick="showSectionById('createUserSection')">
+                    + Create User
+                </button>
+
+            </div>
+
+            <div class="content-card">
+
+                <div class="table-tools">
+
+                    <input
+                        type="search"
+                        id="userSearch"
+                        placeholder="🔍 Search users..."
+                        oninput="filterUsers()"
+                    >
+
+                    <select id="roleFilter" onchange="filterUsers()">
+                        <option value="">All Roles</option>
+                        <option value="employee">Employee</option>
+                        <option value="nurse">Nurse</option>
+                        <option value="doctor">Doctor</option>
+                        <option value="opd">OPD</option>
+                        <option value="ipd">IPD</option>
+                        <option value="pharmacy">Medicine Store</option>
+                        <option value="billing">Billing</option>
+                    </select>
+
+                </div>
+
+                <div class="table-container">
+
+                    <table>
+
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Name</th>
+                                <th>Role</th>
+                                <th>Department</th>
+                                <th>Status</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+
+                        <tbody id="usersTableBody">
+
+                            <tr>
+                                <td colspan="6" class="empty-state">
+                                    No users created yet.
+                                </td>
+                            </tr>
+
+                        </tbody>
+
+                    </table>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- ================= PATIENTS ================= -->
+        <section id="patientsSection" class="page-section">
+
+            <div class="section-heading">
+
+                <div>
+                    <span class="section-label">PATIENT MANAGEMENT</span>
+                    <h2>Patient Records</h2>
+                    <p>Monitor registered patients and their workflow status.</p>
+                </div>
+
+            </div>
+
+            <div class="content-card">
+
+                <div class="table-container">
+
+                    <table>
+
+                        <thead>
+                            <tr>
+                                <th>Patient ID</th>
+                                <th>Patient Name</th>
+                                <th>Age</th>
+                                <th>Gender</th>
+                                <th>Department</th>
+                                <th>Priority</th>
+                                <th>Status</th>
+                            </tr>
+                        </thead>
+
+                        <tbody id="patientsTableBody">
+
+                            <tr>
+                                <td colspan="7" class="empty-state">
+                                    No patient records available.
+                                </td>
+                            </tr>
+
+                        </tbody>
+
+                    </table>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- ================= DEPARTMENTS ================= -->
+        <section id="departmentsSection" class="page-section">
+
+            <div class="section-heading">
+
+                <div>
+                    <span class="section-label">HOSPITAL STRUCTURE</span>
+                    <h2>Departments</h2>
+                    <p>Departments available for patient routing.</p>
+                </div>
+
+            </div>
+
+            <div class="department-grid">
+
+                <div class="department-card">
+                    <span>👁️</span>
+                    <strong>Ophthalmology</strong>
+                    <small>Eye Department</small>
+                </div>
+
+                <div class="department-card">
+                    <span>❤️</span>
+                    <strong>Cardiology</strong>
+                    <small>Heart Department</small>
+                </div>
+
+                <div class="department-card">
+                    <span>🧠</span>
+                    <strong>Neurology</strong>
+                    <small>Nervous System</small>
+                </div>
+
+                <div class="department-card">
+                    <span>🦴</span>
+                    <strong>Orthopedics</strong>
+                    <small>Bone & Joint</small>
+                </div>
+
+                <div class="department-card">
+                    <span>👂</span>
+                    <strong>ENT</strong>
+                    <small>Ear Nose Throat</small>
+                </div>
+
+                <div class="department-card">
+                    <span>🩺</span>
+                    <strong>General Medicine</strong>
+                    <small>General Care</small>
+                </div>
+
+                <div class="department-card">
+                    <span>🚑</span>
+                    <strong>Emergency</strong>
+                    <small>Emergency Care</small>
+                </div>
+
+                <div class="department-card">
+                    <span>👶</span>
+                    <strong>Pediatrics</strong>
+                    <small>Child Care</small>
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- ================= NOTIFICATIONS ================= -->
+        <section id="notificationsSection" class="page-section">
+
+            <div class="section-heading">
+
+                <div>
+                    <span class="section-label">SYSTEM ACTIVITY</span>
+                    <h2>Notifications</h2>
+                    <p>Monitor important hospital workflow events.</p>
+                </div>
+
+                <button class="secondary-btn" onclick="markAllRead()">
+                    Mark All Read
+                </button>
+
+            </div>
+
+            <div id="notificationList" class="notification-list">
+
+                <div class="notification-card unread">
+                    <div class="notification-icon">🧑‍⚕️</div>
+                    <div>
+                        <strong>New patient registration</strong>
+                        <p>A patient registration requires nursing assessment.</p>
+                        <small>Just now</small>
+                    </div>
+                </div>
+
+                <div class="notification-card unread">
+                    <div class="notification-icon">🚨</div>
+                    <div>
+                        <strong>Priority case</strong>
+                        <p>An emergency case has been forwarded for doctor review.</p>
+                        <small>5 minutes ago</small>
+                    </div>
+                </div>
+
+                <div class="notification-card unread">
+                    <div class="notification-icon">💊</div>
+                    <div>
+                        <strong>Medicine request</strong>
+                        <p>A prescription is waiting at the medicine store.</p>
+                        <small>10 minutes ago</small>
+                    </div>
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- ================= REPORTS ================= -->
+        <section id="reportsSection" class="page-section">
+
+            <div class="section-heading">
+
+                <div>
+                    <span class="section-label">SYSTEM REPORTING</span>
+                    <h2>Reports</h2>
+                    <p>Hospital workflow statistics and reports.</p>
+                </div>
+
+            </div>
+
+            <div class="report-grid">
+
+                <div class="report-card">
+                    <span>🧑‍⚕️</span>
+                    <strong>Patient Registration</strong>
+                    <small>Total registered patients</small>
+                    <b id="reportPatients">0</b>
+                </div>
+
+                <div class="report-card">
+                    <span>🚨</span>
+                    <strong>Emergency Cases</strong>
+                    <small>Priority emergency cases</small>
+                    <b id="reportEmergency">0</b>
+                </div>
+
+                <div class="report-card">
+                    <span>💊</span>
+                    <strong>Prescriptions</strong>
+                    <small>Medicine requests</small>
+                    <b id="reportPrescriptions">0</b>
+                </div>
+
+                <div class="report-card">
+                    <span>💳</span>
+                    <strong>Billing</strong>
+                    <small>Payment transactions</small>
+                    <b id="reportPayments">0</b>
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- ================= SETTINGS ================= -->
+        <section id="settingsSection" class="page-section">
+
+            <div class="section-heading">
+
+                <div>
+                    <span class="section-label">SYSTEM</span>
+                    <h2>Settings</h2>
+                    <p>Manage administrator preferences.</p>
+                </div>
+
+            </div>
+
+            <div class="form-card">
+
+                <div class="setting-row">
+                    <div>
+                        <strong>System Notifications</strong>
+                        <p>Receive important MediMatrix notifications.</p>
+                    </div>
+                    <label class="switch">
+                        <input type="checkbox" checked>
+                        <span></span>
+                    </label>
+                </div>
+
+                <div class="setting-row">
+                    <div>
+                        <strong>Emergency Alerts</strong>
+                        <p>Show immediate alerts for emergency cases.</p>
+                    </div>
+                    <label class="switch">
+                        <input type="checkbox" checked>
+                        <span></span>
+                    </label>
+                </div>
+
+                <div class="setting-row">
+                    <div>
+                        <strong>Audit Logging</strong>
+                        <p>Record important administrative activities.</p>
+                    </div>
+                    <label class="switch">
+                        <input type="checkbox" checked>
+                        <span></span>
+                    </label>
+                </div>
+
+            </div>
+
+        </section>
+
+    </main>
+
+</div>
+
+
+<!-- ================= JAVASCRIPT ================= -->
+
+<script src="js/admin-dashboard.js"></script>
+
+</body>
+</html>

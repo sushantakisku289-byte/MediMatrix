@@ -1,0 +1,945 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>MediMatrix | IPD Command Center</title>
+
+    <link
+        rel="stylesheet"
+        href="css/ipd-dashboard.css"
+    >
+</head>
+
+<body>
+
+<!-- =========================================================
+     APP SHELL
+========================================================= -->
+
+<div class="app-shell">
+
+    <!-- =====================================================
+         SIDEBAR
+    ====================================================== -->
+
+    <aside class="sidebar">
+
+        <div class="brand">
+
+            <div class="brand-logo">
+                🏥
+            </div>
+
+            <div class="brand-text">
+                <strong>MediMatrix</strong>
+                <span>Hospital Intelligence</span>
+            </div>
+
+        </div>
+
+
+        <div class="sidebar-section-title">
+            IPD MANAGEMENT
+        </div>
+
+
+        <nav class="sidebar-nav">
+
+            <button
+                class="nav-item active"
+                onclick="showSection('dashboardSection', this)"
+            >
+                <span class="nav-icon">▦</span>
+                <span>Command Center</span>
+            </button>
+
+
+            <button
+                class="nav-item"
+                onclick="showSection('patientsSection', this)"
+            >
+                <span class="nav-icon">♙</span>
+                <span>Patient Search</span>
+            </button>
+
+
+            <button
+                class="nav-item"
+                onclick="showSection('profileSection', this)"
+            >
+                <span class="nav-icon">◉</span>
+                <span>My Profile</span>
+            </button>
+
+        </nav>
+
+
+        <div class="sidebar-bottom">
+
+            <div class="system-status">
+
+                <span class="status-dot"></span>
+
+                <div>
+                    <strong>System Online</strong>
+                    <small>MediMatrix Core</small>
+                </div>
+
+            </div>
+
+
+            <button
+                class="logout-button"
+                onclick="logoutUser()"
+            >
+                <span>⇥</span>
+                Logout
+            </button>
+
+        </div>
+
+    </aside>
+
+
+    <!-- =====================================================
+         MAIN
+    ====================================================== -->
+
+    <main class="main-content">
+
+        <!-- TOPBAR -->
+
+        <header class="topbar">
+
+            <div class="topbar-left">
+
+                <div class="mobile-menu-button"
+                     onclick="toggleSidebar()">
+                    ☰
+                </div>
+
+                <div>
+
+                    <h1 id="pageTitle">
+                        IPD Command Center
+                    </h1>
+
+                    <p id="pageSubtitle">
+                        Real-time inpatient bed and admission management
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div class="topbar-right">
+
+    <!-- =====================================================
+         REFRESH
+    ====================================================== -->
+
+    <button
+        class="refresh-button"
+        onclick="loadDashboard()"
+        title="Refresh Dashboard"
+    >
+        ↻
+    </button>
+
+
+    <!-- =====================================================
+         IPD NOTIFICATION CENTER
+    ====================================================== -->
+
+    <div class="ipd-notification-wrapper">
+
+        <button
+            type="button"
+            class="ipd-notification-button"
+            onclick="toggleIPDNotifications()"
+            title="Notifications"
+            aria-label="IPD Notifications"
+        >
+
+            <span class="ipd-notification-icon">
+                🔔
+            </span>
+
+            <span
+                id="ipdNotificationCount"
+                class="ipd-notification-count hidden"
+            >
+                0
+            </span>
+
+        </button>
+
+
+        <!-- NOTIFICATION PANEL -->
+
+        <div
+            id="ipdNotificationPanel"
+            class="ipd-notification-panel"
+        >
+
+            <div class="ipd-notification-header">
+
+                <div>
+
+                    <strong>
+                        Notification Center
+                    </strong>
+
+                    <span>
+                        IPD admission alerts
+                    </span>
+
+                </div>
+
+                <button
+                    type="button"
+                    onclick="markAllIPDNotificationsRead()"
+                >
+                    Mark all read
+                </button>
+
+            </div>
+
+
+            <div
+                id="ipdNotificationList"
+                class="ipd-notification-list"
+            >
+
+                <div class="ipd-notification-empty">
+
+                    <div class="empty-bell">
+                        🔔
+                    </div>
+
+                    <strong>
+                        All caught up
+                    </strong>
+
+                    <p>
+                        No new IPD admission notifications.
+                    </p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- =====================================================
+         IPD PROFILE
+    ====================================================== -->
+
+    <div
+        class="topbar-profile"
+        onclick="showSection('profileSection')"
+    >
+
+        <div
+            class="avatar"
+            id="topAvatar"
+        >
+            IP
+        </div>
+
+        <div class="top-user-info">
+
+            <strong id="topUserName">
+                IPD Staff
+            </strong>
+
+            <span id="topUserRole">
+                IPD STAFF
+            </span>
+
+        </div>
+
+    </div>
+
+</div>
+
+        </header>
+
+
+        <!-- =================================================
+             DASHBOARD SECTION
+        ================================================== -->
+
+        <section
+            id="dashboardSection"
+            class="page-section active-section"
+        >
+
+            <!-- HERO -->
+
+            <div class="dashboard-hero">
+
+                <div>
+
+                    <span class="hero-label">
+                        INPATIENT DEPARTMENT
+                    </span>
+
+                    <h2>
+                        Bed Command Center
+                    </h2>
+
+                    <p>
+                        Monitor ward capacity, verify paid admissions
+                        and confirm patient placement from one place.
+                    </p>
+
+                </div>
+
+
+                <div class="live-indicator">
+
+                    <span></span>
+
+                    LIVE BED STATUS
+
+                </div>
+
+            </div>
+
+
+            <!-- =================================================
+                 STAT CARDS
+            ================================================== -->
+
+            <div class="stats-grid">
+
+                <div class="stat-card">
+
+                    <div class="stat-icon total-icon">
+                        ▦
+                    </div>
+
+                    <div class="stat-content">
+
+                        <span>Total Beds</span>
+
+                        <strong id="totalBeds">
+                            0
+                        </strong>
+
+                        <small>
+                            Hospital capacity
+                        </small>
+
+                    </div>
+
+                </div>
+
+
+                <div class="stat-card available-card">
+
+                    <div class="stat-icon available-icon">
+                        ✓
+                    </div>
+
+                    <div class="stat-content">
+
+                        <span>Available</span>
+
+                        <strong id="availableBeds">
+                            0
+                        </strong>
+
+                        <small>
+                            Ready for admission
+                        </small>
+
+                    </div>
+
+                </div>
+
+
+                <div class="stat-card occupied-card">
+
+                    <div class="stat-icon occupied-icon">
+                        ●
+                    </div>
+
+                    <div class="stat-content">
+
+                        <span>Occupied</span>
+
+                        <strong id="occupiedBeds">
+                            0
+                        </strong>
+
+                        <small>
+                            Currently admitted
+                        </small>
+
+                    </div>
+
+                </div>
+
+
+                <div class="stat-card">
+
+                    <div class="stat-icon occupancy-icon">
+                        %
+                    </div>
+
+                    <div class="stat-content">
+
+                        <span>Occupancy</span>
+
+                        <strong id="occupancyRate">
+                            0%
+                        </strong>
+
+                        <small>
+                            Current utilization
+                        </small>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- =================================================
+                 SEARCH
+            ================================================== -->
+
+            <div class="search-panel">
+
+                <div class="search-panel-heading">
+
+                    <div class="search-symbol">
+                        ⌕
+                    </div>
+
+                    <div>
+
+                        <h3>
+                            Find Patient Admission
+                        </h3>
+
+                        <p>
+                            Search using the MediMatrix Patient ID
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <div class="search-box">
+
+                    <input
+                        type="text"
+                        id="patientSearchInput"
+                        placeholder="Enter Patient ID e.g. MED-P-000002"
+                        autocomplete="off"
+                        onkeydown="handlePatientSearchKey(event)"
+                    >
+
+                    <button
+                        onclick="searchPatient()"
+                    >
+                        Search Patient
+                    </button>
+
+                </div>
+
+
+                <div
+                    id="searchMessage"
+                    class="search-message"
+                ></div>
+
+            </div>
+
+
+            <!-- =================================================
+                 WARD OVERVIEW
+            ================================================== -->
+
+            <div class="section-heading">
+
+                <div>
+
+                    <span class="section-kicker">
+                        CAPACITY
+                    </span>
+
+                    <h3>
+                        Ward Overview
+                    </h3>
+
+                </div>
+
+            </div>
+
+
+            <div
+                id="wardOverview"
+                class="ward-overview-grid"
+            >
+                <!-- JS -->
+            </div>
+
+
+            <!-- =================================================
+                 BED COMMAND CENTER
+            ================================================== -->
+
+            <div class="section-heading bed-heading">
+
+                <div>
+
+                    <span class="section-kicker">
+                        LIVE MAP
+                    </span>
+
+                    <h3>
+                        Bed Command Center
+                    </h3>
+
+                    <p>
+                        Green = available · Red = occupied · Yellow = pending
+                    </p>
+
+                </div>
+
+
+                <div class="bed-legend">
+
+                    <span>
+                        <i class="legend-dot available"></i>
+                        Available
+                    </span>
+
+                    <span>
+                        <i class="legend-dot occupied"></i>
+                        Occupied
+                    </span>
+
+                    <span>
+                        <i class="legend-dot pending"></i>
+                        Pending
+                    </span>
+
+                </div>
+
+            </div>
+
+
+            <div
+                id="bedCommandCenter"
+                class="bed-command-center"
+            >
+                <!-- JS -->
+            </div>
+
+        </section>
+
+
+        <!-- =================================================
+             PATIENT SEARCH SECTION
+        ================================================== -->
+
+        <section
+            id="patientsSection"
+            class="page-section"
+        >
+
+            <div class="section-page-header">
+
+                <span class="section-kicker">
+                    PATIENT MANAGEMENT
+                </span>
+
+                <h2>
+                    Patient Admission Search
+                </h2>
+
+                <p>
+                    Search a patient ID to automatically retrieve
+                    admission, billing, ward and bed information.
+                </p>
+
+            </div>
+
+
+            <div class="large-search-card">
+
+                <div class="large-search-icon">
+                    ⌕
+                </div>
+
+                <div class="large-search-content">
+
+                    <label>
+                        Patient ID
+                    </label>
+
+                    <div class="large-search-row">
+
+                        <input
+                            type="text"
+                            id="patientSearchInput2"
+                            placeholder="MED-P-000002"
+                            autocomplete="off"
+                            onkeydown="handlePatientSearchKey2(event)"
+                        >
+
+                        <button
+                            onclick="searchPatientFromSection()"
+                        >
+                            Search
+                        </button>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <div
+                id="patientResult"
+                class="patient-result-container"
+            >
+
+                <div class="empty-result">
+
+                    <div class="empty-icon">
+                        ⌕
+                    </div>
+
+                    <h3>
+                        Search for a patient
+                    </h3>
+
+                    <p>
+                        Enter a valid MediMatrix Patient ID above.
+                    </p>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- =================================================
+             PROFILE SECTION
+        ================================================== -->
+
+        <section
+            id="profileSection"
+            class="page-section"
+        >
+
+            <div class="section-page-header">
+
+                <span class="section-kicker">
+                    ACCOUNT
+                </span>
+
+                <h2>
+                    My Profile
+                </h2>
+
+                <p>
+                    IPD staff account information
+                </p>
+
+            </div>
+
+
+            <div class="profile-layout">
+
+                <div class="profile-card profile-main-card">
+
+                    <div class="profile-cover"></div>
+
+                    <div class="profile-avatar-large"
+                         id="profileAvatar">
+                        IP
+                    </div>
+
+                    <div class="profile-main-info">
+
+                        <h2 id="profileName">
+                            IPD Staff
+                        </h2>
+
+                        <span
+                            class="profile-role"
+                            id="profileRole"
+                        >
+                            IPD STAFF
+                        </span>
+
+                    </div>
+
+                </div>
+
+
+                <div class="profile-card">
+
+                    <div class="card-header">
+
+                        <div>
+
+                            <span class="section-kicker">
+                                ACCOUNT INFORMATION
+                            </span>
+
+                            <h3>
+                                Staff Details
+                            </h3>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="profile-details">
+
+                        <div class="profile-detail">
+
+                            <span>
+                                User ID
+                            </span>
+
+                            <strong id="profileUserId">
+                                —
+                            </strong>
+
+                        </div>
+
+
+                        <div class="profile-detail">
+
+                            <span>
+                                Username
+                            </span>
+
+                            <strong id="profileUsername">
+                                —
+                            </strong>
+
+                        </div>
+
+
+                        <div class="profile-detail">
+
+                            <span>
+                                Email
+                            </span>
+
+                            <strong id="profileEmail">
+                                —
+                            </strong>
+
+                        </div>
+
+
+                        <div class="profile-detail">
+
+                            <span>
+                                Mobile
+                            </span>
+
+                            <strong id="profilePhone">
+                                —
+                            </strong>
+
+                        </div>
+
+
+                        <div class="profile-detail">
+
+                            <span>
+                                Department
+                            </span>
+
+                            <strong>
+                                Inpatient Department
+                            </strong>
+
+                        </div>
+
+
+                        <div class="profile-detail">
+
+                            <span>
+                                Status
+                            </span>
+
+                            <strong class="online-text">
+                                ● Online
+                            </strong>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+    </main>
+
+</div>
+
+
+<!-- =========================================================
+     BED DETAILS MODAL
+========================================================= -->
+
+<div
+    id="bedModal"
+    class="modal-overlay"
+    onclick="closeBedModal(event)"
+>
+
+    <div class="modal-card bed-modal-card">
+
+        <button
+            class="modal-close"
+            onclick="closeBedModal()"
+        >
+            ×
+        </button>
+
+
+        <div class="modal-header">
+
+            <div
+                id="modalBedIcon"
+                class="modal-bed-icon"
+            >
+                B
+            </div>
+
+            <div>
+
+                <span id="modalBedStatus"
+                      class="modal-status">
+                    AVAILABLE
+                </span>
+
+                <h2 id="modalBedNumber">
+                    Bed
+                </h2>
+
+                <p id="modalBedLocation">
+                    —
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <div
+            id="modalBedContent"
+            class="modal-content"
+        >
+            <!-- JS -->
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- =========================================================
+     PATIENT ADMISSION MODAL
+========================================================= -->
+
+<div
+    id="patientModal"
+    class="modal-overlay"
+    onclick="closePatientModal(event)"
+>
+
+    <div class="modal-card patient-modal-card">
+
+        <button
+            class="modal-close"
+            onclick="closePatientModal()"
+        >
+            ×
+        </button>
+
+
+        <div class="patient-modal-top">
+
+            <div class="patient-avatar">
+                P
+            </div>
+
+            <div>
+
+                <span class="section-kicker">
+                    IPD ADMISSION
+                </span>
+
+                <h2 id="modalPatientName">
+                    Patient
+                </h2>
+
+                <p id="modalPatientId">
+                    —
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <div
+            id="patientModalContent"
+            class="patient-modal-content"
+        >
+            <!-- JS -->
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- TOAST -->
+
+<div
+    id="toast"
+    class="toast"
+>
+    <span id="toastIcon">✓</span>
+    <span id="toastMessage">Done</span>
+</div>
+
+
+<script src="js/ipd-dashboard.js"></script>
+
+</body>
+</html>

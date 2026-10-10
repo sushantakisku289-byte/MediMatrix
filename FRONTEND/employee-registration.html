@@ -1,0 +1,434 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Employee Registration | MediMatrix</title>
+
+    <link
+        rel="stylesheet"
+        href="./css/employee-registration.css"
+
+
+    >
+
+</head>
+
+
+<body>
+
+<div class="registration-page">
+
+    <!-- =====================================================
+         LEFT BRAND PANEL
+    ====================================================== -->
+
+    <section class="brand-panel">
+
+        <div class="brand-logo">
+            MEDI<span>MATRIX</span>
+        </div>
+
+        <div class="brand-content">
+
+            <span class="brand-badge">
+                HEALTHCARE MANAGEMENT SYSTEM
+            </span>
+
+            <h1>
+                Join MediMatrix
+            </h1>
+
+            <p>
+                Register as a healthcare professional
+                and become part of the MediMatrix
+                clinical team.
+            </p>
+
+            <div class="brand-features">
+
+                <div>
+                    <span>✓</span>
+                    Secure employee registration
+                </div>
+
+                <div>
+                    <span>✓</span>
+                    Professional healthcare workflow
+                </div>
+
+                <div>
+                    <span>✓</span>
+                    Integrated doctor and nurse system
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- =====================================================
+         REGISTRATION PANEL
+    ====================================================== -->
+
+    <main class="registration-panel">
+
+        <div class="registration-card">
+
+            <div class="form-header">
+
+                <span class="form-eyebrow">
+                    EMPLOYEE PORTAL
+                </span>
+
+                <h2>
+                    Employee Registration
+                </h2>
+
+                <p>
+                    Enter your professional details
+                    to submit a registration request.
+                </p>
+
+            </div>
+
+
+            <!-- =================================================
+                 REGISTRATION FORM
+            ================================================== -->
+
+            <form
+                id="employeeRegistrationForm"
+                novalidate
+            >
+
+                <!-- FULL NAME -->
+
+                <div class="form-group">
+
+                    <label for="fullName">
+                        Full Name
+                    </label>
+
+                    <input
+                        type="text"
+                        id="fullName"
+                        name="full_name"
+                        placeholder="Enter your full name"
+                        autocomplete="name"
+                        required
+                    >
+
+                    <small
+                        class="field-error"
+                        id="fullNameError"
+                    ></small>
+
+                </div>
+
+
+                <!-- EMAIL + MOBILE -->
+
+                <div class="form-row">
+
+                    <div class="form-group">
+
+                        <label for="email">
+                            Email Address
+                        </label>
+
+                        <input
+                            type="email"
+                            id="email"
+                            name="email"
+                            placeholder="name@example.com"
+                            autocomplete="email"
+                            required
+                        >
+
+                        <small
+                            class="field-error"
+                            id="emailError"
+                        ></small>
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <label for="mobile">
+                            Mobile Number
+                        </label>
+
+                        <input
+                            type="tel"
+                            id="mobile"
+                            name="mobile"
+                            placeholder="10-digit mobile number"
+                            maxlength="10"
+                            autocomplete="tel"
+                            required
+                        >
+
+                        <small
+                            class="field-error"
+                            id="mobileError"
+                        ></small>
+
+                    </div>
+
+                </div>
+
+
+                <!-- ROLE + DEPARTMENT -->
+
+                <div class="form-row">
+
+                    <div class="form-group">
+
+                        <label for="role">
+                            Employee Role
+                        </label>
+
+                        <select
+                            id="role"
+                            name="role"
+                            required
+                        >
+
+                            <option value="">
+                                Select role
+                            </option>
+
+                            <option value="DOCTOR">
+                                Doctor
+                            </option>
+
+                            <option value="NURSE">
+                                Nurse
+                            </option>
+
+                        </select>
+
+                        <small
+                            class="field-error"
+                            id="roleError"
+                        ></small>
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <label for="department">
+                            Department
+                        </label>
+
+                        <select
+                            id="department"
+                            name="department"
+                            required
+                        >
+
+                            <option value="">
+                                Select department
+                            </option>
+
+                            <option value="General Medicine">
+                                General Medicine
+                            </option>
+
+                            <option value="Cardiology">
+                                Cardiology
+                            </option>
+
+                            <option value="Neurology">
+                                Neurology
+                            </option>
+
+                            <option value="Orthopedics">
+                                Orthopedics
+                            </option>
+
+                            <option value="Pediatrics">
+                                Pediatrics
+                            </option>
+
+                            <option value="Gynecology">
+                                Gynecology
+                            </option>
+
+                            <option value="Dermatology">
+                                Dermatology
+                            </option>
+
+                            <option value="Ophthalmology">
+                                Ophthalmology
+                            </option>
+
+                            <option value="ENT">
+                                ENT
+                            </option>
+
+                            <option value="Emergency">
+                                Emergency
+                            </option>
+
+                        </select>
+
+                        <small
+                            class="field-error"
+                            id="departmentError"
+                        ></small>
+
+                    </div>
+
+                </div>
+
+
+                <!-- PASSWORD -->
+
+                <div class="form-row">
+
+                    <div class="form-group">
+
+                        <label for="password">
+                            Password
+                        </label>
+
+                        <input
+                            type="password"
+                            id="password"
+                            name="password"
+                            placeholder="Create password"
+                            autocomplete="new-password"
+                            required
+                        >
+
+                        <small
+                            class="field-error"
+                            id="passwordError"
+                        ></small>
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <label for="confirmPassword">
+                            Confirm Password
+                        </label>
+
+                        <input
+                            type="password"
+                            id="confirmPassword"
+                            placeholder="Confirm password"
+                            autocomplete="new-password"
+                            required
+                        >
+
+                        <small
+                            class="field-error"
+                            id="confirmPasswordError"
+                        ></small>
+
+                    </div>
+
+                </div>
+
+
+                <!-- TERMS -->
+
+                <label class="terms-row">
+
+                    <input
+                        type="checkbox"
+                        id="terms"
+                    >
+
+                    <span>
+                        I confirm that the information
+                        provided above is accurate.
+                    </span>
+
+                </label>
+
+                <small
+                    class="field-error"
+                    id="termsError"
+                ></small>
+
+
+                <!-- SERVER MESSAGE -->
+
+                <div
+                    id="registrationMessage"
+                    class="registration-message"
+                    role="alert"
+                ></div>
+
+
+                <!-- SUBMIT -->
+
+                <button
+                    type="submit"
+                    id="registerButton"
+                    class="register-button"
+                >
+
+                    <span id="registerButtonText">
+                        Submit Registration
+                    </span>
+
+                    <span
+                        id="registerSpinner"
+                        class="spinner"
+                    ></span>
+
+                </button>
+
+
+            </form>
+
+
+            <!-- =================================================
+                 FOOTER
+            ================================================== -->
+
+            <div class="registration-footer">
+
+                <span>
+                    Already have an account?
+                </span>
+
+                <a href="/">
+                    Login
+                </a>
+
+            </div>
+
+        </div>
+
+    </main>
+
+</div>
+
+
+<script
+    src="./js/employee-registration.css.js"
+    defer
+
+></script>
+
+</body>
+
+</html>
